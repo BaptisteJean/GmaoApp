@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{examplaireMaterielBean.page}'/>
+		<f:event type="preRenderView" listener='#{examplaireMaterielBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Examplaire Materiel entities"/>
+
+	<ui:define name="header">
+		Examplaire Materiel
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Examplaire Materiel entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="examplaireMaterielBeanExampleQuantiteExemplaire" value="Quantite Exemplaire:"/>
+						<h:panelGroup>
+							<h:inputText id="examplaireMaterielBeanExampleQuantiteExemplaire" value="#{examplaireMaterielBean.example.quantiteExemplaire}"/>
+							<h:message for="examplaireMaterielBeanExampleQuantiteExemplaire" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="examplaireMaterielBeanExampleLibelleExemplaire" value="Libelle Exemplaire:"/>
+						<h:panelGroup>
+							<h:inputText id="examplaireMaterielBeanExampleLibelleExemplaire" value="#{examplaireMaterielBean.example.libelleExemplaire}"/>
+							<h:message for="examplaireMaterielBeanExampleLibelleExemplaire" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="examplaireMaterielBeanExampleNumeroSerie" value="Numero Serie:"/>
+						<h:panelGroup>
+							<h:inputText id="examplaireMaterielBeanExampleNumeroSerie" value="#{examplaireMaterielBean.example.numeroSerie}"/>
+							<h:message for="examplaireMaterielBeanExampleNumeroSerie" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="examplaireMaterielBeanExampleFabricantMarque" value="Fabricant Marque:"/>
+						<h:panelGroup>
+							<h:inputText id="examplaireMaterielBeanExampleFabricantMarque" value="#{examplaireMaterielBean.example.fabricantMarque}"/>
+							<h:message for="examplaireMaterielBeanExampleFabricantMarque" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="examplaireMaterielBeanExamplePuissance" value="Puissance:"/>
+						<h:panelGroup>
+							<h:inputText id="examplaireMaterielBeanExamplePuissance" value="#{examplaireMaterielBean.example.puissance}"/>
+							<h:message for="examplaireMaterielBeanExamplePuissance" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{examplaireMaterielBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{examplaireMaterielBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="examplaireMaterielBeanPageItems" styleClass="data-table" value="#{examplaireMaterielBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Emplacement"/>
+					</f:facet>
+					<h:link outcome="/examplaireMateriel/view">
+						<f:param name="id" value="#{_item.idExemplaireMateriel}"/>
+						<h:outputText id="forgeviewdisplayitemIdEmplacement" value="#{forgeview:display(_item.idEmplacement)}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Materiel"/>
+					</f:facet>
+					<h:link outcome="/examplaireMateriel/view">
+						<f:param name="id" value="#{_item.idExemplaireMateriel}"/>
+						<h:outputText id="forgeviewdisplayitemIdMateriel" value="#{forgeview:display(_item.idMateriel)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{examplaireMaterielBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

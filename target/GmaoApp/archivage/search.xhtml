@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{archivageBean.page}'/>
+		<f:event type="preRenderView" listener='#{archivageBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Archivage entities"/>
+
+	<ui:define name="header">
+		Archivage
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Archivage entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="archivageBeanExampleIdClient" value="Id Client:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{clientBean.converter}" id="archivageBeanExampleIdClient" value="#{archivageBean.example.idClient}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{clientBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="archivageBeanExampleIdClient" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="archivageBeanExampleIdDirecteurTechnique" value="Id Directeur Technique:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{directeurTechniqueBean.converter}" id="archivageBeanExampleIdDirecteurTechnique" value="#{archivageBean.example.idDirecteurTechnique}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{directeurTechniqueBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="archivageBeanExampleIdDirecteurTechnique" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{archivageBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{archivageBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="archivageBeanPageItems" styleClass="data-table" value="#{archivageBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Client"/>
+					</f:facet>
+					<h:link outcome="/archivage/view">
+						<f:param name="id" value="#{_item.idArchivage}"/>
+						<h:outputText id="forgeviewdisplayitemIdClient" value="#{forgeview:display(_item.idClient)}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Directeur Technique"/>
+					</f:facet>
+					<h:link outcome="/archivage/view">
+						<f:param name="id" value="#{_item.idArchivage}"/>
+						<h:outputText id="forgeviewdisplayitemIdDirecteurTechnique" value="#{forgeview:display(_item.idDirecteurTechnique)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{archivageBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

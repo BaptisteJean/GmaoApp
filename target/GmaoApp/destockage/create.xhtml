@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{destockageBean.id}'/>
+		<f:event type="preRenderView" listener='#{destockageBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Destockage"/>
+
+	<ui:define name="header">
+		Destockage
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty destockageBean.id}'>
+				Edit existing Destockage
+			</c:when>
+			<c:otherwise>
+				Create a new Destockage
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="destockageBeanDestockageDateRetrait" value="Date Retrait:"/>
+				<h:panelGroup>
+					<h:inputText id="destockageBeanDestockageDateRetrait" value="#{destockageBean.destockage.dateRetrait}"/>
+					<h:message for="destockageBeanDestockageDateRetrait" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="destockageBeanDestockageQuantiteRetire" value="Quantite Retire:"/>
+				<h:panelGroup>
+					<h:inputText id="destockageBeanDestockageQuantiteRetire" value="#{destockageBean.destockage.quantiteRetire}"/>
+					<h:message for="destockageBeanDestockageQuantiteRetire" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="destockageBeanDestockageIdDestination" value="Id Destination:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{destinationBean.converter}" id="destockageBeanDestockageIdDestination" required="true" value="#{destockageBean.destockage.idDestination}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{destinationBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="destockageBeanDestockageIdDestination" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="destockageBeanDestockageIdExemplaire" value="Id Exemplaire:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{examplaireMaterielBean.converter}" id="destockageBeanDestockageIdExemplaire" required="true" value="#{destockageBean.destockage.idExemplaire}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{examplaireMaterielBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="destockageBeanDestockageIdExemplaire" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{destockageBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty destockageBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{destockageBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{destockageBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

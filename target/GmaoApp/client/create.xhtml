@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{clientBean.id}'/>
+		<f:event type="preRenderView" listener='#{clientBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Client"/>
+
+	<ui:define name="header">
+		Client
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty clientBean.id}'>
+				Edit existing Client
+			</c:when>
+			<c:otherwise>
+				Create a new Client
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="clientBeanClientCodeClient" value="Code Client:"/>
+				<h:panelGroup>
+					<h:inputText id="clientBeanClientCodeClient" value="#{clientBean.client.codeClient}"/>
+					<h:message for="clientBeanClientCodeClient" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="clientBeanClientNomClient" value="Nom Client:"/>
+				<h:panelGroup>
+					<h:inputText id="clientBeanClientNomClient" value="#{clientBean.client.nomClient}"/>
+					<h:message for="clientBeanClientNomClient" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="clientBeanClientPrenomClient" value="Prenom Client:"/>
+				<h:panelGroup>
+					<h:inputText id="clientBeanClientPrenomClient" value="#{clientBean.client.prenomClient}"/>
+					<h:message for="clientBeanClientPrenomClient" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="clientBeanClientTypePersonne" value="Type Personne:"/>
+				<h:panelGroup>
+					<h:inputText id="clientBeanClientTypePersonne" value="#{clientBean.client.typePersonne}"/>
+					<h:message for="clientBeanClientTypePersonne" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="clientBeanClientNatureActivite" value="Nature Activite:"/>
+				<h:panelGroup>
+					<h:inputText id="clientBeanClientNatureActivite" value="#{clientBean.client.natureActivite}"/>
+					<h:message for="clientBeanClientNatureActivite" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="clientBeanClientDestinationList" value="Destination List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{clientBean.client.destinationList}"/>
+					<h:dataTable id="clientBeanClientDestinationList" styleClass="data-table" value="#{_collection}" var="_item"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="clientBeanClientSiteInterventionList" value="Site Intervention List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{clientBean.client.siteInterventionList}"/>
+					<h:dataTable id="clientBeanClientSiteInterventionList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Numero Batiment"/>
+							</f:facet>
+							<h:link outcome="/siteIntervention/view">
+								<f:param name="id" value="#{_item.idSiteIntervention}"/>
+								<h:outputText id="itemNumeroBatiment" value="#{_item.numeroBatiment}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="siteInterventionBeanAddNumeroBatiment" value="#{siteInterventionBean.add.numeroBatiment}"/>
+								<h:message for="siteInterventionBeanAddNumeroBatiment" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Libele Bureau"/>
+							</f:facet>
+							<h:link outcome="/siteIntervention/view">
+								<f:param name="id" value="#{_item.idSiteIntervention}"/>
+								<h:outputText id="itemLibeleBureau" value="#{_item.libeleBureau}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="siteInterventionBeanAddLibeleBureau" value="#{siteInterventionBean.add.libeleBureau}"/>
+								<h:message for="siteInterventionBeanAddLibeleBureau" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(siteInterventionBean.added)}" id="clientBeanClientSiteInterventionListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{siteInterventionBean.add.idClient}" value="#{clientBean.client}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="clientBeanClientProvenanceList" value="Provenance List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{clientBean.client.provenanceList}"/>
+					<h:dataTable id="clientBeanClientProvenanceList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id Fournisseur"/>
+							</f:facet>
+							<h:link outcome="/provenance/view">
+								<f:param name="id" value="#{_item.idProvenance}"/>
+								<h:outputText id="forgeviewdisplayitemIdFournisseur" value="#{forgeview:display(_item.idFournisseur)}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:selectOneMenu converter="#{fournisseurBean.converter}" id="provenanceBeanAddIdFournisseur" value="#{provenanceBean.add.idFournisseur}">
+									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{fournisseurBean.all}" var="_item"/>
+								</h:selectOneMenu>
+								<h:message for="provenanceBeanAddIdFournisseur" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(provenanceBean.added)}" id="clientBeanClientProvenanceListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{provenanceBean.add.idClient}" value="#{clientBean.client}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="clientBeanClientIdAdresse" value="Id Adresse:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{adresseBean.converter}" id="clientBeanClientIdAdresse" required="true" value="#{clientBean.client.idAdresse}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{adresseBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="clientBeanClientIdAdresse" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="clientBeanClientArchivageList" value="Archivage List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{clientBean.client.archivageList}"/>
+					<h:dataTable id="clientBeanClientArchivageList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id Directeur Technique"/>
+							</f:facet>
+							<h:link outcome="/archivage/view">
+								<f:param name="id" value="#{_item.idArchivage}"/>
+								<h:outputText id="forgeviewdisplayitemIdDirecteurTechnique" value="#{forgeview:display(_item.idDirecteurTechnique)}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:selectOneMenu converter="#{directeurTechniqueBean.converter}" id="archivageBeanAddIdDirecteurTechnique" value="#{archivageBean.add.idDirecteurTechnique}">
+									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{directeurTechniqueBean.all}" var="_item"/>
+								</h:selectOneMenu>
+								<h:message for="archivageBeanAddIdDirecteurTechnique" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(archivageBean.added)}" id="clientBeanClientArchivageListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{archivageBean.add.idClient}" value="#{clientBean.client}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{clientBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty clientBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{clientBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{clientBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

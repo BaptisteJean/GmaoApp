@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{siteInterventionBean.id}'/>
+		<f:event type="preRenderView" listener='#{siteInterventionBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Site Intervention"/>
+
+	<ui:define name="header">
+		Site Intervention
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Site Intervention
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="siteInterventionBeanSiteInterventionNumeroBatiment" value="Numero Batiment:"/>
+			<h:outputText id="siteInterventionBeanSiteInterventionNumeroBatiment" value="#{siteInterventionBean.siteIntervention.numeroBatiment}"/>
+			<h:outputText/>
+			<h:outputLabel for="siteInterventionBeanSiteInterventionLibeleBureau" value="Libele Bureau:"/>
+			<h:outputText id="siteInterventionBeanSiteInterventionLibeleBureau" value="#{siteInterventionBean.siteIntervention.libeleBureau}"/>
+			<h:outputText/>
+			<h:outputLabel for="siteInterventionBeanSiteInterventionIdClient" value="Id Client:"/>
+			<h:link id="siteInterventionBeanSiteInterventionIdClient" outcome="/client/view" rendered="#{!empty siteInterventionBean.siteIntervention.idClient}" value="#{siteInterventionBean.siteIntervention.idClient}">
+				<f:param name="id" value="#{siteInterventionBean.siteIntervention.idClient.idClient}"/>
+			</h:link>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

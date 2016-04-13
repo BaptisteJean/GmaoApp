@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{materielBean.id}'/>
+		<f:event type="preRenderView" listener='#{materielBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Materiel"/>
+
+	<ui:define name="header">
+		Materiel
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Materiel
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="materielBeanMaterielDesignation" value="Designation:"/>
+			<h:outputText id="materielBeanMaterielDesignation" value="#{materielBean.materiel.designation}"/>
+			<h:outputText/>
+			<h:outputLabel for="materielBeanMaterielTypeMateriel" value="Type Materiel:"/>
+			<h:outputText id="materielBeanMaterielTypeMateriel" value="#{materielBean.materiel.typeMateriel}"/>
+			<h:outputText/>
+			<h:outputLabel for="materielBeanMaterielModelMateriel" value="Model Materiel:"/>
+			<h:outputText id="materielBeanMaterielModelMateriel" value="#{materielBean.materiel.modelMateriel}"/>
+			<h:outputText/>
+			<h:outputLabel for="materielBeanMaterielExamplaireMaterielList" value="Examplaire Materiel List:"/>
+			<h:dataTable id="materielBeanMaterielExamplaireMaterielList" styleClass="data-table" value="#{materielBean.materiel.examplaireMaterielList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Emplacement"/>
+					</f:facet>
+					<h:link outcome="/examplaireMateriel/view">
+						<f:param name="id" value="#{_item.idExemplaireMateriel}"/>
+						<h:outputText id="forgeviewdisplayitemIdEmplacement" value="#{forgeview:display(_item.idEmplacement)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="materielBeanMaterielProvientList" value="Provient List:"/>
+			<h:dataTable id="materielBeanMaterielProvientList" styleClass="data-table" value="#{materielBean.materiel.provientList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Provenance"/>
+					</f:facet>
+					<h:link outcome="/provient/view">
+						<f:param name="id" value="#{_item.idProvient}"/>
+						<h:outputText id="forgeviewdisplayitemIdProvenance" value="#{forgeview:display(_item.idProvenance)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

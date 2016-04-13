@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{provenanceBean.id}'/>
+		<f:event type="preRenderView" listener='#{provenanceBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Provenance"/>
+
+	<ui:define name="header">
+		Provenance
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Provenance
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="provenanceBeanProvenanceMarche" value="Marche:"/>
+			<h:outputText id="provenanceBeanProvenanceMarche" value="#{provenanceBean.provenance.marche}"/>
+			<h:outputText/>
+			<h:outputLabel for="provenanceBeanProvenanceIdClient" value="Id Client:"/>
+			<h:link id="provenanceBeanProvenanceIdClient" outcome="/client/view" rendered="#{!empty provenanceBean.provenance.idClient}" value="#{provenanceBean.provenance.idClient}">
+				<f:param name="id" value="#{provenanceBean.provenance.idClient.idClient}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="provenanceBeanProvenanceIdFournisseur" value="Id Fournisseur:"/>
+			<h:link id="provenanceBeanProvenanceIdFournisseur" outcome="/fournisseur/view" rendered="#{!empty provenanceBean.provenance.idFournisseur}" value="#{provenanceBean.provenance.idFournisseur}">
+				<f:param name="id" value="#{provenanceBean.provenance.idFournisseur.idFournisseur}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="provenanceBeanProvenanceProvientList" value="Provient List:"/>
+			<h:dataTable id="provenanceBeanProvenanceProvientList" styleClass="data-table" value="#{provenanceBean.provenance.provientList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Materiel"/>
+					</f:facet>
+					<h:link outcome="/provient/view">
+						<f:param name="id" value="#{_item.idProvient}"/>
+						<h:outputText id="forgeviewdisplayitemIdMateriel" value="#{forgeview:display(_item.idMateriel)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

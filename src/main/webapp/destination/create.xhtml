@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{destinationBean.id}'/>
+		<f:event type="preRenderView" listener='#{destinationBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Destination"/>
+
+	<ui:define name="header">
+		Destination
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty destinationBean.id}'>
+				Edit existing Destination
+			</c:when>
+			<c:otherwise>
+				Create a new Destination
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="destinationBeanDestinationIdClient" value="Id Client:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{clientBean.converter}" id="destinationBeanDestinationIdClient" required="true" value="#{destinationBean.destination.idClient}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{clientBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="destinationBeanDestinationIdClient" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="destinationBeanDestinationDestockageList" value="Destockage List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{destinationBean.destination.destockageList}"/>
+					<h:dataTable id="destinationBeanDestinationDestockageList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id Exemplaire"/>
+							</f:facet>
+							<h:link outcome="/destockage/view">
+								<f:param name="id" value="#{_item.idDestockage}"/>
+								<h:outputText id="forgeviewdisplayitemIdExemplaire" value="#{forgeview:display(_item.idExemplaire)}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:selectOneMenu converter="#{examplaireMaterielBean.converter}" id="destockageBeanAddIdExemplaire" value="#{destockageBean.add.idExemplaire}">
+									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{examplaireMaterielBean.all}" var="_item"/>
+								</h:selectOneMenu>
+								<h:message for="destockageBeanAddIdExemplaire" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(destockageBean.added)}" id="destinationBeanDestinationDestockageListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{destockageBean.add.idDestination}" value="#{destinationBean.destination}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{destinationBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty destinationBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{destinationBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{destinationBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

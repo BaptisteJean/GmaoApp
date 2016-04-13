@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{departementBean.page}'/>
+		<f:event type="preRenderView" listener='#{departementBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Departement entities"/>
+
+	<ui:define name="header">
+		Departement
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Departement entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="departementBeanExampleLibelleDepartemnt" value="Libelle Departemnt:"/>
+						<h:panelGroup>
+							<h:inputText id="departementBeanExampleLibelleDepartemnt" value="#{departementBean.example.libelleDepartemnt}"/>
+							<h:message for="departementBeanExampleLibelleDepartemnt" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="departementBeanExampleDescriptionActiviteDepartement" value="Description Activite Departement:"/>
+						<h:panelGroup>
+							<h:inputText id="departementBeanExampleDescriptionActiviteDepartement" value="#{departementBean.example.descriptionActiviteDepartement}"/>
+							<h:message for="departementBeanExampleDescriptionActiviteDepartement" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="departementBeanExampleChefDepartement" value="Chef Departement:"/>
+						<h:panelGroup>
+							<h:inputText id="departementBeanExampleChefDepartement" value="#{departementBean.example.chefDepartement}"/>
+							<h:message for="departementBeanExampleChefDepartement" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{departementBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{departementBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="departementBeanPageItems" styleClass="data-table" value="#{departementBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Libelle Departemnt"/>
+					</f:facet>
+					<h:link outcome="/departement/view">
+						<f:param name="id" value="#{_item.idDepartement}"/>
+						<h:outputText id="itemLibelleDepartemnt" value="#{_item.libelleDepartemnt}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Description Activite Departement"/>
+					</f:facet>
+					<h:link outcome="/departement/view">
+						<f:param name="id" value="#{_item.idDepartement}"/>
+						<h:outputText id="itemDescriptionActiviteDepartement" value="#{_item.descriptionActiviteDepartement}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Chef Departement"/>
+					</f:facet>
+					<h:link outcome="/departement/view">
+						<f:param name="id" value="#{_item.idDepartement}"/>
+						<h:outputText id="itemChefDepartement" value="#{_item.chefDepartement}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{departementBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

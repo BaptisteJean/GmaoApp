@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="GmaoApp-persistence-unit" transaction-type="JTA">
+    <description>Forge Persistence Unit</description>
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <jta-data-source>java:/GmaoAppDS</jta-data-source>
+    <class>com.thedevbridge.gmaoapp.model.Intervention</class>
+    <class>com.thedevbridge.gmaoapp.model.Destination</class>
+    <class>com.thedevbridge.gmaoapp.model.ExamplaireMateriel</class>
+    <class>com.thedevbridge.gmaoapp.model.Provient</class>
+    <class>com.thedevbridge.gmaoapp.model.SiteIntervention</class>
+    <class>com.thedevbridge.gmaoapp.model.Provenance</class>
+    <class>com.thedevbridge.gmaoapp.model.Destockage</class>
+    <class>com.thedevbridge.gmaoapp.model.Adresse</class>
+    <class>com.thedevbridge.gmaoapp.model.Client</class>
+    <class>com.thedevbridge.gmaoapp.model.Materiel</class>
+    <class>com.thedevbridge.gmaoapp.model.EmplacementClient</class>
+    <class>com.thedevbridge.gmaoapp.model.Equipe</class>
+    <class>com.thedevbridge.gmaoapp.model.Technicien</class>
+    <class>com.thedevbridge.gmaoapp.model.EmplacementTN</class>
+    <class>com.thedevbridge.gmaoapp.model.Archivage</class>
+    <class>com.thedevbridge.gmaoapp.model.DirecteurTechnique</class>
+    <class>com.thedevbridge.gmaoapp.model.Planification</class>
+    <class>com.thedevbridge.gmaoapp.model.Rapport</class>
+    <class>com.thedevbridge.gmaoapp.model.Fournisseur</class>
+    <class>com.thedevbridge.gmaoapp.model.PlanificationPreventive</class>
+    <class>com.thedevbridge.gmaoapp.model.ArchivageProvoque</class>
+    <class>com.thedevbridge.gmaoapp.model.Personnel</class>
+    <class>com.thedevbridge.gmaoapp.model.ArchivageAutomatique</class>
+    <class>com.thedevbridge.gmaoapp.model.Departement</class>
+    <class>com.thedevbridge.gmaoapp.model.Emplacement</class>
+    <class>com.thedevbridge.gmaoapp.model.PlanificationCurative</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.transaction.flush_before_completion" value="true"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+    </properties>
+  </persistence-unit>
+</persistence>

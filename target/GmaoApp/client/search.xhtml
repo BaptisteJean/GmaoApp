@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{clientBean.page}'/>
+		<f:event type="preRenderView" listener='#{clientBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Client entities"/>
+
+	<ui:define name="header">
+		Client
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Client entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="clientBeanExampleCodeClient" value="Code Client:"/>
+						<h:panelGroup>
+							<h:inputText id="clientBeanExampleCodeClient" value="#{clientBean.example.codeClient}"/>
+							<h:message for="clientBeanExampleCodeClient" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="clientBeanExampleNomClient" value="Nom Client:"/>
+						<h:panelGroup>
+							<h:inputText id="clientBeanExampleNomClient" value="#{clientBean.example.nomClient}"/>
+							<h:message for="clientBeanExampleNomClient" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="clientBeanExamplePrenomClient" value="Prenom Client:"/>
+						<h:panelGroup>
+							<h:inputText id="clientBeanExamplePrenomClient" value="#{clientBean.example.prenomClient}"/>
+							<h:message for="clientBeanExamplePrenomClient" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="clientBeanExampleTypePersonne" value="Type Personne:"/>
+						<h:panelGroup>
+							<h:inputText id="clientBeanExampleTypePersonne" value="#{clientBean.example.typePersonne}"/>
+							<h:message for="clientBeanExampleTypePersonne" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="clientBeanExampleNatureActivite" value="Nature Activite:"/>
+						<h:panelGroup>
+							<h:inputText id="clientBeanExampleNatureActivite" value="#{clientBean.example.natureActivite}"/>
+							<h:message for="clientBeanExampleNatureActivite" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{clientBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{clientBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="clientBeanPageItems" styleClass="data-table" value="#{clientBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Adresse"/>
+					</f:facet>
+					<h:link outcome="/client/view">
+						<f:param name="id" value="#{_item.idClient}"/>
+						<h:outputText id="forgeviewdisplayitemIdAdresse" value="#{forgeview:display(_item.idAdresse)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{clientBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

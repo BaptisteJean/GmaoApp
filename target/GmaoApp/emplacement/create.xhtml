@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{emplacementBean.id}'/>
+		<f:event type="preRenderView" listener='#{emplacementBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Emplacement"/>
+
+	<ui:define name="header">
+		Emplacement
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty emplacementBean.id}'>
+				Edit existing Emplacement
+			</c:when>
+			<c:otherwise>
+				Create a new Emplacement
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="emplacementBeanEmplacementExamplaireMaterielList" value="Examplaire Materiel List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{emplacementBean.emplacement.examplaireMaterielList}"/>
+					<h:dataTable id="emplacementBeanEmplacementExamplaireMaterielList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id Materiel"/>
+							</f:facet>
+							<h:link outcome="/examplaireMateriel/view">
+								<f:param name="id" value="#{_item.idExemplaireMateriel}"/>
+								<h:outputText id="forgeviewdisplayitemIdMateriel" value="#{forgeview:display(_item.idMateriel)}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:selectOneMenu converter="#{materielBean.converter}" id="examplaireMaterielBeanAddIdMateriel" value="#{examplaireMaterielBean.add.idMateriel}">
+									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{materielBean.all}" var="_item"/>
+								</h:selectOneMenu>
+								<h:message for="examplaireMaterielBeanAddIdMateriel" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(examplaireMaterielBean.added)}" id="emplacementBeanEmplacementExamplaireMaterielListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{examplaireMaterielBean.add.idEmplacement}" value="#{emplacementBean.emplacement}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="emplacementBeanEmplacementEmplacementClientList" value="Emplacement Client List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{emplacementBean.emplacement.emplacementClientList}"/>
+					<h:dataTable id="emplacementBeanEmplacementEmplacementClientList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Bloc"/>
+							</f:facet>
+							<h:link outcome="/emplacementClient/view">
+								<f:param name="id" value="#{_item.idEmplClient}"/>
+								<h:outputText id="itemBloc" value="#{_item.bloc}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="emplacementClientBeanAddBloc" value="#{emplacementClientBean.add.bloc}"/>
+								<h:message for="emplacementClientBeanAddBloc" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Salle"/>
+							</f:facet>
+							<h:link outcome="/emplacementClient/view">
+								<f:param name="id" value="#{_item.idEmplClient}"/>
+								<h:outputText id="itemSalle" value="#{_item.salle}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="emplacementClientBeanAddSalle" value="#{emplacementClientBean.add.salle}"/>
+								<h:message for="emplacementClientBeanAddSalle" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Date Installation"/>
+							</f:facet>
+							<h:link outcome="/emplacementClient/view">
+								<f:param name="id" value="#{_item.idEmplClient}"/>
+								<h:outputText id="itemDateInstallation" value="#{_item.dateInstallation}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="emplacementClientBeanAddDateInstallation" value="#{emplacementClientBean.add.dateInstallation}"/>
+								<h:message for="emplacementClientBeanAddDateInstallation" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(emplacementClientBean.added)}" id="emplacementBeanEmplacementEmplacementClientListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{emplacementClientBean.add.idEmplacement}" value="#{emplacementBean.emplacement}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="emplacementBeanEmplacementEmplacementTNList" value="Emplacement TN List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{emplacementBean.emplacement.emplacementTNList}"/>
+					<h:dataTable id="emplacementBeanEmplacementEmplacementTNList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Libelle Caisse"/>
+							</f:facet>
+							<h:link outcome="/emplacementTN/view">
+								<f:param name="id" value="#{_item.idEmplTN}"/>
+								<h:outputText id="itemLibelleCaisse" value="#{_item.libelleCaisse}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="emplacementTNBeanAddLibelleCaisse" value="#{emplacementTNBean.add.libelleCaisse}"/>
+								<h:message for="emplacementTNBeanAddLibelleCaisse" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Libelle Tirroir"/>
+							</f:facet>
+							<h:link outcome="/emplacementTN/view">
+								<f:param name="id" value="#{_item.idEmplTN}"/>
+								<h:outputText id="itemLibelleTirroir" value="#{_item.libelleTirroir}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="emplacementTNBeanAddLibelleTirroir" value="#{emplacementTNBean.add.libelleTirroir}"/>
+								<h:message for="emplacementTNBeanAddLibelleTirroir" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(emplacementTNBean.added)}" id="emplacementBeanEmplacementEmplacementTNListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{emplacementTNBean.add.idEmplacement}" value="#{emplacementBean.emplacement}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{emplacementBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty emplacementBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{emplacementBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{emplacementBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

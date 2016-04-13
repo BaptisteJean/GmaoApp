@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{provientBean.id}'/>
+		<f:event type="preRenderView" listener='#{provientBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Provient"/>
+
+	<ui:define name="header">
+		Provient
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty provientBean.id}'>
+				Edit existing Provient
+			</c:when>
+			<c:otherwise>
+				Create a new Provient
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="provientBeanProvientIdMateriel" value="Id Materiel:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{materielBean.converter}" id="provientBeanProvientIdMateriel" required="true" value="#{provientBean.provient.idMateriel}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{materielBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="provientBeanProvientIdMateriel" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="provientBeanProvientIdProvenance" value="Id Provenance:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{provenanceBean.converter}" id="provientBeanProvientIdProvenance" required="true" value="#{provientBean.provient.idProvenance}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{provenanceBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="provientBeanProvientIdProvenance" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{provientBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty provientBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{provientBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{provientBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

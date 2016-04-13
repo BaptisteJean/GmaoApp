@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{provientBean.page}'/>
+		<f:event type="preRenderView" listener='#{provientBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Provient entities"/>
+
+	<ui:define name="header">
+		Provient
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Provient entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="provientBeanExampleIdMateriel" value="Id Materiel:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{materielBean.converter}" id="provientBeanExampleIdMateriel" value="#{provientBean.example.idMateriel}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{materielBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="provientBeanExampleIdMateriel" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="provientBeanExampleIdProvenance" value="Id Provenance:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{provenanceBean.converter}" id="provientBeanExampleIdProvenance" value="#{provientBean.example.idProvenance}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{provenanceBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="provientBeanExampleIdProvenance" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{provientBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{provientBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="provientBeanPageItems" styleClass="data-table" value="#{provientBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Materiel"/>
+					</f:facet>
+					<h:link outcome="/provient/view">
+						<f:param name="id" value="#{_item.idProvient}"/>
+						<h:outputText id="forgeviewdisplayitemIdMateriel" value="#{forgeview:display(_item.idMateriel)}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Provenance"/>
+					</f:facet>
+					<h:link outcome="/provient/view">
+						<f:param name="id" value="#{_item.idProvient}"/>
+						<h:outputText id="forgeviewdisplayitemIdProvenance" value="#{forgeview:display(_item.idProvenance)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{provientBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

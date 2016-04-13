@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{planificationPreventiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{planificationPreventiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Planification Preventive entities"/>
+
+	<ui:define name="header">
+		Planification Preventive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Planification Preventive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="planificationPreventiveBeanExampleHeureMaintenance" value="Heure Maintenance:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationPreventiveBeanExampleHeureMaintenance" value="#{planificationPreventiveBean.example.heureMaintenance}"/>
+							<h:message for="planificationPreventiveBeanExampleHeureMaintenance" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="planificationPreventiveBeanExampleTacheARealiser" value="Tache A Realiser:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationPreventiveBeanExampleTacheARealiser" value="#{planificationPreventiveBean.example.tacheARealiser}"/>
+							<h:message for="planificationPreventiveBeanExampleTacheARealiser" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{planificationPreventiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{planificationPreventiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="planificationPreventiveBeanPageItems" styleClass="data-table" value="#{planificationPreventiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Heure Maintenance"/>
+					</f:facet>
+					<h:link outcome="/planificationPreventive/view">
+						<f:param name="id" value="#{_item.idPlanifPreventive}"/>
+						<h:outputText id="itemHeureMaintenance" value="#{_item.heureMaintenance}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Tache A Realiser"/>
+					</f:facet>
+					<h:link outcome="/planificationPreventive/view">
+						<f:param name="id" value="#{_item.idPlanifPreventive}"/>
+						<h:outputText id="itemTacheARealiser" value="#{_item.tacheARealiser}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{planificationPreventiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>
