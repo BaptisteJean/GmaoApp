@@ -210,6 +210,20 @@ public class PlanificationCurativeBean implements Serializable {
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
+		String descriptionProbleme = this.example.getDescriptionProbleme();
+		if (descriptionProbleme != null && !"".equals(descriptionProbleme)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("descriptionProbleme")),
+					'%' + descriptionProbleme.toLowerCase() + '%'));
+		}
+		String etatMaterielApresIntervention = this.example
+				.getEtatMaterielApresIntervention();
+		if (etatMaterielApresIntervention != null
+				&& !"".equals(etatMaterielApresIntervention)) {
+			predicatesList.add(builder.like(builder.lower(root
+					.<String> get("etatMaterielApresIntervention")),
+					'%' + etatMaterielApresIntervention.toLowerCase() + '%'));
+		}
 		String heureDebut = this.example.getHeureDebut();
 		if (heureDebut != null && !"".equals(heureDebut)) {
 			predicatesList.add(builder.like(
@@ -222,25 +236,11 @@ public class PlanificationCurativeBean implements Serializable {
 					builder.lower(root.<String> get("heureFin")),
 					'%' + heureFin.toLowerCase() + '%'));
 		}
-		String descriptionProbleme = this.example.getDescriptionProbleme();
-		if (descriptionProbleme != null && !"".equals(descriptionProbleme)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("descriptionProbleme")),
-					'%' + descriptionProbleme.toLowerCase() + '%'));
-		}
 		String solutionApportee = this.example.getSolutionApportee();
 		if (solutionApportee != null && !"".equals(solutionApportee)) {
 			predicatesList.add(builder.like(
 					builder.lower(root.<String> get("solutionApportee")),
 					'%' + solutionApportee.toLowerCase() + '%'));
-		}
-		String etatMaterielApresIntervention = this.example
-				.getEtatMaterielApresIntervention();
-		if (etatMaterielApresIntervention != null
-				&& !"".equals(etatMaterielApresIntervention)) {
-			predicatesList.add(builder.like(builder.lower(root
-					.<String> get("etatMaterielApresIntervention")),
-					'%' + etatMaterielApresIntervention.toLowerCase() + '%'));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);

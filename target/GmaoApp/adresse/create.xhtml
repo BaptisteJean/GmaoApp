@@ -36,28 +36,34 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="adresseBeanAdresseCodeAdresse" value="Code Adresse:"/>
-				<h:panelGroup>
-					<h:inputText id="adresseBeanAdresseCodeAdresse" value="#{adresseBean.adresse.codeAdresse}"/>
-					<h:message for="adresseBeanAdresseCodeAdresse" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
 				<h:outputLabel for="adresseBeanAdresseBoitePostale" value="Boite Postale:"/>
 				<h:panelGroup>
 					<h:inputText id="adresseBeanAdresseBoitePostale" value="#{adresseBean.adresse.boitePostale}"/>
 					<h:message for="adresseBeanAdresseBoitePostale" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="adresseBeanAdresseNumeroPhone" value="Numero Phone:"/>
+				<h:outputLabel for="adresseBeanAdresseCodeAdresse" value="Code Adresse:"/>
 				<h:panelGroup>
-					<h:inputText id="adresseBeanAdresseNumeroPhone" value="#{adresseBean.adresse.numeroPhone}"/>
-					<h:message for="adresseBeanAdresseNumeroPhone" styleClass="error"/>
+					<h:inputText id="adresseBeanAdresseCodeAdresse" value="#{adresseBean.adresse.codeAdresse}"/>
+					<h:message for="adresseBeanAdresseCodeAdresse" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="adresseBeanAdresseEmail" value="Email:"/>
 				<h:panelGroup>
 					<h:inputText id="adresseBeanAdresseEmail" value="#{adresseBean.adresse.email}"/>
 					<h:message for="adresseBeanAdresseEmail" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseBeanAdresseLieuDit" value="Lieu Dit:"/>
+				<h:panelGroup>
+					<h:inputText id="adresseBeanAdresseLieuDit" value="#{adresseBean.adresse.lieuDit}"/>
+					<h:message for="adresseBeanAdresseLieuDit" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseBeanAdresseNumeroPhone" value="Numero Phone:"/>
+				<h:panelGroup>
+					<h:inputText id="adresseBeanAdresseNumeroPhone" value="#{adresseBean.adresse.numeroPhone}"/>
+					<h:message for="adresseBeanAdresseNumeroPhone" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="adresseBeanAdresseRegion" value="Region:"/>
@@ -70,12 +76,6 @@
 				<h:panelGroup>
 					<h:inputText id="adresseBeanAdresseVille" value="#{adresseBean.adresse.ville}"/>
 					<h:message for="adresseBeanAdresseVille" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="adresseBeanAdresseLieuDit" value="Lieu Dit:"/>
-				<h:panelGroup>
-					<h:inputText id="adresseBeanAdresseLieuDit" value="#{adresseBean.adresse.lieuDit}"/>
-					<h:message for="adresseBeanAdresseLieuDit" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="adresseBeanAdresseFournisseurList" value="Fournisseur List:"/>
@@ -125,6 +125,19 @@
 						</h:column>
 						<h:column>
 							<f:facet name="header">
+								<h:outputText value="Nature Activite"/>
+							</f:facet>
+							<h:link outcome="/client/view">
+								<f:param name="id" value="#{_item.idClient}"/>
+								<h:outputText id="itemNatureActivite" value="#{_item.natureActivite}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="clientBeanAddNatureActivite" value="#{clientBean.add.natureActivite}"/>
+								<h:message for="clientBeanAddNatureActivite" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
 								<h:outputText value="Nom Client"/>
 							</f:facet>
 							<h:link outcome="/client/view">
@@ -160,19 +173,6 @@
 							<f:facet name="footer">
 								<h:inputText id="clientBeanAddTypePersonne" value="#{clientBean.add.typePersonne}"/>
 								<h:message for="clientBeanAddTypePersonne" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Nature Activite"/>
-							</f:facet>
-							<h:link outcome="/client/view">
-								<f:param name="id" value="#{_item.idClient}"/>
-								<h:outputText id="itemNatureActivite" value="#{_item.natureActivite}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:inputText id="clientBeanAddNatureActivite" value="#{clientBean.add.natureActivite}"/>
-								<h:message for="clientBeanAddNatureActivite" styleClass="error"/>
 							</f:facet>
 						</h:column>
 						<h:column footerClass="remove-column" headerClass="remove-column">

@@ -40,11 +40,11 @@ public class Destination implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id_destination")
 	private Long idDestination;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idDestination")
+	private List<Destockage> destockageList;
 	@JoinColumn(name = "id_client", referencedColumnName = "id_client")
 	@ManyToOne(optional = false)
 	private Client idClient;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idDestination")
-	private List<Destockage> destockageList;
 
 	public Destination() {
 	}
@@ -61,14 +61,6 @@ public class Destination implements Serializable {
 		this.idDestination = idDestination;
 	}
 
-	public Client getIdClient() {
-		return idClient;
-	}
-
-	public void setIdClient(Client idClient) {
-		this.idClient = idClient;
-	}
-
 	@XmlTransient
 	public List<Destockage> getDestockageList() {
 		return destockageList;
@@ -76,6 +68,14 @@ public class Destination implements Serializable {
 
 	public void setDestockageList(List<Destockage> destockageList) {
 		this.destockageList = destockageList;
+	}
+
+	public Client getIdClient() {
+		return idClient;
+	}
+
+	public void setIdClient(Client idClient) {
+		this.idClient = idClient;
 	}
 
 	@Override

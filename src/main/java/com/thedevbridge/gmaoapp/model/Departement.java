@@ -31,9 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
 		@NamedQuery(name = "Departement.findAll", query = "SELECT d FROM Departement d"),
 		@NamedQuery(name = "Departement.findByIdDepartement", query = "SELECT d FROM Departement d WHERE d.idDepartement = :idDepartement"),
-		@NamedQuery(name = "Departement.findByLibelleDepartemnt", query = "SELECT d FROM Departement d WHERE d.libelleDepartemnt = :libelleDepartemnt"),
+		@NamedQuery(name = "Departement.findByChefDepartement", query = "SELECT d FROM Departement d WHERE d.chefDepartement = :chefDepartement"),
 		@NamedQuery(name = "Departement.findByDescriptionActiviteDepartement", query = "SELECT d FROM Departement d WHERE d.descriptionActiviteDepartement = :descriptionActiviteDepartement"),
-		@NamedQuery(name = "Departement.findByChefDepartement", query = "SELECT d FROM Departement d WHERE d.chefDepartement = :chefDepartement")})
+		@NamedQuery(name = "Departement.findByLibelleDepartemnt", query = "SELECT d FROM Departement d WHERE d.libelleDepartemnt = :libelleDepartemnt")})
 public class Departement implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -41,12 +41,12 @@ public class Departement implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id_departement")
 	private Long idDepartement;
-	@Column(name = "libelle_departemnt")
-	private String libelleDepartemnt;
-	@Column(name = "description_activite_departement")
-	private String descriptionActiviteDepartement;
 	@Column(name = "chef_departement")
 	private String chefDepartement;
+	@Column(name = "description_activite_departement")
+	private String descriptionActiviteDepartement;
+	@Column(name = "libelle_departemnt")
+	private String libelleDepartemnt;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idDepartement")
 	private List<Technicien> technicienList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idDepartemant")
@@ -67,12 +67,12 @@ public class Departement implements Serializable {
 		this.idDepartement = idDepartement;
 	}
 
-	public String getLibelleDepartemnt() {
-		return libelleDepartemnt;
+	public String getChefDepartement() {
+		return chefDepartement;
 	}
 
-	public void setLibelleDepartemnt(String libelleDepartemnt) {
-		this.libelleDepartemnt = libelleDepartemnt;
+	public void setChefDepartement(String chefDepartement) {
+		this.chefDepartement = chefDepartement;
 	}
 
 	public String getDescriptionActiviteDepartement() {
@@ -84,12 +84,12 @@ public class Departement implements Serializable {
 		this.descriptionActiviteDepartement = descriptionActiviteDepartement;
 	}
 
-	public String getChefDepartement() {
-		return chefDepartement;
+	public String getLibelleDepartemnt() {
+		return libelleDepartemnt;
 	}
 
-	public void setChefDepartement(String chefDepartement) {
-		this.chefDepartement = chefDepartement;
+	public void setLibelleDepartemnt(String libelleDepartemnt) {
+		this.libelleDepartemnt = libelleDepartemnt;
 	}
 
 	@XmlTransient

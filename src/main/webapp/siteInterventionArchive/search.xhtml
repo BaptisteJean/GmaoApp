@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{siteInterventionArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{siteInterventionArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Site Intervention Archive entities"/>
+
+	<ui:define name="header">
+		Site Intervention Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Site Intervention Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="siteInterventionArchiveBeanExampleLibeleBureau" value="Libele Bureau:"/>
+						<h:panelGroup>
+							<h:inputText id="siteInterventionArchiveBeanExampleLibeleBureau" value="#{siteInterventionArchiveBean.example.libeleBureau}"/>
+							<h:message for="siteInterventionArchiveBeanExampleLibeleBureau" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="siteInterventionArchiveBeanExampleNumeroBatiment" value="Numero Batiment:"/>
+						<h:panelGroup>
+							<h:inputText id="siteInterventionArchiveBeanExampleNumeroBatiment" value="#{siteInterventionArchiveBean.example.numeroBatiment}"/>
+							<h:message for="siteInterventionArchiveBeanExampleNumeroBatiment" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="siteInterventionArchiveBeanExampleIdClient" value="Id Client:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{clientArchiveBean.converter}" id="siteInterventionArchiveBeanExampleIdClient" value="#{siteInterventionArchiveBean.example.idClient}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{clientArchiveBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="siteInterventionArchiveBeanExampleIdClient" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{siteInterventionArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{siteInterventionArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="siteInterventionArchiveBeanPageItems" styleClass="data-table" value="#{siteInterventionArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Client"/>
+					</f:facet>
+					<h:link outcome="/siteInterventionArchive/view">
+						<f:param name="id" value="#{_item.idsiteintervention}"/>
+						<h:outputText id="forgeviewdisplayitemIdClient" value="#{forgeview:display(_item.idClient)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{siteInterventionArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

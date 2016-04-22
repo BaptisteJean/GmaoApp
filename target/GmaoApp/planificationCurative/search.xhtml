@@ -29,6 +29,18 @@
 				<h:panelGroup styleClass="search">
 
 					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="planificationCurativeBeanExampleDescriptionProbleme" value="Description Probleme:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationCurativeBeanExampleDescriptionProbleme" value="#{planificationCurativeBean.example.descriptionProbleme}"/>
+							<h:message for="planificationCurativeBeanExampleDescriptionProbleme" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="planificationCurativeBeanExampleEtatMaterielApresIntervention" value="Etat Materiel Apres Intervention:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationCurativeBeanExampleEtatMaterielApresIntervention" value="#{planificationCurativeBean.example.etatMaterielApresIntervention}"/>
+							<h:message for="planificationCurativeBeanExampleEtatMaterielApresIntervention" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
 						<h:outputLabel for="planificationCurativeBeanExampleHeureDebut" value="Heure Debut:"/>
 						<h:panelGroup>
 							<h:inputText id="planificationCurativeBeanExampleHeureDebut" value="#{planificationCurativeBean.example.heureDebut}"/>
@@ -41,22 +53,10 @@
 							<h:message for="planificationCurativeBeanExampleHeureFin" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
-						<h:outputLabel for="planificationCurativeBeanExampleDescriptionProbleme" value="Description Probleme:"/>
-						<h:panelGroup>
-							<h:inputText id="planificationCurativeBeanExampleDescriptionProbleme" value="#{planificationCurativeBean.example.descriptionProbleme}"/>
-							<h:message for="planificationCurativeBeanExampleDescriptionProbleme" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
 						<h:outputLabel for="planificationCurativeBeanExampleSolutionApportee" value="Solution Apportee:"/>
 						<h:panelGroup>
 							<h:inputText id="planificationCurativeBeanExampleSolutionApportee" value="#{planificationCurativeBean.example.solutionApportee}"/>
 							<h:message for="planificationCurativeBeanExampleSolutionApportee" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
-						<h:outputLabel for="planificationCurativeBeanExampleEtatMaterielApresIntervention" value="Etat Materiel Apres Intervention:"/>
-						<h:panelGroup>
-							<h:inputText id="planificationCurativeBeanExampleEtatMaterielApresIntervention" value="#{planificationCurativeBean.example.etatMaterielApresIntervention}"/>
-							<h:message for="planificationCurativeBeanExampleEtatMaterielApresIntervention" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 					</h:panelGrid>
@@ -68,6 +68,24 @@
 			</f:validateBean>
 			
 			<h:dataTable id="planificationCurativeBeanPageItems" styleClass="data-table" value="#{planificationCurativeBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Description Probleme"/>
+					</f:facet>
+					<h:link outcome="/planificationCurative/view">
+						<f:param name="id" value="#{_item.idPlanifCurative}"/>
+						<h:outputText id="itemDescriptionProbleme" value="#{_item.descriptionProbleme}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Etat Materiel Apres Intervention"/>
+					</f:facet>
+					<h:link outcome="/planificationCurative/view">
+						<f:param name="id" value="#{_item.idPlanifCurative}"/>
+						<h:outputText id="itemEtatMaterielApresIntervention" value="#{_item.etatMaterielApresIntervention}"/>
+					</h:link>
+				</h:column>
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Heure Debut"/>
@@ -88,29 +106,11 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Description Probleme"/>
-					</f:facet>
-					<h:link outcome="/planificationCurative/view">
-						<f:param name="id" value="#{_item.idPlanifCurative}"/>
-						<h:outputText id="itemDescriptionProbleme" value="#{_item.descriptionProbleme}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
 						<h:outputText value="Solution Apportee"/>
 					</f:facet>
 					<h:link outcome="/planificationCurative/view">
 						<f:param name="id" value="#{_item.idPlanifCurative}"/>
 						<h:outputText id="itemSolutionApportee" value="#{_item.solutionApportee}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Etat Materiel Apres Intervention"/>
-					</f:facet>
-					<h:link outcome="/planificationCurative/view">
-						<f:param name="id" value="#{_item.idPlanifCurative}"/>
-						<h:outputText id="itemEtatMaterielApresIntervention" value="#{_item.etatMaterielApresIntervention}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

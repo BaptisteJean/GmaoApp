@@ -215,17 +215,17 @@ public class RapportBean implements Serializable {
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		String descriptionRapport = this.example.getDescriptionRapport();
-		if (descriptionRapport != null && !"".equals(descriptionRapport)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("descriptionRapport")),
-					'%' + descriptionRapport.toLowerCase() + '%'));
-		}
 		String dateRedaction = this.example.getDateRedaction();
 		if (dateRedaction != null && !"".equals(dateRedaction)) {
 			predicatesList.add(builder.like(
 					builder.lower(root.<String> get("dateRedaction")),
 					'%' + dateRedaction.toLowerCase() + '%'));
+		}
+		String descriptionRapport = this.example.getDescriptionRapport();
+		if (descriptionRapport != null && !"".equals(descriptionRapport)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("descriptionRapport")),
+					'%' + descriptionRapport.toLowerCase() + '%'));
 		}
 		Equipe idEquipe = this.example.getIdEquipe();
 		if (idEquipe != null) {

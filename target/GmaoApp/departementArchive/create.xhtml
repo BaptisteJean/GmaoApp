@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{departementArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{departementArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Departement Archive"/>
+
+	<ui:define name="header">
+		Departement Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty departementArchiveBean.id}'>
+				Edit existing Departement Archive
+			</c:when>
+			<c:otherwise>
+				Create a new Departement Archive
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="departementArchiveBeanDepartementArchiveChefDepartement" value="Chef Departement:"/>
+				<h:panelGroup>
+					<h:inputText id="departementArchiveBeanDepartementArchiveChefDepartement" value="#{departementArchiveBean.departementArchive.chefDepartement}"/>
+					<h:message for="departementArchiveBeanDepartementArchiveChefDepartement" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="departementArchiveBeanDepartementArchiveDescriptionActiviteDepartement" value="Description Activite Departement:"/>
+				<h:panelGroup>
+					<h:inputText id="departementArchiveBeanDepartementArchiveDescriptionActiviteDepartement" value="#{departementArchiveBean.departementArchive.descriptionActiviteDepartement}"/>
+					<h:message for="departementArchiveBeanDepartementArchiveDescriptionActiviteDepartement" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="departementArchiveBeanDepartementArchiveLibelleDepartemnt" value="Libelle Departemnt:"/>
+				<h:panelGroup>
+					<h:inputText id="departementArchiveBeanDepartementArchiveLibelleDepartemnt" value="#{departementArchiveBean.departementArchive.libelleDepartemnt}"/>
+					<h:message for="departementArchiveBeanDepartementArchiveLibelleDepartemnt" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="departementArchiveBeanDepartementArchiveEquipeArchiveList" value="Equipe Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{departementArchiveBean.departementArchive.equipeArchiveList}"/>
+					<h:dataTable id="departementArchiveBeanDepartementArchiveEquipeArchiveList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Chef Equipe"/>
+							</f:facet>
+							<h:link outcome="/equipeArchive/view">
+								<f:param name="id" value="#{_item.idEquipe}"/>
+								<h:outputText id="itemChefEquipe" value="#{_item.chefEquipe}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="equipeArchiveBeanAddChefEquipe" value="#{equipeArchiveBean.add.chefEquipe}"/>
+								<h:message for="equipeArchiveBeanAddChefEquipe" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Description Activite Equipe"/>
+							</f:facet>
+							<h:link outcome="/equipeArchive/view">
+								<f:param name="id" value="#{_item.idEquipe}"/>
+								<h:outputText id="itemDescriptionActiviteEquipe" value="#{_item.descriptionActiviteEquipe}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="equipeArchiveBeanAddDescriptionActiviteEquipe" value="#{equipeArchiveBean.add.descriptionActiviteEquipe}"/>
+								<h:message for="equipeArchiveBeanAddDescriptionActiviteEquipe" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Libelle Equipe"/>
+							</f:facet>
+							<h:link outcome="/equipeArchive/view">
+								<f:param name="id" value="#{_item.idEquipe}"/>
+								<h:outputText id="itemLibelleEquipe" value="#{_item.libelleEquipe}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="equipeArchiveBeanAddLibelleEquipe" value="#{equipeArchiveBean.add.libelleEquipe}"/>
+								<h:message for="equipeArchiveBeanAddLibelleEquipe" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(equipeArchiveBean.added)}" id="departementArchiveBeanDepartementArchiveEquipeArchiveListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{equipeArchiveBean.add.idDepartemant}" value="#{departementArchiveBean.departementArchive}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="departementArchiveBeanDepartementArchiveTechnicienArchiveList" value="Technicien Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{departementArchiveBean.departementArchive.technicienArchiveList}"/>
+					<h:dataTable id="departementArchiveBeanDepartementArchiveTechnicienArchiveList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id Equipe"/>
+							</f:facet>
+							<h:link outcome="/technicienArchive/view">
+								<f:param name="id" value="#{_item.idTechnicien}"/>
+								<h:outputText id="forgeviewdisplayitemIdEquipe" value="#{forgeview:display(_item.idEquipe)}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:selectOneMenu converter="#{equipeArchiveBean.converter}" id="technicienArchiveBeanAddIdEquipe" value="#{technicienArchiveBean.add.idEquipe}">
+									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{equipeArchiveBean.all}" var="_item"/>
+								</h:selectOneMenu>
+								<h:message for="technicienArchiveBeanAddIdEquipe" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id Personnel"/>
+							</f:facet>
+							<h:link outcome="/technicienArchive/view">
+								<f:param name="id" value="#{_item.idTechnicien}"/>
+								<h:outputText id="forgeviewdisplayitemIdPersonnel" value="#{forgeview:display(_item.idPersonnel)}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:selectOneMenu converter="#{personnelArchiveBean.converter}" id="technicienArchiveBeanAddIdPersonnel" value="#{technicienArchiveBean.add.idPersonnel}">
+									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{personnelArchiveBean.all}" var="_item"/>
+								</h:selectOneMenu>
+								<h:message for="technicienArchiveBeanAddIdPersonnel" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(technicienArchiveBean.added)}" id="departementArchiveBeanDepartementArchiveTechnicienArchiveListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{technicienArchiveBean.add.idDepartement}" value="#{departementArchiveBean.departementArchive}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{departementArchiveBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty departementArchiveBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{departementArchiveBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{departementArchiveBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

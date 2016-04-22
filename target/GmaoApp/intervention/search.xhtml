@@ -42,12 +42,6 @@
 							<h:message for="interventionBeanExampleDescriptionIntervention" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
-						<h:outputLabel for="interventionBeanExampleTempsMis" value="Temps Mis:"/>
-						<h:panelGroup>
-							<h:inputText id="interventionBeanExampleTempsMis" value="#{interventionBean.example.tempsMis}"/>
-							<h:message for="interventionBeanExampleTempsMis" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
 						<h:outputLabel for="interventionBeanExampleStatutRapport" value="Statut Rapport:"/>
 						<h:panelGroup>
 							<h:selectOneMenu id="interventionBeanExampleStatutRapport" value="#{interventionBean.example.statutRapport}">
@@ -56,6 +50,12 @@
 								<f:selectItem itemLabel="No" itemValue="false"/>
 							</h:selectOneMenu>
 							<h:message for="interventionBeanExampleStatutRapport" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="interventionBeanExampleTempsMis" value="Temps Mis:"/>
+						<h:panelGroup>
+							<h:inputText id="interventionBeanExampleTempsMis" value="#{interventionBean.example.tempsMis}"/>
+							<h:message for="interventionBeanExampleTempsMis" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 						<h:outputLabel for="interventionBeanExampleIdDirecteurTech" value="Id Directeur Tech:"/>

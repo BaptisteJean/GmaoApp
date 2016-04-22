@@ -218,10 +218,11 @@ public class ExamplaireMaterielBean implements Serializable {
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		Integer quantiteExemplaire = this.example.getQuantiteExemplaire();
-		if (quantiteExemplaire != null && quantiteExemplaire.intValue() != 0) {
-			predicatesList.add(builder.equal(root.get("quantiteExemplaire"),
-					quantiteExemplaire));
+		String fabricantMarque = this.example.getFabricantMarque();
+		if (fabricantMarque != null && !"".equals(fabricantMarque)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("fabricantMarque")),
+					'%' + fabricantMarque.toLowerCase() + '%'));
 		}
 		String libelleExemplaire = this.example.getLibelleExemplaire();
 		if (libelleExemplaire != null && !"".equals(libelleExemplaire)) {
@@ -235,15 +236,14 @@ public class ExamplaireMaterielBean implements Serializable {
 					builder.lower(root.<String> get("numeroSerie")),
 					'%' + numeroSerie.toLowerCase() + '%'));
 		}
-		String fabricantMarque = this.example.getFabricantMarque();
-		if (fabricantMarque != null && !"".equals(fabricantMarque)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("fabricantMarque")),
-					'%' + fabricantMarque.toLowerCase() + '%'));
-		}
 		Integer puissance = this.example.getPuissance();
 		if (puissance != null && puissance.intValue() != 0) {
 			predicatesList.add(builder.equal(root.get("puissance"), puissance));
+		}
+		Integer quantiteExemplaire = this.example.getQuantiteExemplaire();
+		if (quantiteExemplaire != null && quantiteExemplaire.intValue() != 0) {
+			predicatesList.add(builder.equal(root.get("quantiteExemplaire"),
+					quantiteExemplaire));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);

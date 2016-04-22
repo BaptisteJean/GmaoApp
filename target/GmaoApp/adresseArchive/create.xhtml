@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{adresseArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{adresseArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Adresse Archive"/>
+
+	<ui:define name="header">
+		Adresse Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty adresseArchiveBean.id}'>
+				Edit existing Adresse Archive
+			</c:when>
+			<c:otherwise>
+				Create a new Adresse Archive
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="adresseArchiveBeanAdresseArchiveBoitePostale" value="Boite Postale:"/>
+				<h:panelGroup>
+					<h:inputText id="adresseArchiveBeanAdresseArchiveBoitePostale" value="#{adresseArchiveBean.adresseArchive.boitePostale}"/>
+					<h:message for="adresseArchiveBeanAdresseArchiveBoitePostale" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseArchiveBeanAdresseArchiveCodeAdresse" value="Code Adresse:"/>
+				<h:panelGroup>
+					<h:inputText id="adresseArchiveBeanAdresseArchiveCodeAdresse" value="#{adresseArchiveBean.adresseArchive.codeAdresse}"/>
+					<h:message for="adresseArchiveBeanAdresseArchiveCodeAdresse" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseArchiveBeanAdresseArchiveEmail" value="Email:"/>
+				<h:panelGroup>
+					<h:inputText id="adresseArchiveBeanAdresseArchiveEmail" value="#{adresseArchiveBean.adresseArchive.email}"/>
+					<h:message for="adresseArchiveBeanAdresseArchiveEmail" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseArchiveBeanAdresseArchiveLieuDit" value="Lieu Dit:"/>
+				<h:panelGroup>
+					<h:inputText id="adresseArchiveBeanAdresseArchiveLieuDit" value="#{adresseArchiveBean.adresseArchive.lieuDit}"/>
+					<h:message for="adresseArchiveBeanAdresseArchiveLieuDit" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseArchiveBeanAdresseArchiveNumeroPhone" value="Numero Phone:"/>
+				<h:panelGroup>
+					<h:inputText id="adresseArchiveBeanAdresseArchiveNumeroPhone" value="#{adresseArchiveBean.adresseArchive.numeroPhone}"/>
+					<h:message for="adresseArchiveBeanAdresseArchiveNumeroPhone" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseArchiveBeanAdresseArchiveRegion" value="Region:"/>
+				<h:panelGroup>
+					<h:inputText id="adresseArchiveBeanAdresseArchiveRegion" value="#{adresseArchiveBean.adresseArchive.region}"/>
+					<h:message for="adresseArchiveBeanAdresseArchiveRegion" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseArchiveBeanAdresseArchiveVille" value="Ville:"/>
+				<h:panelGroup>
+					<h:inputText id="adresseArchiveBeanAdresseArchiveVille" value="#{adresseArchiveBean.adresseArchive.ville}"/>
+					<h:message for="adresseArchiveBeanAdresseArchiveVille" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseArchiveBeanAdresseArchiveFournisseurArchiveList" value="Fournisseur Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{adresseArchiveBean.adresseArchive.fournisseurArchiveList}"/>
+					<h:dataTable id="adresseArchiveBeanAdresseArchiveFournisseurArchiveList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Raison Social"/>
+							</f:facet>
+							<h:link outcome="/fournisseurArchive/view">
+								<f:param name="id" value="#{_item.idFournisseur}"/>
+								<h:outputText id="itemRaisonSocial" value="#{_item.raisonSocial}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="fournisseurArchiveBeanAddRaisonSocial" value="#{fournisseurArchiveBean.add.raisonSocial}"/>
+								<h:message for="fournisseurArchiveBeanAddRaisonSocial" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(fournisseurArchiveBean.added)}" id="adresseArchiveBeanAdresseArchiveFournisseurArchiveListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{fournisseurArchiveBean.add.idAdresse}" value="#{adresseArchiveBean.adresseArchive}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="adresseArchiveBeanAdresseArchiveClientArchiveList" value="Client Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{adresseArchiveBean.adresseArchive.clientArchiveList}"/>
+					<h:dataTable id="adresseArchiveBeanAdresseArchiveClientArchiveList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Code Client"/>
+							</f:facet>
+							<h:link outcome="/clientArchive/view">
+								<f:param name="id" value="#{_item.idClient}"/>
+								<h:outputText id="itemCodeClient" value="#{_item.codeClient}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="clientArchiveBeanAddCodeClient" value="#{clientArchiveBean.add.codeClient}"/>
+								<h:message for="clientArchiveBeanAddCodeClient" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Nature Activite"/>
+							</f:facet>
+							<h:link outcome="/clientArchive/view">
+								<f:param name="id" value="#{_item.idClient}"/>
+								<h:outputText id="itemNatureActivite" value="#{_item.natureActivite}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="clientArchiveBeanAddNatureActivite" value="#{clientArchiveBean.add.natureActivite}"/>
+								<h:message for="clientArchiveBeanAddNatureActivite" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Nom Client"/>
+							</f:facet>
+							<h:link outcome="/clientArchive/view">
+								<f:param name="id" value="#{_item.idClient}"/>
+								<h:outputText id="itemNomClient" value="#{_item.nomClient}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="clientArchiveBeanAddNomClient" value="#{clientArchiveBean.add.nomClient}"/>
+								<h:message for="clientArchiveBeanAddNomClient" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Prenom Client"/>
+							</f:facet>
+							<h:link outcome="/clientArchive/view">
+								<f:param name="id" value="#{_item.idClient}"/>
+								<h:outputText id="itemPrenomClient" value="#{_item.prenomClient}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="clientArchiveBeanAddPrenomClient" value="#{clientArchiveBean.add.prenomClient}"/>
+								<h:message for="clientArchiveBeanAddPrenomClient" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Type Personne"/>
+							</f:facet>
+							<h:link outcome="/clientArchive/view">
+								<f:param name="id" value="#{_item.idClient}"/>
+								<h:outputText id="itemTypePersonne" value="#{_item.typePersonne}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="clientArchiveBeanAddTypePersonne" value="#{clientArchiveBean.add.typePersonne}"/>
+								<h:message for="clientArchiveBeanAddTypePersonne" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(clientArchiveBean.added)}" id="adresseArchiveBeanAdresseArchiveClientArchiveListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{clientArchiveBean.add.idAdresse}" value="#{adresseArchiveBean.adresseArchive}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{adresseArchiveBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty adresseArchiveBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{adresseArchiveBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{adresseArchiveBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

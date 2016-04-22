@@ -235,14 +235,14 @@ public class InterventionBean implements Serializable {
 							.<String> get("descriptionIntervention")),
 							'%' + descriptionIntervention.toLowerCase() + '%'));
 		}
-		Integer tempsMis = this.example.getTempsMis();
-		if (tempsMis != null && tempsMis.intValue() != 0) {
-			predicatesList.add(builder.equal(root.get("tempsMis"), tempsMis));
-		}
 		Boolean statutRapport = this.example.getStatutRapport();
 		if (statutRapport != null) {
 			predicatesList.add(builder.equal(root.get("statutRapport"),
 					statutRapport));
+		}
+		Integer tempsMis = this.example.getTempsMis();
+		if (tempsMis != null && tempsMis.intValue() != 0) {
+			predicatesList.add(builder.equal(root.get("tempsMis"), tempsMis));
 		}
 		DirecteurTechnique idDirecteurTech = this.example.getIdDirecteurTech();
 		if (idDirecteurTech != null) {

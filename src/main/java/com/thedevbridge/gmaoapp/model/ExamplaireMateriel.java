@@ -28,16 +28,16 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author wabo
  */
 @Entity
-@Table(name = "examplaire_Materiel")
+@Table(name = "examplaire_materiel")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "ExamplaireMateriel.findAll", query = "SELECT e FROM ExamplaireMateriel e"),
 		@NamedQuery(name = "ExamplaireMateriel.findByIdExemplaireMateriel", query = "SELECT e FROM ExamplaireMateriel e WHERE e.idExemplaireMateriel = :idExemplaireMateriel"),
-		@NamedQuery(name = "ExamplaireMateriel.findByQuantiteExemplaire", query = "SELECT e FROM ExamplaireMateriel e WHERE e.quantiteExemplaire = :quantiteExemplaire"),
+		@NamedQuery(name = "ExamplaireMateriel.findByFabricantMarque", query = "SELECT e FROM ExamplaireMateriel e WHERE e.fabricantMarque = :fabricantMarque"),
 		@NamedQuery(name = "ExamplaireMateriel.findByLibelleExemplaire", query = "SELECT e FROM ExamplaireMateriel e WHERE e.libelleExemplaire = :libelleExemplaire"),
 		@NamedQuery(name = "ExamplaireMateriel.findByNumeroSerie", query = "SELECT e FROM ExamplaireMateriel e WHERE e.numeroSerie = :numeroSerie"),
-		@NamedQuery(name = "ExamplaireMateriel.findByFabricantMarque", query = "SELECT e FROM ExamplaireMateriel e WHERE e.fabricantMarque = :fabricantMarque"),
-		@NamedQuery(name = "ExamplaireMateriel.findByPuissance", query = "SELECT e FROM ExamplaireMateriel e WHERE e.puissance = :puissance")})
+		@NamedQuery(name = "ExamplaireMateriel.findByPuissance", query = "SELECT e FROM ExamplaireMateriel e WHERE e.puissance = :puissance"),
+		@NamedQuery(name = "ExamplaireMateriel.findByQuantiteExemplaire", query = "SELECT e FROM ExamplaireMateriel e WHERE e.quantiteExemplaire = :quantiteExemplaire")})
 public class ExamplaireMateriel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -45,28 +45,28 @@ public class ExamplaireMateriel implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id_exemplaire_materiel")
 	private Long idExemplaireMateriel;
-	@Column(name = "quantite_exemplaire")
-	private Integer quantiteExemplaire;
+	@Column(name = "fabricant_marque")
+	private String fabricantMarque;
 	@Column(name = "libelle_exemplaire")
 	private String libelleExemplaire;
 	@Column(name = "numero_serie")
 	private String numeroSerie;
-	@Column(name = "fabricant_marque")
-	private String fabricantMarque;
 	@Column(name = "puissance")
 	private Integer puissance;
+	@Column(name = "quantite_exemplaire")
+	private Integer quantiteExemplaire;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idExemplaire")
 	private List<Destockage> destockageList;
-	@JoinColumn(name = "id_emplacement", referencedColumnName = "id_Empl")
+	@JoinColumn(name = "id_emplacement", referencedColumnName = "id_empl")
 	@ManyToOne(optional = false)
 	private Emplacement idEmplacement;
 	@JoinColumn(name = "id_materiel", referencedColumnName = "id_materiel")
 	@ManyToOne(optional = false)
 	private Materiel idMateriel;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idExemplaireMat")
-	private List<Planification> planificationList;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idExemplaireMat")
 	private List<Intervention> interventionList;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idExemplaireMat")
+	private List<Planification> planificationList;
 
 	public ExamplaireMateriel() {
 	}
@@ -83,12 +83,12 @@ public class ExamplaireMateriel implements Serializable {
 		this.idExemplaireMateriel = idExemplaireMateriel;
 	}
 
-	public Integer getQuantiteExemplaire() {
-		return quantiteExemplaire;
+	public String getFabricantMarque() {
+		return fabricantMarque;
 	}
 
-	public void setQuantiteExemplaire(Integer quantiteExemplaire) {
-		this.quantiteExemplaire = quantiteExemplaire;
+	public void setFabricantMarque(String fabricantMarque) {
+		this.fabricantMarque = fabricantMarque;
 	}
 
 	public String getLibelleExemplaire() {
@@ -107,20 +107,20 @@ public class ExamplaireMateriel implements Serializable {
 		this.numeroSerie = numeroSerie;
 	}
 
-	public String getFabricantMarque() {
-		return fabricantMarque;
-	}
-
-	public void setFabricantMarque(String fabricantMarque) {
-		this.fabricantMarque = fabricantMarque;
-	}
-
 	public Integer getPuissance() {
 		return puissance;
 	}
 
 	public void setPuissance(Integer puissance) {
 		this.puissance = puissance;
+	}
+
+	public Integer getQuantiteExemplaire() {
+		return quantiteExemplaire;
+	}
+
+	public void setQuantiteExemplaire(Integer quantiteExemplaire) {
+		this.quantiteExemplaire = quantiteExemplaire;
 	}
 
 	@XmlTransient
@@ -149,21 +149,21 @@ public class ExamplaireMateriel implements Serializable {
 	}
 
 	@XmlTransient
-	public List<Planification> getPlanificationList() {
-		return planificationList;
-	}
-
-	public void setPlanificationList(List<Planification> planificationList) {
-		this.planificationList = planificationList;
-	}
-
-	@XmlTransient
 	public List<Intervention> getInterventionList() {
 		return interventionList;
 	}
 
 	public void setInterventionList(List<Intervention> interventionList) {
 		this.interventionList = interventionList;
+	}
+
+	@XmlTransient
+	public List<Planification> getPlanificationList() {
+		return planificationList;
+	}
+
+	public void setPlanificationList(List<Planification> planificationList) {
+		this.planificationList = planificationList;
 	}
 
 	@Override

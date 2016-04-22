@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{equipeArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{equipeArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Equipe Archive entities"/>
+
+	<ui:define name="header">
+		Equipe Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Equipe Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="equipeArchiveBeanExampleChefEquipe" value="Chef Equipe:"/>
+						<h:panelGroup>
+							<h:inputText id="equipeArchiveBeanExampleChefEquipe" value="#{equipeArchiveBean.example.chefEquipe}"/>
+							<h:message for="equipeArchiveBeanExampleChefEquipe" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="equipeArchiveBeanExampleDescriptionActiviteEquipe" value="Description Activite Equipe:"/>
+						<h:panelGroup>
+							<h:inputText id="equipeArchiveBeanExampleDescriptionActiviteEquipe" value="#{equipeArchiveBean.example.descriptionActiviteEquipe}"/>
+							<h:message for="equipeArchiveBeanExampleDescriptionActiviteEquipe" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="equipeArchiveBeanExampleLibelleEquipe" value="Libelle Equipe:"/>
+						<h:panelGroup>
+							<h:inputText id="equipeArchiveBeanExampleLibelleEquipe" value="#{equipeArchiveBean.example.libelleEquipe}"/>
+							<h:message for="equipeArchiveBeanExampleLibelleEquipe" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="equipeArchiveBeanExampleIdDepartemant" value="Id Departemant:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{departementArchiveBean.converter}" id="equipeArchiveBeanExampleIdDepartemant" value="#{equipeArchiveBean.example.idDepartemant}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{departementArchiveBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="equipeArchiveBeanExampleIdDepartemant" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{equipeArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{equipeArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="equipeArchiveBeanPageItems" styleClass="data-table" value="#{equipeArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Departemant"/>
+					</f:facet>
+					<h:link outcome="/equipeArchive/view">
+						<f:param name="id" value="#{_item.idEquipe}"/>
+						<h:outputText id="forgeviewdisplayitemIdDepartemant" value="#{forgeview:display(_item.idDepartemant)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{equipeArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

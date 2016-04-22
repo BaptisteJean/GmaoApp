@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 		@NamedQuery(name = "Intervention.findByIdIntervention", query = "SELECT i FROM Intervention i WHERE i.idIntervention = :idIntervention"),
 		@NamedQuery(name = "Intervention.findByDateIntervention", query = "SELECT i FROM Intervention i WHERE i.dateIntervention = :dateIntervention"),
 		@NamedQuery(name = "Intervention.findByDescriptionIntervention", query = "SELECT i FROM Intervention i WHERE i.descriptionIntervention = :descriptionIntervention"),
-		@NamedQuery(name = "Intervention.findByTempsMis", query = "SELECT i FROM Intervention i WHERE i.tempsMis = :tempsMis"),
-		@NamedQuery(name = "Intervention.findByStatutRapport", query = "SELECT i FROM Intervention i WHERE i.statutRapport = :statutRapport")})
+		@NamedQuery(name = "Intervention.findByStatutRapport", query = "SELECT i FROM Intervention i WHERE i.statutRapport = :statutRapport"),
+		@NamedQuery(name = "Intervention.findByTempsMis", query = "SELECT i FROM Intervention i WHERE i.tempsMis = :tempsMis")})
 public class Intervention implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -48,18 +48,18 @@ public class Intervention implements Serializable {
 	private String dateIntervention;
 	@Column(name = "description_intervention")
 	private String descriptionIntervention;
-	@Column(name = "temps_mis")
-	private Integer tempsMis;
 	@Column(name = "statut_rapport")
 	private Boolean statutRapport;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idIntervention")
-	private List<Rapport> rapportList;
+	@Column(name = "temps_mis")
+	private Integer tempsMis;
 	@JoinColumn(name = "id_directeur_tech", referencedColumnName = "id_directeur_tech")
 	@ManyToOne(optional = false)
 	private DirecteurTechnique idDirecteurTech;
 	@JoinColumn(name = "id_exemplaire_mat", referencedColumnName = "id_exemplaire_materiel")
 	@ManyToOne(optional = false)
 	private ExamplaireMateriel idExemplaireMat;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idIntervention")
+	private List<Rapport> rapportList;
 
 	public Intervention() {
 	}
@@ -92,14 +92,6 @@ public class Intervention implements Serializable {
 		this.descriptionIntervention = descriptionIntervention;
 	}
 
-	public Integer getTempsMis() {
-		return tempsMis;
-	}
-
-	public void setTempsMis(Integer tempsMis) {
-		this.tempsMis = tempsMis;
-	}
-
 	public Boolean getStatutRapport() {
 		return statutRapport;
 	}
@@ -108,13 +100,12 @@ public class Intervention implements Serializable {
 		this.statutRapport = statutRapport;
 	}
 
-	@XmlTransient
-	public List<Rapport> getRapportList() {
-		return rapportList;
+	public Integer getTempsMis() {
+		return tempsMis;
 	}
 
-	public void setRapportList(List<Rapport> rapportList) {
-		this.rapportList = rapportList;
+	public void setTempsMis(Integer tempsMis) {
+		this.tempsMis = tempsMis;
 	}
 
 	public DirecteurTechnique getIdDirecteurTech() {
@@ -131,6 +122,15 @@ public class Intervention implements Serializable {
 
 	public void setIdExemplaireMat(ExamplaireMateriel idExemplaireMat) {
 		this.idExemplaireMat = idExemplaireMat;
+	}
+
+	@XmlTransient
+	public List<Rapport> getRapportList() {
+		return rapportList;
+	}
+
+	public void setRapportList(List<Rapport> rapportList) {
+		this.rapportList = rapportList;
 	}
 
 	@Override

@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{interventionArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{interventionArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Intervention Archive"/>
+
+	<ui:define name="header">
+		Intervention Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Intervention Archive
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="interventionArchiveBeanInterventionArchiveDateIntervention" value="Date Intervention:"/>
+			<h:outputText id="interventionArchiveBeanInterventionArchiveDateIntervention" value="#{interventionArchiveBean.interventionArchive.dateIntervention}"/>
+			<h:outputText/>
+			<h:outputLabel for="interventionArchiveBeanInterventionArchiveDescriptionIntervention" value="Description Intervention:"/>
+			<h:outputText id="interventionArchiveBeanInterventionArchiveDescriptionIntervention" value="#{interventionArchiveBean.interventionArchive.descriptionIntervention}"/>
+			<h:outputText/>
+			<h:outputLabel for="interventionArchiveBeanInterventionArchiveStatutRapport" value="Statut Rapport:"/>
+			<h:outputText id="interventionArchiveBeanInterventionArchiveStatutRapport" value="#{interventionArchiveBean.interventionArchive.statutRapport}"/>
+			<h:outputText/>
+			<h:outputLabel for="interventionArchiveBeanInterventionArchiveTempsMis" value="Temps Mis:"/>
+			<h:outputText id="interventionArchiveBeanInterventionArchiveTempsMis" value="#{interventionArchiveBean.interventionArchive.tempsMis}"/>
+			<h:outputText/>
+			<h:outputLabel for="interventionArchiveBeanInterventionArchiveRapportArchiveList" value="Rapport Archive List:"/>
+			<h:dataTable id="interventionArchiveBeanInterventionArchiveRapportArchiveList" styleClass="data-table" value="#{interventionArchiveBean.interventionArchive.rapportArchiveList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Equipe"/>
+					</f:facet>
+					<h:link outcome="/rapportArchive/view">
+						<f:param name="id" value="#{_item.idRapport}"/>
+						<h:outputText id="forgeviewdisplayitemIdEquipe" value="#{forgeview:display(_item.idEquipe)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="interventionArchiveBeanInterventionArchiveIdDirecteurTech" value="Id Directeur Tech:"/>
+			<h:link id="interventionArchiveBeanInterventionArchiveIdDirecteurTech" outcome="/directeurTechniqueArchive/view" rendered="#{!empty interventionArchiveBean.interventionArchive.idDirecteurTech}" value="#{interventionArchiveBean.interventionArchive.idDirecteurTech}">
+				<f:param name="id" value="#{interventionArchiveBean.interventionArchive.idDirecteurTech.idDirecteurTech}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="interventionArchiveBeanInterventionArchiveIdExemplaireMat" value="Id Exemplaire Mat:"/>
+			<h:link id="interventionArchiveBeanInterventionArchiveIdExemplaireMat" outcome="/examplaireMaterielArchive/view" rendered="#{!empty interventionArchiveBean.interventionArchive.idExemplaireMat}" value="#{interventionArchiveBean.interventionArchive.idExemplaireMat}">
+				<f:param name="id" value="#{interventionArchiveBean.interventionArchive.idExemplaireMat.idExemplaireMateriel}"/>
+			</h:link>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

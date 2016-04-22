@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{technicienArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{technicienArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Technicien Archive"/>
+
+	<ui:define name="header">
+		Technicien Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Technicien Archive
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="technicienArchiveBeanTechnicienArchiveFonctionTechicien" value="Fonction Techicien:"/>
+			<h:outputText id="technicienArchiveBeanTechnicienArchiveFonctionTechicien" value="#{technicienArchiveBean.technicienArchive.fonctionTechicien}"/>
+			<h:outputText/>
+			<h:outputLabel for="technicienArchiveBeanTechnicienArchiveIdDepartement" value="Id Departement:"/>
+			<h:link id="technicienArchiveBeanTechnicienArchiveIdDepartement" outcome="/departementArchive/view" rendered="#{!empty technicienArchiveBean.technicienArchive.idDepartement}" value="#{technicienArchiveBean.technicienArchive.idDepartement}">
+				<f:param name="id" value="#{technicienArchiveBean.technicienArchive.idDepartement.idDepartement}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="technicienArchiveBeanTechnicienArchiveIdEquipe" value="Id Equipe:"/>
+			<h:link id="technicienArchiveBeanTechnicienArchiveIdEquipe" outcome="/equipeArchive/view" rendered="#{!empty technicienArchiveBean.technicienArchive.idEquipe}" value="#{technicienArchiveBean.technicienArchive.idEquipe}">
+				<f:param name="id" value="#{technicienArchiveBean.technicienArchive.idEquipe.idEquipe}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="technicienArchiveBeanTechnicienArchiveIdPersonnel" value="Id Personnel:"/>
+			<h:link id="technicienArchiveBeanTechnicienArchiveIdPersonnel" outcome="/personnelArchive/view" rendered="#{!empty technicienArchiveBean.technicienArchive.idPersonnel}" value="#{technicienArchiveBean.technicienArchive.idPersonnel}">
+				<f:param name="id" value="#{technicienArchiveBean.technicienArchive.idPersonnel.idPersonnel}"/>
+			</h:link>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

@@ -219,6 +219,18 @@ public class PersonnelBean implements Serializable {
 					builder.lower(root.<String> get("prenomPersonnel")),
 					'%' + prenomPersonnel.toLowerCase() + '%'));
 		}
+		String login = this.example.getLogin();
+		if (login != null && !"".equals(login)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("login")),
+					'%' + login.toLowerCase() + '%'));
+		}
+		String password = this.example.getPassword();
+		if (password != null && !"".equals(password)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("password")),
+					'%' + password.toLowerCase() + '%'));
+		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}

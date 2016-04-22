@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author wabo
  */
 @Entity
-@Table(name = "directeur_Technique")
+@Table(name = "directeur_technique")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "DirecteurTechnique.findAll", query = "SELECT d FROM DirecteurTechnique d"),
@@ -40,13 +40,13 @@ public class DirecteurTechnique implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id_directeur_tech")
 	private Long idDirecteurTech;
-	@JoinColumn(name = "id_personnel", referencedColumnName = "id_personnel")
-	@ManyToOne(optional = false)
-	private Personnel idPersonnel;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idDirecteurTechnique")
 	private List<Archivage> archivageList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idDirecteurTech")
 	private List<Intervention> interventionList;
+	@JoinColumn(name = "id_personnel", referencedColumnName = "id_personnel")
+	@ManyToOne(optional = false)
+	private Personnel idPersonnel;
 
 	public DirecteurTechnique() {
 	}
@@ -61,14 +61,6 @@ public class DirecteurTechnique implements Serializable {
 
 	public void setIdDirecteurTech(Long idDirecteurTech) {
 		this.idDirecteurTech = idDirecteurTech;
-	}
-
-	public Personnel getIdPersonnel() {
-		return idPersonnel;
-	}
-
-	public void setIdPersonnel(Personnel idPersonnel) {
-		this.idPersonnel = idPersonnel;
 	}
 
 	@XmlTransient
@@ -87,6 +79,14 @@ public class DirecteurTechnique implements Serializable {
 
 	public void setInterventionList(List<Intervention> interventionList) {
 		this.interventionList = interventionList;
+	}
+
+	public Personnel getIdPersonnel() {
+		return idPersonnel;
+	}
+
+	public void setIdPersonnel(Personnel idPersonnel) {
+		this.idPersonnel = idPersonnel;
 	}
 
 	@Override

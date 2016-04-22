@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{examplaireMaterielArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{examplaireMaterielArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Examplaire Materiel Archive"/>
+
+	<ui:define name="header">
+		Examplaire Materiel Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty examplaireMaterielArchiveBean.id}'>
+				Edit existing Examplaire Materiel Archive
+			</c:when>
+			<c:otherwise>
+				Create a new Examplaire Materiel Archive
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveFabricantMarque" value="Fabricant Marque:"/>
+				<h:panelGroup>
+					<h:inputText id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveFabricantMarque" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.fabricantMarque}"/>
+					<h:message for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveFabricantMarque" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveLibelleExemplaire" value="Libelle Exemplaire:"/>
+				<h:panelGroup>
+					<h:inputText id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveLibelleExemplaire" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.libelleExemplaire}"/>
+					<h:message for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveLibelleExemplaire" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveNumeroSerie" value="Numero Serie:"/>
+				<h:panelGroup>
+					<h:inputText id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveNumeroSerie" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.numeroSerie}"/>
+					<h:message for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveNumeroSerie" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchivePuissance" value="Puissance:"/>
+				<h:panelGroup>
+					<h:inputText id="examplaireMaterielArchiveBeanExamplaireMaterielArchivePuissance" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.puissance}"/>
+					<h:message for="examplaireMaterielArchiveBeanExamplaireMaterielArchivePuissance" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveQuantiteExemplaire" value="Quantite Exemplaire:"/>
+				<h:panelGroup>
+					<h:inputText id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveQuantiteExemplaire" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.quantiteExemplaire}"/>
+					<h:message for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveQuantiteExemplaire" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveDestockageArchiveList" value="Destockage Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.destockageArchiveList}"/>
+					<h:dataTable id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveDestockageArchiveList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id Destination"/>
+							</f:facet>
+							<h:link outcome="/destockageArchive/view">
+								<f:param name="id" value="#{_item.idDestockage}"/>
+								<h:outputText id="forgeviewdisplayitemIdDestination" value="#{forgeview:display(_item.idDestination)}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:selectOneMenu converter="#{destinationArchiveBean.converter}" id="destockageArchiveBeanAddIdDestination" value="#{destockageArchiveBean.add.idDestination}">
+									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{destinationArchiveBean.all}" var="_item"/>
+								</h:selectOneMenu>
+								<h:message for="destockageArchiveBeanAddIdDestination" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(destockageArchiveBean.added)}" id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveDestockageArchiveListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{destockageArchiveBean.add.idExemplaire}" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveInterventionArchiveList" value="Intervention Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.interventionArchiveList}"/>
+					<h:dataTable id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveInterventionArchiveList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id Directeur Tech"/>
+							</f:facet>
+							<h:link outcome="/interventionArchive/view">
+								<f:param name="id" value="#{_item.idIntervention}"/>
+								<h:outputText id="forgeviewdisplayitemIdDirecteurTech" value="#{forgeview:display(_item.idDirecteurTech)}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:selectOneMenu converter="#{directeurTechniqueArchiveBean.converter}" id="interventionArchiveBeanAddIdDirecteurTech" value="#{interventionArchiveBean.add.idDirecteurTech}">
+									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{directeurTechniqueArchiveBean.all}" var="_item"/>
+								</h:selectOneMenu>
+								<h:message for="interventionArchiveBeanAddIdDirecteurTech" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(interventionArchiveBean.added)}" id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveInterventionArchiveListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{interventionArchiveBean.add.idExemplaireMat}" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveIdEmplacement" value="Id Emplacement:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{emplacementArchiveBean.converter}" id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveIdEmplacement" required="true" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.idEmplacement}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{emplacementArchiveBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveIdEmplacement" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveIdMateriel" value="Id Materiel:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{materielArchiveBean.converter}" id="examplaireMaterielArchiveBeanExamplaireMaterielArchiveIdMateriel" required="true" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.idMateriel}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{materielArchiveBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="examplaireMaterielArchiveBeanExamplaireMaterielArchiveIdMateriel" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="examplaireMaterielArchiveBeanExamplaireMaterielArchivePlanificationArchiveList" value="Planification Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive.planificationArchiveList}"/>
+					<h:dataTable id="examplaireMaterielArchiveBeanExamplaireMaterielArchivePlanificationArchiveList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Date Planification"/>
+							</f:facet>
+							<h:link outcome="/planificationArchive/view">
+								<f:param name="id" value="#{_item.idPlanification}"/>
+								<h:outputText id="itemDatePlanification" value="#{_item.datePlanification}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="planificationArchiveBeanAddDatePlanification" value="#{planificationArchiveBean.add.datePlanification}"/>
+								<h:message for="planificationArchiveBeanAddDatePlanification" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(planificationArchiveBean.added)}" id="examplaireMaterielArchiveBeanExamplaireMaterielArchivePlanificationArchiveListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{planificationArchiveBean.add.idExemplaireMat}" value="#{examplaireMaterielArchiveBean.examplaireMaterielArchive}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{examplaireMaterielArchiveBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty examplaireMaterielArchiveBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{examplaireMaterielArchiveBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{examplaireMaterielArchiveBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

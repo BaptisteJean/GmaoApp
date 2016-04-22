@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{provenanceArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{provenanceArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Provenance Archive"/>
+
+	<ui:define name="header">
+		Provenance Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty provenanceArchiveBean.id}'>
+				Edit existing Provenance Archive
+			</c:when>
+			<c:otherwise>
+				Create a new Provenance Archive
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="provenanceArchiveBeanProvenanceArchiveMarche" value="Marche:"/>
+				<h:panelGroup>
+					<h:inputText id="provenanceArchiveBeanProvenanceArchiveMarche" value="#{provenanceArchiveBean.provenanceArchive.marche}"/>
+					<h:message for="provenanceArchiveBeanProvenanceArchiveMarche" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="provenanceArchiveBeanProvenanceArchiveIdClient" value="Id Client:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{clientArchiveBean.converter}" id="provenanceArchiveBeanProvenanceArchiveIdClient" required="true" value="#{provenanceArchiveBean.provenanceArchive.idClient}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{clientArchiveBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="provenanceArchiveBeanProvenanceArchiveIdClient" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="provenanceArchiveBeanProvenanceArchiveIdFournisseur" value="Id Fournisseur:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{fournisseurArchiveBean.converter}" id="provenanceArchiveBeanProvenanceArchiveIdFournisseur" required="true" value="#{provenanceArchiveBean.provenanceArchive.idFournisseur}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{fournisseurArchiveBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="provenanceArchiveBeanProvenanceArchiveIdFournisseur" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="provenanceArchiveBeanProvenanceArchiveProvientArchiveList" value="Provient Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{provenanceArchiveBean.provenanceArchive.provientArchiveList}"/>
+					<h:dataTable id="provenanceArchiveBeanProvenanceArchiveProvientArchiveList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Id Materiel"/>
+							</f:facet>
+							<h:link outcome="/provientArchive/view">
+								<f:param name="id" value="#{_item.idProvient}"/>
+								<h:outputText id="forgeviewdisplayitemIdMateriel" value="#{forgeview:display(_item.idMateriel)}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:selectOneMenu converter="#{materielArchiveBean.converter}" id="provientArchiveBeanAddIdMateriel" value="#{provientArchiveBean.add.idMateriel}">
+									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{materielArchiveBean.all}" var="_item"/>
+								</h:selectOneMenu>
+								<h:message for="provientArchiveBeanAddIdMateriel" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(provientArchiveBean.added)}" id="provenanceArchiveBeanProvenanceArchiveProvientArchiveListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{provientArchiveBean.add.idProvenance}" value="#{provenanceArchiveBean.provenanceArchive}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{provenanceArchiveBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty provenanceArchiveBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{provenanceArchiveBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{provenanceArchiveBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

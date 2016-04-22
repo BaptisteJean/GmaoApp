@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author wabo
  */
 @Entity
-@Table(name = "archivage_Automatique")
+@Table(name = "archivage_automatique")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "ArchivageAutomatique.findAll", query = "SELECT a FROM ArchivageAutomatique a"),

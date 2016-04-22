@@ -29,8 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
 		@NamedQuery(name = "Rapport.findAll", query = "SELECT r FROM Rapport r"),
 		@NamedQuery(name = "Rapport.findByIdRapport", query = "SELECT r FROM Rapport r WHERE r.idRapport = :idRapport"),
-		@NamedQuery(name = "Rapport.findByDescriptionRapport", query = "SELECT r FROM Rapport r WHERE r.descriptionRapport = :descriptionRapport"),
-		@NamedQuery(name = "Rapport.findByDateRedaction", query = "SELECT r FROM Rapport r WHERE r.dateRedaction = :dateRedaction")})
+		@NamedQuery(name = "Rapport.findByDateRedaction", query = "SELECT r FROM Rapport r WHERE r.dateRedaction = :dateRedaction"),
+		@NamedQuery(name = "Rapport.findByDescriptionRapport", query = "SELECT r FROM Rapport r WHERE r.descriptionRapport = :descriptionRapport")})
 public class Rapport implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -38,10 +38,10 @@ public class Rapport implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id_rapport")
 	private Long idRapport;
-	@Column(name = "description_rapport")
-	private String descriptionRapport;
 	@Column(name = "date_redaction")
 	private String dateRedaction;
+	@Column(name = "description_rapport")
+	private String descriptionRapport;
 	@JoinColumn(name = "id_equipe", referencedColumnName = "id_equipe")
 	@ManyToOne(optional = false)
 	private Equipe idEquipe;
@@ -64,20 +64,20 @@ public class Rapport implements Serializable {
 		this.idRapport = idRapport;
 	}
 
-	public String getDescriptionRapport() {
-		return descriptionRapport;
-	}
-
-	public void setDescriptionRapport(String descriptionRapport) {
-		this.descriptionRapport = descriptionRapport;
-	}
-
 	public String getDateRedaction() {
 		return dateRedaction;
 	}
 
 	public void setDateRedaction(String dateRedaction) {
 		this.dateRedaction = dateRedaction;
+	}
+
+	public String getDescriptionRapport() {
+		return descriptionRapport;
+	}
+
+	public void setDescriptionRapport(String descriptionRapport) {
+		this.descriptionRapport = descriptionRapport;
 	}
 
 	public Equipe getIdEquipe() {

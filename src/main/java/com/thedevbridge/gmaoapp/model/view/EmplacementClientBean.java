@@ -118,7 +118,7 @@ public class EmplacementClientBean implements Serializable {
 			} else {
 				this.entityManager.merge(this.emplacementClient);
 				return "view?faces-redirect=true&id="
-						+ this.emplacementClient.getIdEmplClient();
+						+ this.emplacementClient.getIdEmplclient();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -219,17 +219,17 @@ public class EmplacementClientBean implements Serializable {
 					builder.lower(root.<String> get("bloc")),
 					'%' + bloc.toLowerCase() + '%'));
 		}
-		String salle = this.example.getSalle();
-		if (salle != null && !"".equals(salle)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("salle")),
-					'%' + salle.toLowerCase() + '%'));
-		}
 		String dateInstallation = this.example.getDateInstallation();
 		if (dateInstallation != null && !"".equals(dateInstallation)) {
 			predicatesList.add(builder.like(
 					builder.lower(root.<String> get("dateInstallation")),
 					'%' + dateInstallation.toLowerCase() + '%'));
+		}
+		String salle = this.example.getSalle();
+		if (salle != null && !"".equals(salle)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("salle")),
+					'%' + salle.toLowerCase() + '%'));
 		}
 		Emplacement idEmplacement = this.example.getIdEmplacement();
 		if (idEmplacement != null) {
@@ -288,7 +288,7 @@ public class EmplacementClientBean implements Serializable {
 				}
 
 				return String.valueOf(((EmplacementClient) value)
-						.getIdEmplClient());
+						.getIdEmplclient());
 			}
 		};
 	}

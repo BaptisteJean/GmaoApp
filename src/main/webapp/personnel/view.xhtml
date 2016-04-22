@@ -32,6 +32,12 @@
 			<h:outputLabel for="personnelBeanPersonnelPrenomPersonnel" value="Prenom Personnel:"/>
 			<h:outputText id="personnelBeanPersonnelPrenomPersonnel" value="#{personnelBean.personnel.prenomPersonnel}"/>
 			<h:outputText/>
+			<h:outputLabel for="personnelBeanPersonnelLogin" value="Login:"/>
+			<h:outputText id="personnelBeanPersonnelLogin" value="#{personnelBean.personnel.login}"/>
+			<h:outputText/>
+			<h:outputLabel for="personnelBeanPersonnelPassword" value="Password:"/>
+			<h:outputText id="personnelBeanPersonnelPassword" value="#{personnelBean.personnel.password}"/>
+			<h:outputText/>
 			<h:outputLabel for="personnelBeanPersonnelDirecteurTechniqueList" value="Directeur Technique List:"/>
 			<h:dataTable id="personnelBeanPersonnelDirecteurTechniqueList" styleClass="data-table" value="#{personnelBean.personnel.directeurTechniqueList}" var="_item"/>
 			<h:outputText/>

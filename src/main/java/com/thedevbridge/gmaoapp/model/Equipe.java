@@ -33,9 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
 		@NamedQuery(name = "Equipe.findAll", query = "SELECT e FROM Equipe e"),
 		@NamedQuery(name = "Equipe.findByIdEquipe", query = "SELECT e FROM Equipe e WHERE e.idEquipe = :idEquipe"),
-		@NamedQuery(name = "Equipe.findByLibelleEquipe", query = "SELECT e FROM Equipe e WHERE e.libelleEquipe = :libelleEquipe"),
+		@NamedQuery(name = "Equipe.findByChefEquipe", query = "SELECT e FROM Equipe e WHERE e.chefEquipe = :chefEquipe"),
 		@NamedQuery(name = "Equipe.findByDescriptionActiviteEquipe", query = "SELECT e FROM Equipe e WHERE e.descriptionActiviteEquipe = :descriptionActiviteEquipe"),
-		@NamedQuery(name = "Equipe.findByChefEquipe", query = "SELECT e FROM Equipe e WHERE e.chefEquipe = :chefEquipe")})
+		@NamedQuery(name = "Equipe.findByLibelleEquipe", query = "SELECT e FROM Equipe e WHERE e.libelleEquipe = :libelleEquipe")})
 public class Equipe implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -43,12 +43,12 @@ public class Equipe implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id_equipe")
 	private Long idEquipe;
-	@Column(name = "libelle_equipe")
-	private String libelleEquipe;
-	@Column(name = "description_activite_equipe")
-	private String descriptionActiviteEquipe;
 	@Column(name = "chef_equipe")
 	private String chefEquipe;
+	@Column(name = "description_activite_equipe")
+	private String descriptionActiviteEquipe;
+	@Column(name = "libelle_equipe")
+	private String libelleEquipe;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idEquipe")
 	private List<Rapport> rapportList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idEquipe")
@@ -72,12 +72,12 @@ public class Equipe implements Serializable {
 		this.idEquipe = idEquipe;
 	}
 
-	public String getLibelleEquipe() {
-		return libelleEquipe;
+	public String getChefEquipe() {
+		return chefEquipe;
 	}
 
-	public void setLibelleEquipe(String libelleEquipe) {
-		this.libelleEquipe = libelleEquipe;
+	public void setChefEquipe(String chefEquipe) {
+		this.chefEquipe = chefEquipe;
 	}
 
 	public String getDescriptionActiviteEquipe() {
@@ -88,12 +88,12 @@ public class Equipe implements Serializable {
 		this.descriptionActiviteEquipe = descriptionActiviteEquipe;
 	}
 
-	public String getChefEquipe() {
-		return chefEquipe;
+	public String getLibelleEquipe() {
+		return libelleEquipe;
 	}
 
-	public void setChefEquipe(String chefEquipe) {
-		this.chefEquipe = chefEquipe;
+	public void setLibelleEquipe(String libelleEquipe) {
+		this.libelleEquipe = libelleEquipe;
 	}
 
 	@XmlTransient

@@ -24,44 +24,44 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author wabo
  */
 @Entity
-@Table(name = "emplacement_Client")
+@Table(name = "emplacement_client")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "EmplacementClient.findAll", query = "SELECT e FROM EmplacementClient e"),
-		@NamedQuery(name = "EmplacementClient.findByIdEmplClient", query = "SELECT e FROM EmplacementClient e WHERE e.idEmplClient = :idEmplClient"),
+		@NamedQuery(name = "EmplacementClient.findByIdEmplclient", query = "SELECT e FROM EmplacementClient e WHERE e.idEmplclient = :idEmplclient"),
 		@NamedQuery(name = "EmplacementClient.findByBloc", query = "SELECT e FROM EmplacementClient e WHERE e.bloc = :bloc"),
-		@NamedQuery(name = "EmplacementClient.findBySalle", query = "SELECT e FROM EmplacementClient e WHERE e.salle = :salle"),
-		@NamedQuery(name = "EmplacementClient.findByDateInstallation", query = "SELECT e FROM EmplacementClient e WHERE e.dateInstallation = :dateInstallation")})
+		@NamedQuery(name = "EmplacementClient.findByDateInstallation", query = "SELECT e FROM EmplacementClient e WHERE e.dateInstallation = :dateInstallation"),
+		@NamedQuery(name = "EmplacementClient.findBySalle", query = "SELECT e FROM EmplacementClient e WHERE e.salle = :salle")})
 public class EmplacementClient implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name = "id_EmplClient")
-	private Long idEmplClient;
+	@Column(name = "id_emplclient")
+	private Long idEmplclient;
 	@Column(name = "bloc")
 	private String bloc;
-	@Column(name = "salle")
-	private String salle;
 	@Column(name = "date_installation")
 	private String dateInstallation;
-	@JoinColumn(name = "id_emplacement", referencedColumnName = "id_Empl")
+	@Column(name = "salle")
+	private String salle;
+	@JoinColumn(name = "id_emplacement", referencedColumnName = "id_empl")
 	@ManyToOne(optional = false)
 	private Emplacement idEmplacement;
 
 	public EmplacementClient() {
 	}
 
-	public EmplacementClient(Long idEmplClient) {
-		this.idEmplClient = idEmplClient;
+	public EmplacementClient(Long idEmplclient) {
+		this.idEmplclient = idEmplclient;
 	}
 
-	public Long getIdEmplClient() {
-		return idEmplClient;
+	public Long getIdEmplclient() {
+		return idEmplclient;
 	}
 
-	public void setIdEmplClient(Long idEmplClient) {
-		this.idEmplClient = idEmplClient;
+	public void setIdEmplclient(Long idEmplclient) {
+		this.idEmplclient = idEmplclient;
 	}
 
 	public String getBloc() {
@@ -72,20 +72,20 @@ public class EmplacementClient implements Serializable {
 		this.bloc = bloc;
 	}
 
-	public String getSalle() {
-		return salle;
-	}
-
-	public void setSalle(String salle) {
-		this.salle = salle;
-	}
-
 	public String getDateInstallation() {
 		return dateInstallation;
 	}
 
 	public void setDateInstallation(String dateInstallation) {
 		this.dateInstallation = dateInstallation;
+	}
+
+	public String getSalle() {
+		return salle;
+	}
+
+	public void setSalle(String salle) {
+		this.salle = salle;
 	}
 
 	public Emplacement getIdEmplacement() {
@@ -99,7 +99,7 @@ public class EmplacementClient implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 0;
-		hash += (idEmplClient != null ? idEmplClient.hashCode() : 0);
+		hash += (idEmplclient != null ? idEmplclient.hashCode() : 0);
 		return hash;
 	}
 
@@ -111,9 +111,9 @@ public class EmplacementClient implements Serializable {
 			return false;
 		}
 		EmplacementClient other = (EmplacementClient) object;
-		if ((this.idEmplClient == null && other.idEmplClient != null)
-				|| (this.idEmplClient != null && !this.idEmplClient
-						.equals(other.idEmplClient))) {
+		if ((this.idEmplclient == null && other.idEmplclient != null)
+				|| (this.idEmplclient != null && !this.idEmplclient
+						.equals(other.idEmplclient))) {
 			return false;
 		}
 		return true;
@@ -121,8 +121,8 @@ public class EmplacementClient implements Serializable {
 
 	@Override
 	public String toString() {
-		return "com.thedevbridge.gmaoapp.model.EmplacementClient[ idEmplClient="
-				+ idEmplClient + " ]";
+		return "com.thedevbridge.gmaoapp.model.EmplacementClient[ idEmplclient="
+				+ idEmplclient + " ]";
 	}
 
 }

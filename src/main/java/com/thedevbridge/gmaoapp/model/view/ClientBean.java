@@ -216,6 +216,12 @@ public class ClientBean implements Serializable {
 					builder.lower(root.<String> get("codeClient")),
 					'%' + codeClient.toLowerCase() + '%'));
 		}
+		String natureActivite = this.example.getNatureActivite();
+		if (natureActivite != null && !"".equals(natureActivite)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("natureActivite")),
+					'%' + natureActivite.toLowerCase() + '%'));
+		}
 		String nomClient = this.example.getNomClient();
 		if (nomClient != null && !"".equals(nomClient)) {
 			predicatesList.add(builder.like(
@@ -233,12 +239,6 @@ public class ClientBean implements Serializable {
 			predicatesList.add(builder.like(
 					builder.lower(root.<String> get("typePersonne")),
 					'%' + typePersonne.toLowerCase() + '%'));
-		}
-		String natureActivite = this.example.getNatureActivite();
-		if (natureActivite != null && !"".equals(natureActivite)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("natureActivite")),
-					'%' + natureActivite.toLowerCase() + '%'));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);

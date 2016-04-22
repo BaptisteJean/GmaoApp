@@ -30,16 +30,16 @@
 				<h:panelGroup styleClass="search">
 
 					<h:panelGrid columnClasses="label,component,required" columns="3">
-						<h:outputLabel for="siteInterventionBeanExampleNumeroBatiment" value="Numero Batiment:"/>
-						<h:panelGroup>
-							<h:inputText id="siteInterventionBeanExampleNumeroBatiment" value="#{siteInterventionBean.example.numeroBatiment}"/>
-							<h:message for="siteInterventionBeanExampleNumeroBatiment" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
 						<h:outputLabel for="siteInterventionBeanExampleLibeleBureau" value="Libele Bureau:"/>
 						<h:panelGroup>
 							<h:inputText id="siteInterventionBeanExampleLibeleBureau" value="#{siteInterventionBean.example.libeleBureau}"/>
 							<h:message for="siteInterventionBeanExampleLibeleBureau" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="siteInterventionBeanExampleNumeroBatiment" value="Numero Batiment:"/>
+						<h:panelGroup>
+							<h:inputText id="siteInterventionBeanExampleNumeroBatiment" value="#{siteInterventionBean.example.numeroBatiment}"/>
+							<h:message for="siteInterventionBeanExampleNumeroBatiment" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 						<h:outputLabel for="siteInterventionBeanExampleIdClient" value="Id Client:"/>
@@ -65,7 +65,7 @@
 						<h:outputText value="Id Client"/>
 					</f:facet>
 					<h:link outcome="/siteIntervention/view">
-						<f:param name="id" value="#{_item.idSiteIntervention}"/>
+						<f:param name="id" value="#{_item.idsiteintervention}"/>
 						<h:outputText id="forgeviewdisplayitemIdClient" value="#{forgeview:display(_item.idClient)}"/>
 					</h:link>
 				</h:column>

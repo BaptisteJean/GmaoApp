@@ -24,24 +24,24 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author wabo
  */
 @Entity
-@Table(name = "site_Intervention")
+@Table(name = "site_intervention")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "SiteIntervention.findAll", query = "SELECT s FROM SiteIntervention s"),
-		@NamedQuery(name = "SiteIntervention.findByIdSiteIntervention", query = "SELECT s FROM SiteIntervention s WHERE s.idSiteIntervention = :idSiteIntervention"),
-		@NamedQuery(name = "SiteIntervention.findByNumeroBatiment", query = "SELECT s FROM SiteIntervention s WHERE s.numeroBatiment = :numeroBatiment"),
-		@NamedQuery(name = "SiteIntervention.findByLibeleBureau", query = "SELECT s FROM SiteIntervention s WHERE s.libeleBureau = :libeleBureau")})
+		@NamedQuery(name = "SiteIntervention.findByIdsiteintervention", query = "SELECT s FROM SiteIntervention s WHERE s.idsiteintervention = :idsiteintervention"),
+		@NamedQuery(name = "SiteIntervention.findByLibeleBureau", query = "SELECT s FROM SiteIntervention s WHERE s.libeleBureau = :libeleBureau"),
+		@NamedQuery(name = "SiteIntervention.findByNumeroBatiment", query = "SELECT s FROM SiteIntervention s WHERE s.numeroBatiment = :numeroBatiment")})
 public class SiteIntervention implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name = "idSiteIntervention")
-	private Long idSiteIntervention;
-	@Column(name = "numero_batiment")
-	private String numeroBatiment;
+	@Column(name = "idsiteintervention")
+	private Long idsiteintervention;
 	@Column(name = "libele_bureau")
 	private String libeleBureau;
+	@Column(name = "numero_batiment")
+	private String numeroBatiment;
 	@JoinColumn(name = "id_client", referencedColumnName = "id_client")
 	@ManyToOne(optional = false)
 	private Client idClient;
@@ -49,24 +49,16 @@ public class SiteIntervention implements Serializable {
 	public SiteIntervention() {
 	}
 
-	public SiteIntervention(Long idSiteIntervention) {
-		this.idSiteIntervention = idSiteIntervention;
+	public SiteIntervention(Long idsiteintervention) {
+		this.idsiteintervention = idsiteintervention;
 	}
 
-	public Long getIdSiteIntervention() {
-		return idSiteIntervention;
+	public Long getIdsiteintervention() {
+		return idsiteintervention;
 	}
 
-	public void setIdSiteIntervention(Long idSiteIntervention) {
-		this.idSiteIntervention = idSiteIntervention;
-	}
-
-	public String getNumeroBatiment() {
-		return numeroBatiment;
-	}
-
-	public void setNumeroBatiment(String numeroBatiment) {
-		this.numeroBatiment = numeroBatiment;
+	public void setIdsiteintervention(Long idsiteintervention) {
+		this.idsiteintervention = idsiteintervention;
 	}
 
 	public String getLibeleBureau() {
@@ -75,6 +67,14 @@ public class SiteIntervention implements Serializable {
 
 	public void setLibeleBureau(String libeleBureau) {
 		this.libeleBureau = libeleBureau;
+	}
+
+	public String getNumeroBatiment() {
+		return numeroBatiment;
+	}
+
+	public void setNumeroBatiment(String numeroBatiment) {
+		this.numeroBatiment = numeroBatiment;
 	}
 
 	public Client getIdClient() {
@@ -88,7 +88,7 @@ public class SiteIntervention implements Serializable {
 	@Override
 	public int hashCode() {
 		int hash = 0;
-		hash += (idSiteIntervention != null ? idSiteIntervention.hashCode() : 0);
+		hash += (idsiteintervention != null ? idsiteintervention.hashCode() : 0);
 		return hash;
 	}
 
@@ -100,9 +100,9 @@ public class SiteIntervention implements Serializable {
 			return false;
 		}
 		SiteIntervention other = (SiteIntervention) object;
-		if ((this.idSiteIntervention == null && other.idSiteIntervention != null)
-				|| (this.idSiteIntervention != null && !this.idSiteIntervention
-						.equals(other.idSiteIntervention))) {
+		if ((this.idsiteintervention == null && other.idsiteintervention != null)
+				|| (this.idsiteintervention != null && !this.idsiteintervention
+						.equals(other.idsiteintervention))) {
 			return false;
 		}
 		return true;
@@ -110,8 +110,8 @@ public class SiteIntervention implements Serializable {
 
 	@Override
 	public String toString() {
-		return "com.thedevbridge.gmaoapp.model.SiteIntervention[ idSiteIntervention="
-				+ idSiteIntervention + " ]";
+		return "com.thedevbridge.gmaoapp.model.SiteIntervention[ idsiteintervention="
+				+ idsiteintervention + " ]";
 	}
 
 }

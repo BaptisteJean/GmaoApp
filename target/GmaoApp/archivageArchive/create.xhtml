@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{archivageArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{archivageArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Create Archivage Archive"/>
+
+	<ui:define name="header">
+		Archivage Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		<c:choose>
+			<c:when test='#{!empty archivageArchiveBean.id}'>
+				Edit existing Archivage Archive
+			</c:when>
+			<c:otherwise>
+				Create a new Archivage Archive
+			</c:otherwise>
+		</c:choose>
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="create">
+			<h:messages globalOnly="true" styleClass="error"/>
+
+			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="archivageArchiveBeanArchivageArchiveIdClient" value="Id Client:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{clientArchiveBean.converter}" id="archivageArchiveBeanArchivageArchiveIdClient" required="true" value="#{archivageArchiveBean.archivageArchive.idClient}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{clientArchiveBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="archivageArchiveBeanArchivageArchiveIdClient" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="archivageArchiveBeanArchivageArchiveIdDirecteurTechnique" value="Id Directeur Technique:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{directeurTechniqueArchiveBean.converter}" id="archivageArchiveBeanArchivageArchiveIdDirecteurTechnique" required="true" value="#{archivageArchiveBean.archivageArchive.idDirecteurTechnique}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{directeurTechniqueArchiveBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="archivageArchiveBeanArchivageArchiveIdDirecteurTechnique" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="archivageArchiveBeanArchivageArchiveArchivageProvoqueArchiveList" value="Archivage Provoque Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{archivageArchiveBean.archivageArchive.archivageProvoqueArchiveList}"/>
+					<h:dataTable id="archivageArchiveBeanArchivageArchiveArchivageProvoqueArchiveList" styleClass="data-table" value="#{_collection}" var="_item"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="archivageArchiveBeanArchivageArchiveArchivageAutomatiqueArchiveList" value="Archivage Automatique Archive List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{archivageArchiveBean.archivageArchive.archivageAutomatiqueArchiveList}"/>
+					<h:dataTable id="archivageArchiveBeanArchivageArchiveArchivageAutomatiqueArchiveList" styleClass="data-table" value="#{_collection}" var="_item"/>
+				</h:panelGroup>
+				<h:outputText/>
+			</h:panelGrid>
+
+			<div class="buttons">
+				<h:commandLink value="Save" action='#{archivageArchiveBean.update}' styleClass="btn btn-primary"/>
+				<c:choose>
+					<c:when test='#{!empty archivageArchiveBean.id}'>
+						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
+							<f:param name="id" value='#{archivageArchiveBean.id}'/>
+						</h:link>
+						<h:commandLink value="Delete" action='#{archivageArchiveBean.delete}' styleClass="btn btn-primary"/>
+					</c:when>
+					<c:otherwise>
+						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>

@@ -35,16 +35,16 @@
 							<h:message for="materielBeanExampleDesignation" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
-						<h:outputLabel for="materielBeanExampleTypeMateriel" value="Type Materiel:"/>
-						<h:panelGroup>
-							<h:inputText id="materielBeanExampleTypeMateriel" value="#{materielBean.example.typeMateriel}"/>
-							<h:message for="materielBeanExampleTypeMateriel" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
 						<h:outputLabel for="materielBeanExampleModelMateriel" value="Model Materiel:"/>
 						<h:panelGroup>
 							<h:inputText id="materielBeanExampleModelMateriel" value="#{materielBean.example.modelMateriel}"/>
 							<h:message for="materielBeanExampleModelMateriel" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="materielBeanExampleTypeMateriel" value="Type Materiel:"/>
+						<h:panelGroup>
+							<h:inputText id="materielBeanExampleTypeMateriel" value="#{materielBean.example.typeMateriel}"/>
+							<h:message for="materielBeanExampleTypeMateriel" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 					</h:panelGrid>
@@ -67,20 +67,20 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Type Materiel"/>
-					</f:facet>
-					<h:link outcome="/materiel/view">
-						<f:param name="id" value="#{_item.idMateriel}"/>
-						<h:outputText id="itemTypeMateriel" value="#{_item.typeMateriel}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
 						<h:outputText value="Model Materiel"/>
 					</f:facet>
 					<h:link outcome="/materiel/view">
 						<f:param name="id" value="#{_item.idMateriel}"/>
 						<h:outputText id="itemModelMateriel" value="#{_item.modelMateriel}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Type Materiel"/>
+					</f:facet>
+					<h:link outcome="/materiel/view">
+						<f:param name="id" value="#{_item.idMateriel}"/>
+						<h:outputText id="itemTypeMateriel" value="#{_item.typeMateriel}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

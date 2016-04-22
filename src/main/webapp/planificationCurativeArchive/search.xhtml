@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{planificationCurativeArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{planificationCurativeArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Planification Curative Archive entities"/>
+
+	<ui:define name="header">
+		Planification Curative Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Planification Curative Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="planificationCurativeArchiveBeanExampleDescriptionProbleme" value="Description Probleme:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationCurativeArchiveBeanExampleDescriptionProbleme" value="#{planificationCurativeArchiveBean.example.descriptionProbleme}"/>
+							<h:message for="planificationCurativeArchiveBeanExampleDescriptionProbleme" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="planificationCurativeArchiveBeanExampleEtatMaterielApresIntervention" value="Etat Materiel Apres Intervention:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationCurativeArchiveBeanExampleEtatMaterielApresIntervention" value="#{planificationCurativeArchiveBean.example.etatMaterielApresIntervention}"/>
+							<h:message for="planificationCurativeArchiveBeanExampleEtatMaterielApresIntervention" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="planificationCurativeArchiveBeanExampleHeureDebut" value="Heure Debut:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationCurativeArchiveBeanExampleHeureDebut" value="#{planificationCurativeArchiveBean.example.heureDebut}"/>
+							<h:message for="planificationCurativeArchiveBeanExampleHeureDebut" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="planificationCurativeArchiveBeanExampleHeureFin" value="Heure Fin:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationCurativeArchiveBeanExampleHeureFin" value="#{planificationCurativeArchiveBean.example.heureFin}"/>
+							<h:message for="planificationCurativeArchiveBeanExampleHeureFin" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="planificationCurativeArchiveBeanExampleSolutionApportee" value="Solution Apportee:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationCurativeArchiveBeanExampleSolutionApportee" value="#{planificationCurativeArchiveBean.example.solutionApportee}"/>
+							<h:message for="planificationCurativeArchiveBeanExampleSolutionApportee" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{planificationCurativeArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{planificationCurativeArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="planificationCurativeArchiveBeanPageItems" styleClass="data-table" value="#{planificationCurativeArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Description Probleme"/>
+					</f:facet>
+					<h:link outcome="/planificationCurativeArchive/view">
+						<f:param name="id" value="#{_item.idPlanifCurative}"/>
+						<h:outputText id="itemDescriptionProbleme" value="#{_item.descriptionProbleme}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Etat Materiel Apres Intervention"/>
+					</f:facet>
+					<h:link outcome="/planificationCurativeArchive/view">
+						<f:param name="id" value="#{_item.idPlanifCurative}"/>
+						<h:outputText id="itemEtatMaterielApresIntervention" value="#{_item.etatMaterielApresIntervention}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Heure Debut"/>
+					</f:facet>
+					<h:link outcome="/planificationCurativeArchive/view">
+						<f:param name="id" value="#{_item.idPlanifCurative}"/>
+						<h:outputText id="itemHeureDebut" value="#{_item.heureDebut}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Heure Fin"/>
+					</f:facet>
+					<h:link outcome="/planificationCurativeArchive/view">
+						<f:param name="id" value="#{_item.idPlanifCurative}"/>
+						<h:outputText id="itemHeureFin" value="#{_item.heureFin}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Solution Apportee"/>
+					</f:facet>
+					<h:link outcome="/planificationCurativeArchive/view">
+						<f:param name="id" value="#{_item.idPlanifCurative}"/>
+						<h:outputText id="itemSolutionApportee" value="#{_item.solutionApportee}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{planificationCurativeArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

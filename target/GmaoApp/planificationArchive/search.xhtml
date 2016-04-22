@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{planificationArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{planificationArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Planification Archive entities"/>
+
+	<ui:define name="header">
+		Planification Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Planification Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="planificationArchiveBeanExampleDatePlanification" value="Date Planification:"/>
+						<h:panelGroup>
+							<h:inputText id="planificationArchiveBeanExampleDatePlanification" value="#{planificationArchiveBean.example.datePlanification}"/>
+							<h:message for="planificationArchiveBeanExampleDatePlanification" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="planificationArchiveBeanExampleIdExemplaireMat" value="Id Exemplaire Mat:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{examplaireMaterielArchiveBean.converter}" id="planificationArchiveBeanExampleIdExemplaireMat" value="#{planificationArchiveBean.example.idExemplaireMat}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{examplaireMaterielArchiveBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="planificationArchiveBeanExampleIdExemplaireMat" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{planificationArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{planificationArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="planificationArchiveBeanPageItems" styleClass="data-table" value="#{planificationArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Exemplaire Mat"/>
+					</f:facet>
+					<h:link outcome="/planificationArchive/view">
+						<f:param name="id" value="#{_item.idPlanification}"/>
+						<h:outputText id="forgeviewdisplayitemIdExemplaireMat" value="#{forgeview:display(_item.idExemplaireMat)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{planificationArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

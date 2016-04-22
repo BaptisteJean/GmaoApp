@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{adresseArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{adresseArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Adresse Archive"/>
+
+	<ui:define name="header">
+		Adresse Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Adresse Archive
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="adresseArchiveBeanAdresseArchiveBoitePostale" value="Boite Postale:"/>
+			<h:outputText id="adresseArchiveBeanAdresseArchiveBoitePostale" value="#{adresseArchiveBean.adresseArchive.boitePostale}"/>
+			<h:outputText/>
+			<h:outputLabel for="adresseArchiveBeanAdresseArchiveCodeAdresse" value="Code Adresse:"/>
+			<h:outputText id="adresseArchiveBeanAdresseArchiveCodeAdresse" value="#{adresseArchiveBean.adresseArchive.codeAdresse}"/>
+			<h:outputText/>
+			<h:outputLabel for="adresseArchiveBeanAdresseArchiveEmail" value="Email:"/>
+			<h:outputText id="adresseArchiveBeanAdresseArchiveEmail" value="#{adresseArchiveBean.adresseArchive.email}"/>
+			<h:outputText/>
+			<h:outputLabel for="adresseArchiveBeanAdresseArchiveLieuDit" value="Lieu Dit:"/>
+			<h:outputText id="adresseArchiveBeanAdresseArchiveLieuDit" value="#{adresseArchiveBean.adresseArchive.lieuDit}"/>
+			<h:outputText/>
+			<h:outputLabel for="adresseArchiveBeanAdresseArchiveNumeroPhone" value="Numero Phone:"/>
+			<h:outputText id="adresseArchiveBeanAdresseArchiveNumeroPhone" value="#{adresseArchiveBean.adresseArchive.numeroPhone}"/>
+			<h:outputText/>
+			<h:outputLabel for="adresseArchiveBeanAdresseArchiveRegion" value="Region:"/>
+			<h:outputText id="adresseArchiveBeanAdresseArchiveRegion" value="#{adresseArchiveBean.adresseArchive.region}"/>
+			<h:outputText/>
+			<h:outputLabel for="adresseArchiveBeanAdresseArchiveVille" value="Ville:"/>
+			<h:outputText id="adresseArchiveBeanAdresseArchiveVille" value="#{adresseArchiveBean.adresseArchive.ville}"/>
+			<h:outputText/>
+			<h:outputLabel for="adresseArchiveBeanAdresseArchiveFournisseurArchiveList" value="Fournisseur Archive List:"/>
+			<h:dataTable id="adresseArchiveBeanAdresseArchiveFournisseurArchiveList" styleClass="data-table" value="#{adresseArchiveBean.adresseArchive.fournisseurArchiveList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Raison Social"/>
+					</f:facet>
+					<h:link outcome="/fournisseurArchive/view">
+						<f:param name="id" value="#{_item.idFournisseur}"/>
+						<h:outputText id="itemRaisonSocial" value="#{_item.raisonSocial}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="adresseArchiveBeanAdresseArchiveClientArchiveList" value="Client Archive List:"/>
+			<h:dataTable id="adresseArchiveBeanAdresseArchiveClientArchiveList" styleClass="data-table" value="#{adresseArchiveBean.adresseArchive.clientArchiveList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Code Client"/>
+					</f:facet>
+					<h:link outcome="/clientArchive/view">
+						<f:param name="id" value="#{_item.idClient}"/>
+						<h:outputText id="itemCodeClient" value="#{_item.codeClient}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nature Activite"/>
+					</f:facet>
+					<h:link outcome="/clientArchive/view">
+						<f:param name="id" value="#{_item.idClient}"/>
+						<h:outputText id="itemNatureActivite" value="#{_item.natureActivite}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nom Client"/>
+					</f:facet>
+					<h:link outcome="/clientArchive/view">
+						<f:param name="id" value="#{_item.idClient}"/>
+						<h:outputText id="itemNomClient" value="#{_item.nomClient}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Prenom Client"/>
+					</f:facet>
+					<h:link outcome="/clientArchive/view">
+						<f:param name="id" value="#{_item.idClient}"/>
+						<h:outputText id="itemPrenomClient" value="#{_item.prenomClient}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Type Personne"/>
+					</f:facet>
+					<h:link outcome="/clientArchive/view">
+						<f:param name="id" value="#{_item.idClient}"/>
+						<h:outputText id="itemTypePersonne" value="#{_item.typePersonne}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

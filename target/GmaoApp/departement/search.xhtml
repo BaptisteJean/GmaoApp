@@ -29,10 +29,10 @@
 				<h:panelGroup styleClass="search">
 
 					<h:panelGrid columnClasses="label,component,required" columns="3">
-						<h:outputLabel for="departementBeanExampleLibelleDepartemnt" value="Libelle Departemnt:"/>
+						<h:outputLabel for="departementBeanExampleChefDepartement" value="Chef Departement:"/>
 						<h:panelGroup>
-							<h:inputText id="departementBeanExampleLibelleDepartemnt" value="#{departementBean.example.libelleDepartemnt}"/>
-							<h:message for="departementBeanExampleLibelleDepartemnt" styleClass="error"/>
+							<h:inputText id="departementBeanExampleChefDepartement" value="#{departementBean.example.chefDepartement}"/>
+							<h:message for="departementBeanExampleChefDepartement" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 						<h:outputLabel for="departementBeanExampleDescriptionActiviteDepartement" value="Description Activite Departement:"/>
@@ -41,10 +41,10 @@
 							<h:message for="departementBeanExampleDescriptionActiviteDepartement" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
-						<h:outputLabel for="departementBeanExampleChefDepartement" value="Chef Departement:"/>
+						<h:outputLabel for="departementBeanExampleLibelleDepartemnt" value="Libelle Departemnt:"/>
 						<h:panelGroup>
-							<h:inputText id="departementBeanExampleChefDepartement" value="#{departementBean.example.chefDepartement}"/>
-							<h:message for="departementBeanExampleChefDepartement" styleClass="error"/>
+							<h:inputText id="departementBeanExampleLibelleDepartemnt" value="#{departementBean.example.libelleDepartemnt}"/>
+							<h:message for="departementBeanExampleLibelleDepartemnt" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 					</h:panelGrid>
@@ -58,11 +58,11 @@
 			<h:dataTable id="departementBeanPageItems" styleClass="data-table" value="#{departementBean.pageItems}" var="_item">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Libelle Departemnt"/>
+						<h:outputText value="Chef Departement"/>
 					</f:facet>
 					<h:link outcome="/departement/view">
 						<f:param name="id" value="#{_item.idDepartement}"/>
-						<h:outputText id="itemLibelleDepartemnt" value="#{_item.libelleDepartemnt}"/>
+						<h:outputText id="itemChefDepartement" value="#{_item.chefDepartement}"/>
 					</h:link>
 				</h:column>
 				<h:column>
@@ -76,11 +76,11 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Chef Departement"/>
+						<h:outputText value="Libelle Departemnt"/>
 					</f:facet>
 					<h:link outcome="/departement/view">
 						<f:param name="id" value="#{_item.idDepartement}"/>
-						<h:outputText id="itemChefDepartement" value="#{_item.chefDepartement}"/>
+						<h:outputText id="itemLibelleDepartemnt" value="#{_item.libelleDepartemnt}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

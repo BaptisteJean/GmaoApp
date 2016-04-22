@@ -46,17 +46,8 @@
 						<h:outputText value="Bloc"/>
 					</f:facet>
 					<h:link outcome="/emplacementClient/view">
-						<f:param name="id" value="#{_item.idEmplClient}"/>
+						<f:param name="id" value="#{_item.idEmplclient}"/>
 						<h:outputText id="itemBloc" value="#{_item.bloc}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Salle"/>
-					</f:facet>
-					<h:link outcome="/emplacementClient/view">
-						<f:param name="id" value="#{_item.idEmplClient}"/>
-						<h:outputText id="itemSalle" value="#{_item.salle}"/>
 					</h:link>
 				</h:column>
 				<h:column>
@@ -64,20 +55,29 @@
 						<h:outputText value="Date Installation"/>
 					</f:facet>
 					<h:link outcome="/emplacementClient/view">
-						<f:param name="id" value="#{_item.idEmplClient}"/>
+						<f:param name="id" value="#{_item.idEmplclient}"/>
 						<h:outputText id="itemDateInstallation" value="#{_item.dateInstallation}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Salle"/>
+					</f:facet>
+					<h:link outcome="/emplacementClient/view">
+						<f:param name="id" value="#{_item.idEmplclient}"/>
+						<h:outputText id="itemSalle" value="#{_item.salle}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>
 			<h:outputText/>
-			<h:outputLabel for="emplacementBeanEmplacementEmplacementTNList" value="Emplacement TN List:"/>
-			<h:dataTable id="emplacementBeanEmplacementEmplacementTNList" styleClass="data-table" value="#{emplacementBean.emplacement.emplacementTNList}" var="_item">
+			<h:outputLabel for="emplacementBeanEmplacementEmplacementTnList" value="Emplacement Tn List:"/>
+			<h:dataTable id="emplacementBeanEmplacementEmplacementTnList" styleClass="data-table" value="#{emplacementBean.emplacement.emplacementTnList}" var="_item">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="Libelle Caisse"/>
 					</f:facet>
-					<h:link outcome="/emplacementTN/view">
-						<f:param name="id" value="#{_item.idEmplTN}"/>
+					<h:link outcome="/emplacementTn/view">
+						<f:param name="id" value="#{_item.idEmpltn}"/>
 						<h:outputText id="itemLibelleCaisse" value="#{_item.libelleCaisse}"/>
 					</h:link>
 				</h:column>
@@ -85,8 +85,8 @@
 					<f:facet name="header">
 						<h:outputText value="Libelle Tirroir"/>
 					</f:facet>
-					<h:link outcome="/emplacementTN/view">
-						<f:param name="id" value="#{_item.idEmplTN}"/>
+					<h:link outcome="/emplacementTn/view">
+						<f:param name="id" value="#{_item.idEmpltn}"/>
 						<h:outputText id="itemLibelleTirroir" value="#{_item.libelleTirroir}"/>
 					</h:link>
 				</h:column>

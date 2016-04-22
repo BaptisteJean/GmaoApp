@@ -29,6 +29,9 @@
 			<h:outputLabel for="clientBeanClientCodeClient" value="Code Client:"/>
 			<h:outputText id="clientBeanClientCodeClient" value="#{clientBean.client.codeClient}"/>
 			<h:outputText/>
+			<h:outputLabel for="clientBeanClientNatureActivite" value="Nature Activite:"/>
+			<h:outputText id="clientBeanClientNatureActivite" value="#{clientBean.client.natureActivite}"/>
+			<h:outputText/>
 			<h:outputLabel for="clientBeanClientNomClient" value="Nom Client:"/>
 			<h:outputText id="clientBeanClientNomClient" value="#{clientBean.client.nomClient}"/>
 			<h:outputText/>
@@ -38,33 +41,21 @@
 			<h:outputLabel for="clientBeanClientTypePersonne" value="Type Personne:"/>
 			<h:outputText id="clientBeanClientTypePersonne" value="#{clientBean.client.typePersonne}"/>
 			<h:outputText/>
-			<h:outputLabel for="clientBeanClientNatureActivite" value="Nature Activite:"/>
-			<h:outputText id="clientBeanClientNatureActivite" value="#{clientBean.client.natureActivite}"/>
-			<h:outputText/>
-			<h:outputLabel for="clientBeanClientDestinationList" value="Destination List:"/>
-			<h:dataTable id="clientBeanClientDestinationList" styleClass="data-table" value="#{clientBean.client.destinationList}" var="_item"/>
-			<h:outputText/>
-			<h:outputLabel for="clientBeanClientSiteInterventionList" value="Site Intervention List:"/>
-			<h:dataTable id="clientBeanClientSiteInterventionList" styleClass="data-table" value="#{clientBean.client.siteInterventionList}" var="_item">
+			<h:outputLabel for="clientBeanClientArchivageList" value="Archivage List:"/>
+			<h:dataTable id="clientBeanClientArchivageList" styleClass="data-table" value="#{clientBean.client.archivageList}" var="_item">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Numero Batiment"/>
+						<h:outputText value="Id Directeur Technique"/>
 					</f:facet>
-					<h:link outcome="/siteIntervention/view">
-						<f:param name="id" value="#{_item.idSiteIntervention}"/>
-						<h:outputText id="itemNumeroBatiment" value="#{_item.numeroBatiment}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Libele Bureau"/>
-					</f:facet>
-					<h:link outcome="/siteIntervention/view">
-						<f:param name="id" value="#{_item.idSiteIntervention}"/>
-						<h:outputText id="itemLibeleBureau" value="#{_item.libeleBureau}"/>
+					<h:link outcome="/archivage/view">
+						<f:param name="id" value="#{_item.idArchivage}"/>
+						<h:outputText id="forgeviewdisplayitemIdDirecteurTechnique" value="#{forgeview:display(_item.idDirecteurTechnique)}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="clientBeanClientDestinationList" value="Destination List:"/>
+			<h:dataTable id="clientBeanClientDestinationList" styleClass="data-table" value="#{clientBean.client.destinationList}" var="_item"/>
 			<h:outputText/>
 			<h:outputLabel for="clientBeanClientProvenanceList" value="Provenance List:"/>
 			<h:dataTable id="clientBeanClientProvenanceList" styleClass="data-table" value="#{clientBean.client.provenanceList}" var="_item">
@@ -79,23 +70,32 @@
 				</h:column>
 			</h:dataTable>
 			<h:outputText/>
+			<h:outputLabel for="clientBeanClientSiteInterventionList" value="Site Intervention List:"/>
+			<h:dataTable id="clientBeanClientSiteInterventionList" styleClass="data-table" value="#{clientBean.client.siteInterventionList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Libele Bureau"/>
+					</f:facet>
+					<h:link outcome="/siteIntervention/view">
+						<f:param name="id" value="#{_item.idsiteintervention}"/>
+						<h:outputText id="itemLibeleBureau" value="#{_item.libeleBureau}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Numero Batiment"/>
+					</f:facet>
+					<h:link outcome="/siteIntervention/view">
+						<f:param name="id" value="#{_item.idsiteintervention}"/>
+						<h:outputText id="itemNumeroBatiment" value="#{_item.numeroBatiment}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
 			<h:outputLabel for="clientBeanClientIdAdresse" value="Id Adresse:"/>
 			<h:link id="clientBeanClientIdAdresse" outcome="/adresse/view" rendered="#{!empty clientBean.client.idAdresse}" value="#{clientBean.client.idAdresse}">
 				<f:param name="id" value="#{clientBean.client.idAdresse.idAdresse}"/>
 			</h:link>
-			<h:outputText/>
-			<h:outputLabel for="clientBeanClientArchivageList" value="Archivage List:"/>
-			<h:dataTable id="clientBeanClientArchivageList" styleClass="data-table" value="#{clientBean.client.archivageList}" var="_item">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Id Directeur Technique"/>
-					</f:facet>
-					<h:link outcome="/archivage/view">
-						<f:param name="id" value="#{_item.idArchivage}"/>
-						<h:outputText id="forgeviewdisplayitemIdDirecteurTechnique" value="#{forgeview:display(_item.idDirecteurTechnique)}"/>
-					</h:link>
-				</h:column>
-			</h:dataTable>
 			<h:outputText/>
 		</h:panelGrid>
 

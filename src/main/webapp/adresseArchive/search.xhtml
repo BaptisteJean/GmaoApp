@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{adresseArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{adresseArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Adresse Archive entities"/>
+
+	<ui:define name="header">
+		Adresse Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Adresse Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="adresseArchiveBeanExampleBoitePostale" value="Boite Postale:"/>
+						<h:panelGroup>
+							<h:inputText id="adresseArchiveBeanExampleBoitePostale" value="#{adresseArchiveBean.example.boitePostale}"/>
+							<h:message for="adresseArchiveBeanExampleBoitePostale" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="adresseArchiveBeanExampleCodeAdresse" value="Code Adresse:"/>
+						<h:panelGroup>
+							<h:inputText id="adresseArchiveBeanExampleCodeAdresse" value="#{adresseArchiveBean.example.codeAdresse}"/>
+							<h:message for="adresseArchiveBeanExampleCodeAdresse" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="adresseArchiveBeanExampleEmail" value="Email:"/>
+						<h:panelGroup>
+							<h:inputText id="adresseArchiveBeanExampleEmail" value="#{adresseArchiveBean.example.email}"/>
+							<h:message for="adresseArchiveBeanExampleEmail" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="adresseArchiveBeanExampleLieuDit" value="Lieu Dit:"/>
+						<h:panelGroup>
+							<h:inputText id="adresseArchiveBeanExampleLieuDit" value="#{adresseArchiveBean.example.lieuDit}"/>
+							<h:message for="adresseArchiveBeanExampleLieuDit" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="adresseArchiveBeanExampleNumeroPhone" value="Numero Phone:"/>
+						<h:panelGroup>
+							<h:inputText id="adresseArchiveBeanExampleNumeroPhone" value="#{adresseArchiveBean.example.numeroPhone}"/>
+							<h:message for="adresseArchiveBeanExampleNumeroPhone" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{adresseArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{adresseArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="adresseArchiveBeanPageItems" styleClass="data-table" value="#{adresseArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Boite Postale"/>
+					</f:facet>
+					<h:link outcome="/adresseArchive/view">
+						<f:param name="id" value="#{_item.idAdresse}"/>
+						<h:outputText id="itemBoitePostale" value="#{_item.boitePostale}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Code Adresse"/>
+					</f:facet>
+					<h:link outcome="/adresseArchive/view">
+						<f:param name="id" value="#{_item.idAdresse}"/>
+						<h:outputText id="itemCodeAdresse" value="#{_item.codeAdresse}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Email"/>
+					</f:facet>
+					<h:link outcome="/adresseArchive/view">
+						<f:param name="id" value="#{_item.idAdresse}"/>
+						<h:outputText id="itemEmail" value="#{_item.email}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Lieu Dit"/>
+					</f:facet>
+					<h:link outcome="/adresseArchive/view">
+						<f:param name="id" value="#{_item.idAdresse}"/>
+						<h:outputText id="itemLieuDit" value="#{_item.lieuDit}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Numero Phone"/>
+					</f:facet>
+					<h:link outcome="/adresseArchive/view">
+						<f:param name="id" value="#{_item.idAdresse}"/>
+						<h:outputText id="itemNumeroPhone" value="#{_item.numeroPhone}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{adresseArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

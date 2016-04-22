@@ -36,6 +36,12 @@
 							<h:message for="clientBeanExampleCodeClient" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
+						<h:outputLabel for="clientBeanExampleNatureActivite" value="Nature Activite:"/>
+						<h:panelGroup>
+							<h:inputText id="clientBeanExampleNatureActivite" value="#{clientBean.example.natureActivite}"/>
+							<h:message for="clientBeanExampleNatureActivite" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
 						<h:outputLabel for="clientBeanExampleNomClient" value="Nom Client:"/>
 						<h:panelGroup>
 							<h:inputText id="clientBeanExampleNomClient" value="#{clientBean.example.nomClient}"/>
@@ -52,12 +58,6 @@
 						<h:panelGroup>
 							<h:inputText id="clientBeanExampleTypePersonne" value="#{clientBean.example.typePersonne}"/>
 							<h:message for="clientBeanExampleTypePersonne" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
-						<h:outputLabel for="clientBeanExampleNatureActivite" value="Nature Activite:"/>
-						<h:panelGroup>
-							<h:inputText id="clientBeanExampleNatureActivite" value="#{clientBean.example.natureActivite}"/>
-							<h:message for="clientBeanExampleNatureActivite" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 					</h:panelGrid>

@@ -25,11 +25,11 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="siteInterventionBeanSiteInterventionNumeroBatiment" value="Numero Batiment:"/>
-			<h:outputText id="siteInterventionBeanSiteInterventionNumeroBatiment" value="#{siteInterventionBean.siteIntervention.numeroBatiment}"/>
-			<h:outputText/>
 			<h:outputLabel for="siteInterventionBeanSiteInterventionLibeleBureau" value="Libele Bureau:"/>
 			<h:outputText id="siteInterventionBeanSiteInterventionLibeleBureau" value="#{siteInterventionBean.siteIntervention.libeleBureau}"/>
+			<h:outputText/>
+			<h:outputLabel for="siteInterventionBeanSiteInterventionNumeroBatiment" value="Numero Batiment:"/>
+			<h:outputText id="siteInterventionBeanSiteInterventionNumeroBatiment" value="#{siteInterventionBean.siteIntervention.numeroBatiment}"/>
 			<h:outputText/>
 			<h:outputLabel for="siteInterventionBeanSiteInterventionIdClient" value="Id Client:"/>
 			<h:link id="siteInterventionBeanSiteInterventionIdClient" outcome="/client/view" rendered="#{!empty siteInterventionBean.siteIntervention.idClient}" value="#{siteInterventionBean.siteIntervention.idClient}">

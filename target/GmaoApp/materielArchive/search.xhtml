@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{materielArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{materielArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Materiel Archive entities"/>
+
+	<ui:define name="header">
+		Materiel Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Materiel Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="materielArchiveBeanExampleDesignation" value="Designation:"/>
+						<h:panelGroup>
+							<h:inputText id="materielArchiveBeanExampleDesignation" value="#{materielArchiveBean.example.designation}"/>
+							<h:message for="materielArchiveBeanExampleDesignation" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="materielArchiveBeanExampleModelMateriel" value="Model Materiel:"/>
+						<h:panelGroup>
+							<h:inputText id="materielArchiveBeanExampleModelMateriel" value="#{materielArchiveBean.example.modelMateriel}"/>
+							<h:message for="materielArchiveBeanExampleModelMateriel" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="materielArchiveBeanExampleTypeMateriel" value="Type Materiel:"/>
+						<h:panelGroup>
+							<h:inputText id="materielArchiveBeanExampleTypeMateriel" value="#{materielArchiveBean.example.typeMateriel}"/>
+							<h:message for="materielArchiveBeanExampleTypeMateriel" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{materielArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{materielArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="materielArchiveBeanPageItems" styleClass="data-table" value="#{materielArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Designation"/>
+					</f:facet>
+					<h:link outcome="/materielArchive/view">
+						<f:param name="id" value="#{_item.idMateriel}"/>
+						<h:outputText id="itemDesignation" value="#{_item.designation}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Model Materiel"/>
+					</f:facet>
+					<h:link outcome="/materielArchive/view">
+						<f:param name="id" value="#{_item.idMateriel}"/>
+						<h:outputText id="itemModelMateriel" value="#{_item.modelMateriel}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Type Materiel"/>
+					</f:facet>
+					<h:link outcome="/materielArchive/view">
+						<f:param name="id" value="#{_item.idMateriel}"/>
+						<h:outputText id="itemTypeMateriel" value="#{_item.typeMateriel}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{materielArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

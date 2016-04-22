@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{emplacementClientArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{emplacementClientArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Emplacement Client Archive entities"/>
+
+	<ui:define name="header">
+		Emplacement Client Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Emplacement Client Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="emplacementClientArchiveBeanExampleBloc" value="Bloc:"/>
+						<h:panelGroup>
+							<h:inputText id="emplacementClientArchiveBeanExampleBloc" value="#{emplacementClientArchiveBean.example.bloc}"/>
+							<h:message for="emplacementClientArchiveBeanExampleBloc" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="emplacementClientArchiveBeanExampleDateInstallation" value="Date Installation:"/>
+						<h:panelGroup>
+							<h:inputText id="emplacementClientArchiveBeanExampleDateInstallation" value="#{emplacementClientArchiveBean.example.dateInstallation}"/>
+							<h:message for="emplacementClientArchiveBeanExampleDateInstallation" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="emplacementClientArchiveBeanExampleSalle" value="Salle:"/>
+						<h:panelGroup>
+							<h:inputText id="emplacementClientArchiveBeanExampleSalle" value="#{emplacementClientArchiveBean.example.salle}"/>
+							<h:message for="emplacementClientArchiveBeanExampleSalle" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="emplacementClientArchiveBeanExampleIdEmplacement" value="Id Emplacement:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{emplacementArchiveBean.converter}" id="emplacementClientArchiveBeanExampleIdEmplacement" value="#{emplacementClientArchiveBean.example.idEmplacement}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{emplacementArchiveBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="emplacementClientArchiveBeanExampleIdEmplacement" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{emplacementClientArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{emplacementClientArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="emplacementClientArchiveBeanPageItems" styleClass="data-table" value="#{emplacementClientArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Emplacement"/>
+					</f:facet>
+					<h:link outcome="/emplacementClientArchive/view">
+						<f:param name="id" value="#{_item.idEmplclient}"/>
+						<h:outputText id="forgeviewdisplayitemIdEmplacement" value="#{forgeview:display(_item.idEmplacement)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{emplacementClientArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

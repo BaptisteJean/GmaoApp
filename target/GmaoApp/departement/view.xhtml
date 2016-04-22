@@ -26,14 +26,14 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="departementBeanDepartementLibelleDepartemnt" value="Libelle Departemnt:"/>
-			<h:outputText id="departementBeanDepartementLibelleDepartemnt" value="#{departementBean.departement.libelleDepartemnt}"/>
+			<h:outputLabel for="departementBeanDepartementChefDepartement" value="Chef Departement:"/>
+			<h:outputText id="departementBeanDepartementChefDepartement" value="#{departementBean.departement.chefDepartement}"/>
 			<h:outputText/>
 			<h:outputLabel for="departementBeanDepartementDescriptionActiviteDepartement" value="Description Activite Departement:"/>
 			<h:outputText id="departementBeanDepartementDescriptionActiviteDepartement" value="#{departementBean.departement.descriptionActiviteDepartement}"/>
 			<h:outputText/>
-			<h:outputLabel for="departementBeanDepartementChefDepartement" value="Chef Departement:"/>
-			<h:outputText id="departementBeanDepartementChefDepartement" value="#{departementBean.departement.chefDepartement}"/>
+			<h:outputLabel for="departementBeanDepartementLibelleDepartemnt" value="Libelle Departemnt:"/>
+			<h:outputText id="departementBeanDepartementLibelleDepartemnt" value="#{departementBean.departement.libelleDepartemnt}"/>
 			<h:outputText/>
 			<h:outputLabel for="departementBeanDepartementTechnicienList" value="Technicien List:"/>
 			<h:dataTable id="departementBeanDepartementTechnicienList" styleClass="data-table" value="#{departementBean.departement.technicienList}" var="_item">
@@ -61,11 +61,11 @@
 			<h:dataTable id="departementBeanDepartementEquipeList" styleClass="data-table" value="#{departementBean.departement.equipeList}" var="_item">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Libelle Equipe"/>
+						<h:outputText value="Chef Equipe"/>
 					</f:facet>
 					<h:link outcome="/equipe/view">
 						<f:param name="id" value="#{_item.idEquipe}"/>
-						<h:outputText id="itemLibelleEquipe" value="#{_item.libelleEquipe}"/>
+						<h:outputText id="itemChefEquipe" value="#{_item.chefEquipe}"/>
 					</h:link>
 				</h:column>
 				<h:column>
@@ -79,11 +79,11 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Chef Equipe"/>
+						<h:outputText value="Libelle Equipe"/>
 					</f:facet>
 					<h:link outcome="/equipe/view">
 						<f:param name="id" value="#{_item.idEquipe}"/>
-						<h:outputText id="itemChefEquipe" value="#{_item.chefEquipe}"/>
+						<h:outputText id="itemLibelleEquipe" value="#{_item.libelleEquipe}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{archivageArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{archivageArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Archivage Archive"/>
+
+	<ui:define name="header">
+		Archivage Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Archivage Archive
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="archivageArchiveBeanArchivageArchiveIdClient" value="Id Client:"/>
+			<h:link id="archivageArchiveBeanArchivageArchiveIdClient" outcome="/clientArchive/view" rendered="#{!empty archivageArchiveBean.archivageArchive.idClient}" value="#{archivageArchiveBean.archivageArchive.idClient}">
+				<f:param name="id" value="#{archivageArchiveBean.archivageArchive.idClient.idClient}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="archivageArchiveBeanArchivageArchiveIdDirecteurTechnique" value="Id Directeur Technique:"/>
+			<h:link id="archivageArchiveBeanArchivageArchiveIdDirecteurTechnique" outcome="/directeurTechniqueArchive/view" rendered="#{!empty archivageArchiveBean.archivageArchive.idDirecteurTechnique}" value="#{archivageArchiveBean.archivageArchive.idDirecteurTechnique}">
+				<f:param name="id" value="#{archivageArchiveBean.archivageArchive.idDirecteurTechnique.idDirecteurTech}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="archivageArchiveBeanArchivageArchiveArchivageProvoqueArchiveList" value="Archivage Provoque Archive List:"/>
+			<h:dataTable id="archivageArchiveBeanArchivageArchiveArchivageProvoqueArchiveList" styleClass="data-table" value="#{archivageArchiveBean.archivageArchive.archivageProvoqueArchiveList}" var="_item"/>
+			<h:outputText/>
+			<h:outputLabel for="archivageArchiveBeanArchivageArchiveArchivageAutomatiqueArchiveList" value="Archivage Automatique Archive List:"/>
+			<h:dataTable id="archivageArchiveBeanArchivageArchiveArchivageAutomatiqueArchiveList" styleClass="data-table" value="#{archivageArchiveBean.archivageArchive.archivageAutomatiqueArchiveList}" var="_item"/>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

@@ -26,11 +26,6 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="destinationBeanDestinationIdClient" value="Id Client:"/>
-			<h:link id="destinationBeanDestinationIdClient" outcome="/client/view" rendered="#{!empty destinationBean.destination.idClient}" value="#{destinationBean.destination.idClient}">
-				<f:param name="id" value="#{destinationBean.destination.idClient.idClient}"/>
-			</h:link>
-			<h:outputText/>
 			<h:outputLabel for="destinationBeanDestinationDestockageList" value="Destockage List:"/>
 			<h:dataTable id="destinationBeanDestinationDestockageList" styleClass="data-table" value="#{destinationBean.destination.destockageList}" var="_item">
 				<h:column>
@@ -43,6 +38,11 @@
 					</h:link>
 				</h:column>
 			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="destinationBeanDestinationIdClient" value="Id Client:"/>
+			<h:link id="destinationBeanDestinationIdClient" outcome="/client/view" rendered="#{!empty destinationBean.destination.idClient}" value="#{destinationBean.destination.idClient}">
+				<f:param name="id" value="#{destinationBean.destination.idClient.idClient}"/>
+			</h:link>
 			<h:outputText/>
 		</h:panelGrid>
 

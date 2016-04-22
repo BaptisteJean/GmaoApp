@@ -37,10 +37,10 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="departementBeanDepartementLibelleDepartemnt" value="Libelle Departemnt:"/>
+				<h:outputLabel for="departementBeanDepartementChefDepartement" value="Chef Departement:"/>
 				<h:panelGroup>
-					<h:inputText id="departementBeanDepartementLibelleDepartemnt" value="#{departementBean.departement.libelleDepartemnt}"/>
-					<h:message for="departementBeanDepartementLibelleDepartemnt" styleClass="error"/>
+					<h:inputText id="departementBeanDepartementChefDepartement" value="#{departementBean.departement.chefDepartement}"/>
+					<h:message for="departementBeanDepartementChefDepartement" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="departementBeanDepartementDescriptionActiviteDepartement" value="Description Activite Departement:"/>
@@ -49,10 +49,10 @@
 					<h:message for="departementBeanDepartementDescriptionActiviteDepartement" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="departementBeanDepartementChefDepartement" value="Chef Departement:"/>
+				<h:outputLabel for="departementBeanDepartementLibelleDepartemnt" value="Libelle Departemnt:"/>
 				<h:panelGroup>
-					<h:inputText id="departementBeanDepartementChefDepartement" value="#{departementBean.departement.chefDepartement}"/>
-					<h:message for="departementBeanDepartementChefDepartement" styleClass="error"/>
+					<h:inputText id="departementBeanDepartementLibelleDepartemnt" value="#{departementBean.departement.libelleDepartemnt}"/>
+					<h:message for="departementBeanDepartementLibelleDepartemnt" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="departementBeanDepartementTechnicienList" value="Technicien List:"/>
@@ -106,15 +106,15 @@
 					<h:dataTable id="departementBeanDepartementEquipeList" styleClass="data-table" value="#{_collection}" var="_item">
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Libelle Equipe"/>
+								<h:outputText value="Chef Equipe"/>
 							</f:facet>
 							<h:link outcome="/equipe/view">
 								<f:param name="id" value="#{_item.idEquipe}"/>
-								<h:outputText id="itemLibelleEquipe" value="#{_item.libelleEquipe}"/>
+								<h:outputText id="itemChefEquipe" value="#{_item.chefEquipe}"/>
 							</h:link>
 							<f:facet name="footer">
-								<h:inputText id="equipeBeanAddLibelleEquipe" value="#{equipeBean.add.libelleEquipe}"/>
-								<h:message for="equipeBeanAddLibelleEquipe" styleClass="error"/>
+								<h:inputText id="equipeBeanAddChefEquipe" value="#{equipeBean.add.chefEquipe}"/>
+								<h:message for="equipeBeanAddChefEquipe" styleClass="error"/>
 							</f:facet>
 						</h:column>
 						<h:column>
@@ -132,15 +132,15 @@
 						</h:column>
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Chef Equipe"/>
+								<h:outputText value="Libelle Equipe"/>
 							</f:facet>
 							<h:link outcome="/equipe/view">
 								<f:param name="id" value="#{_item.idEquipe}"/>
-								<h:outputText id="itemChefEquipe" value="#{_item.chefEquipe}"/>
+								<h:outputText id="itemLibelleEquipe" value="#{_item.libelleEquipe}"/>
 							</h:link>
 							<f:facet name="footer">
-								<h:inputText id="equipeBeanAddChefEquipe" value="#{equipeBean.add.chefEquipe}"/>
-								<h:message for="equipeBeanAddChefEquipe" styleClass="error"/>
+								<h:inputText id="equipeBeanAddLibelleEquipe" value="#{equipeBean.add.libelleEquipe}"/>
+								<h:message for="equipeBeanAddLibelleEquipe" styleClass="error"/>
 							</f:facet>
 						</h:column>
 						<h:column footerClass="remove-column" headerClass="remove-column">

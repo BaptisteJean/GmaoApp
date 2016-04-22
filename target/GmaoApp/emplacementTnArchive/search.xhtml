@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{emplacementTnArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{emplacementTnArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Emplacement Tn Archive entities"/>
+
+	<ui:define name="header">
+		Emplacement Tn Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Emplacement Tn Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="emplacementTnArchiveBeanExampleLibelleCaisse" value="Libelle Caisse:"/>
+						<h:panelGroup>
+							<h:inputText id="emplacementTnArchiveBeanExampleLibelleCaisse" value="#{emplacementTnArchiveBean.example.libelleCaisse}"/>
+							<h:message for="emplacementTnArchiveBeanExampleLibelleCaisse" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="emplacementTnArchiveBeanExampleLibelleTirroir" value="Libelle Tirroir:"/>
+						<h:panelGroup>
+							<h:inputText id="emplacementTnArchiveBeanExampleLibelleTirroir" value="#{emplacementTnArchiveBean.example.libelleTirroir}"/>
+							<h:message for="emplacementTnArchiveBeanExampleLibelleTirroir" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="emplacementTnArchiveBeanExampleIdEmplacement" value="Id Emplacement:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{emplacementArchiveBean.converter}" id="emplacementTnArchiveBeanExampleIdEmplacement" value="#{emplacementTnArchiveBean.example.idEmplacement}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{emplacementArchiveBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="emplacementTnArchiveBeanExampleIdEmplacement" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{emplacementTnArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{emplacementTnArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="emplacementTnArchiveBeanPageItems" styleClass="data-table" value="#{emplacementTnArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Emplacement"/>
+					</f:facet>
+					<h:link outcome="/emplacementTnArchive/view">
+						<f:param name="id" value="#{_item.idEmpltn}"/>
+						<h:outputText id="forgeviewdisplayitemIdEmplacement" value="#{forgeview:display(_item.idEmplacement)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{emplacementTnArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

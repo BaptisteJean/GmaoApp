@@ -30,16 +30,16 @@
 				<h:panelGroup styleClass="search">
 
 					<h:panelGrid columnClasses="label,component,required" columns="3">
-						<h:outputLabel for="rapportBeanExampleDescriptionRapport" value="Description Rapport:"/>
-						<h:panelGroup>
-							<h:inputText id="rapportBeanExampleDescriptionRapport" value="#{rapportBean.example.descriptionRapport}"/>
-							<h:message for="rapportBeanExampleDescriptionRapport" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
 						<h:outputLabel for="rapportBeanExampleDateRedaction" value="Date Redaction:"/>
 						<h:panelGroup>
 							<h:inputText id="rapportBeanExampleDateRedaction" value="#{rapportBean.example.dateRedaction}"/>
 							<h:message for="rapportBeanExampleDateRedaction" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="rapportBeanExampleDescriptionRapport" value="Description Rapport:"/>
+						<h:panelGroup>
+							<h:inputText id="rapportBeanExampleDescriptionRapport" value="#{rapportBean.example.descriptionRapport}"/>
+							<h:message for="rapportBeanExampleDescriptionRapport" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 						<h:outputLabel for="rapportBeanExampleIdEquipe" value="Id Equipe:"/>

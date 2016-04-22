@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{provientArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{provientArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Provient Archive"/>
+
+	<ui:define name="header">
+		Provient Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Provient Archive
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="provientArchiveBeanProvientArchiveIdMateriel" value="Id Materiel:"/>
+			<h:link id="provientArchiveBeanProvientArchiveIdMateriel" outcome="/materielArchive/view" rendered="#{!empty provientArchiveBean.provientArchive.idMateriel}" value="#{provientArchiveBean.provientArchive.idMateriel}">
+				<f:param name="id" value="#{provientArchiveBean.provientArchive.idMateriel.idMateriel}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="provientArchiveBeanProvientArchiveIdProvenance" value="Id Provenance:"/>
+			<h:link id="provientArchiveBeanProvientArchiveIdProvenance" outcome="/provenanceArchive/view" rendered="#{!empty provientArchiveBean.provientArchive.idProvenance}" value="#{provientArchiveBean.provientArchive.idProvenance}">
+				<f:param name="id" value="#{provientArchiveBean.provientArchive.idProvenance.idProvenance}"/>
+			</h:link>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

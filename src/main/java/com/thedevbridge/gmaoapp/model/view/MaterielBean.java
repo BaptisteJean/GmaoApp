@@ -212,17 +212,17 @@ public class MaterielBean implements Serializable {
 					builder.lower(root.<String> get("designation")),
 					'%' + designation.toLowerCase() + '%'));
 		}
-		String typeMateriel = this.example.getTypeMateriel();
-		if (typeMateriel != null && !"".equals(typeMateriel)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("typeMateriel")),
-					'%' + typeMateriel.toLowerCase() + '%'));
-		}
 		String modelMateriel = this.example.getModelMateriel();
 		if (modelMateriel != null && !"".equals(modelMateriel)) {
 			predicatesList.add(builder.like(
 					builder.lower(root.<String> get("modelMateriel")),
 					'%' + modelMateriel.toLowerCase() + '%'));
+		}
+		String typeMateriel = this.example.getTypeMateriel();
+		if (typeMateriel != null && !"".equals(typeMateriel)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("typeMateriel")),
+					'%' + typeMateriel.toLowerCase() + '%'));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);

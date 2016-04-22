@@ -37,16 +37,16 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="rapportBeanRapportDescriptionRapport" value="Description Rapport:"/>
-				<h:panelGroup>
-					<h:inputText id="rapportBeanRapportDescriptionRapport" value="#{rapportBean.rapport.descriptionRapport}"/>
-					<h:message for="rapportBeanRapportDescriptionRapport" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
 				<h:outputLabel for="rapportBeanRapportDateRedaction" value="Date Redaction:"/>
 				<h:panelGroup>
 					<h:inputText id="rapportBeanRapportDateRedaction" value="#{rapportBean.rapport.dateRedaction}"/>
 					<h:message for="rapportBeanRapportDateRedaction" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="rapportBeanRapportDescriptionRapport" value="Description Rapport:"/>
+				<h:panelGroup>
+					<h:inputText id="rapportBeanRapportDescriptionRapport" value="#{rapportBean.rapport.descriptionRapport}"/>
+					<h:message for="rapportBeanRapportDescriptionRapport" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="rapportBeanRapportIdEquipe" value="Id Equipe:"/>

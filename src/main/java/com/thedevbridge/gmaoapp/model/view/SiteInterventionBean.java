@@ -118,7 +118,7 @@ public class SiteInterventionBean implements Serializable {
 			} else {
 				this.entityManager.merge(this.siteIntervention);
 				return "view?faces-redirect=true&id="
-						+ this.siteIntervention.getIdSiteIntervention();
+						+ this.siteIntervention.getIdsiteintervention();
 			}
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -213,17 +213,17 @@ public class SiteInterventionBean implements Serializable {
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		String numeroBatiment = this.example.getNumeroBatiment();
-		if (numeroBatiment != null && !"".equals(numeroBatiment)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("numeroBatiment")),
-					'%' + numeroBatiment.toLowerCase() + '%'));
-		}
 		String libeleBureau = this.example.getLibeleBureau();
 		if (libeleBureau != null && !"".equals(libeleBureau)) {
 			predicatesList.add(builder.like(
 					builder.lower(root.<String> get("libeleBureau")),
 					'%' + libeleBureau.toLowerCase() + '%'));
+		}
+		String numeroBatiment = this.example.getNumeroBatiment();
+		if (numeroBatiment != null && !"".equals(numeroBatiment)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("numeroBatiment")),
+					'%' + numeroBatiment.toLowerCase() + '%'));
 		}
 		Client idClient = this.example.getIdClient();
 		if (idClient != null) {
@@ -281,7 +281,7 @@ public class SiteInterventionBean implements Serializable {
 				}
 
 				return String.valueOf(((SiteIntervention) value)
-						.getIdSiteIntervention());
+						.getIdsiteintervention());
 			}
 		};
 	}

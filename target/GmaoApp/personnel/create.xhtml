@@ -49,6 +49,18 @@
 					<h:message for="personnelBeanPersonnelPrenomPersonnel" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
+				<h:outputLabel for="personnelBeanPersonnelLogin" value="Login:"/>
+				<h:panelGroup>
+					<h:inputText id="personnelBeanPersonnelLogin" value="#{personnelBean.personnel.login}"/>
+					<h:message for="personnelBeanPersonnelLogin" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="personnelBeanPersonnelPassword" value="Password:"/>
+				<h:panelGroup>
+					<h:inputText id="personnelBeanPersonnelPassword" value="#{personnelBean.personnel.password}"/>
+					<h:message for="personnelBeanPersonnelPassword" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
 				<h:outputLabel for="personnelBeanPersonnelDirecteurTechniqueList" value="Directeur Technique List:"/>
 				<h:panelGroup>
 					<ui:param name="_collection" value="#{personnelBean.personnel.directeurTechniqueList}"/>

@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{clientArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{clientArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Client Archive entities"/>
+
+	<ui:define name="header">
+		Client Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Client Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="clientArchiveBeanExampleCodeClient" value="Code Client:"/>
+						<h:panelGroup>
+							<h:inputText id="clientArchiveBeanExampleCodeClient" value="#{clientArchiveBean.example.codeClient}"/>
+							<h:message for="clientArchiveBeanExampleCodeClient" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="clientArchiveBeanExampleNatureActivite" value="Nature Activite:"/>
+						<h:panelGroup>
+							<h:inputText id="clientArchiveBeanExampleNatureActivite" value="#{clientArchiveBean.example.natureActivite}"/>
+							<h:message for="clientArchiveBeanExampleNatureActivite" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="clientArchiveBeanExampleNomClient" value="Nom Client:"/>
+						<h:panelGroup>
+							<h:inputText id="clientArchiveBeanExampleNomClient" value="#{clientArchiveBean.example.nomClient}"/>
+							<h:message for="clientArchiveBeanExampleNomClient" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="clientArchiveBeanExamplePrenomClient" value="Prenom Client:"/>
+						<h:panelGroup>
+							<h:inputText id="clientArchiveBeanExamplePrenomClient" value="#{clientArchiveBean.example.prenomClient}"/>
+							<h:message for="clientArchiveBeanExamplePrenomClient" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="clientArchiveBeanExampleTypePersonne" value="Type Personne:"/>
+						<h:panelGroup>
+							<h:inputText id="clientArchiveBeanExampleTypePersonne" value="#{clientArchiveBean.example.typePersonne}"/>
+							<h:message for="clientArchiveBeanExampleTypePersonne" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{clientArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{clientArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="clientArchiveBeanPageItems" styleClass="data-table" value="#{clientArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Adresse"/>
+					</f:facet>
+					<h:link outcome="/clientArchive/view">
+						<f:param name="id" value="#{_item.idClient}"/>
+						<h:outputText id="forgeviewdisplayitemIdAdresse" value="#{forgeview:display(_item.idAdresse)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{clientArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

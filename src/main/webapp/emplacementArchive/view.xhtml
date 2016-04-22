@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{emplacementArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{emplacementArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Emplacement Archive"/>
+
+	<ui:define name="header">
+		Emplacement Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Emplacement Archive
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="emplacementArchiveBeanEmplacementArchiveEmplacementClientArchiveList" value="Emplacement Client Archive List:"/>
+			<h:dataTable id="emplacementArchiveBeanEmplacementArchiveEmplacementClientArchiveList" styleClass="data-table" value="#{emplacementArchiveBean.emplacementArchive.emplacementClientArchiveList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Bloc"/>
+					</f:facet>
+					<h:link outcome="/emplacementClientArchive/view">
+						<f:param name="id" value="#{_item.idEmplclient}"/>
+						<h:outputText id="itemBloc" value="#{_item.bloc}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Date Installation"/>
+					</f:facet>
+					<h:link outcome="/emplacementClientArchive/view">
+						<f:param name="id" value="#{_item.idEmplclient}"/>
+						<h:outputText id="itemDateInstallation" value="#{_item.dateInstallation}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Salle"/>
+					</f:facet>
+					<h:link outcome="/emplacementClientArchive/view">
+						<f:param name="id" value="#{_item.idEmplclient}"/>
+						<h:outputText id="itemSalle" value="#{_item.salle}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="emplacementArchiveBeanEmplacementArchiveExamplaireMaterielArchiveList" value="Examplaire Materiel Archive List:"/>
+			<h:dataTable id="emplacementArchiveBeanEmplacementArchiveExamplaireMaterielArchiveList" styleClass="data-table" value="#{emplacementArchiveBean.emplacementArchive.examplaireMaterielArchiveList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Materiel"/>
+					</f:facet>
+					<h:link outcome="/examplaireMaterielArchive/view">
+						<f:param name="id" value="#{_item.idExemplaireMateriel}"/>
+						<h:outputText id="forgeviewdisplayitemIdMateriel" value="#{forgeview:display(_item.idMateriel)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="emplacementArchiveBeanEmplacementArchiveEmplacementTnArchiveList" value="Emplacement Tn Archive List:"/>
+			<h:dataTable id="emplacementArchiveBeanEmplacementArchiveEmplacementTnArchiveList" styleClass="data-table" value="#{emplacementArchiveBean.emplacementArchive.emplacementTnArchiveList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Libelle Caisse"/>
+					</f:facet>
+					<h:link outcome="/emplacementTnArchive/view">
+						<f:param name="id" value="#{_item.idEmpltn}"/>
+						<h:outputText id="itemLibelleCaisse" value="#{_item.libelleCaisse}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Libelle Tirroir"/>
+					</f:facet>
+					<h:link outcome="/emplacementTnArchive/view">
+						<f:param name="id" value="#{_item.idEmpltn}"/>
+						<h:outputText id="itemLibelleTirroir" value="#{_item.libelleTirroir}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

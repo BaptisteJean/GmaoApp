@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="page" value='#{destockageArchiveBean.page}'/>
+		<f:event type="preRenderView" listener='#{destockageArchiveBean.paginate}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="Search Destockage Archive entities"/>
+
+	<ui:define name="header">
+		Destockage Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		Search Destockage Archive entities
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:form id="search">
+			<f:validateBean disabled="true">
+				<h:panelGroup styleClass="search">
+
+					<h:panelGrid columnClasses="label,component,required" columns="3">
+						<h:outputLabel for="destockageArchiveBeanExampleDateRetrait" value="Date Retrait:"/>
+						<h:panelGroup>
+							<h:inputText id="destockageArchiveBeanExampleDateRetrait" value="#{destockageArchiveBean.example.dateRetrait}"/>
+							<h:message for="destockageArchiveBeanExampleDateRetrait" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="destockageArchiveBeanExampleQuantiteRetire" value="Quantite Retire:"/>
+						<h:panelGroup>
+							<h:inputText id="destockageArchiveBeanExampleQuantiteRetire" value="#{destockageArchiveBean.example.quantiteRetire}"/>
+							<h:message for="destockageArchiveBeanExampleQuantiteRetire" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="destockageArchiveBeanExampleIdDestination" value="Id Destination:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{destinationArchiveBean.converter}" id="destockageArchiveBeanExampleIdDestination" value="#{destockageArchiveBean.example.idDestination}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{destinationArchiveBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="destockageArchiveBeanExampleIdDestination" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="destockageArchiveBeanExampleIdExemplaire" value="Id Exemplaire:"/>
+						<h:panelGroup>
+							<h:selectOneMenu converter="#{examplaireMaterielArchiveBean.converter}" id="destockageArchiveBeanExampleIdExemplaire" value="#{destockageArchiveBean.example.idExemplaire}">
+								<f:selectItem/>
+								<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{examplaireMaterielArchiveBean.all}" var="_item"/>
+							</h:selectOneMenu>
+							<h:message for="destockageArchiveBeanExampleIdExemplaire" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+					</h:panelGrid>
+					<h:panelGroup styleClass="buttons">
+						<h:commandLink value="Search" action='#{destockageArchiveBean.search}' styleClass="btn btn-primary"/>
+						<h:commandLink value="Create New" action='#{destockageArchiveBean.create}' styleClass="btn btn-primary"/>
+					</h:panelGroup>
+				</h:panelGroup>
+			</f:validateBean>
+			
+			<h:dataTable id="destockageArchiveBeanPageItems" styleClass="data-table" value="#{destockageArchiveBean.pageItems}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Destination"/>
+					</f:facet>
+					<h:link outcome="/destockageArchive/view">
+						<f:param name="id" value="#{_item.idDestockage}"/>
+						<h:outputText id="forgeviewdisplayitemIdDestination" value="#{forgeview:display(_item.idDestination)}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Exemplaire"/>
+					</f:facet>
+					<h:link outcome="/destockageArchive/view">
+						<f:param name="id" value="#{_item.idDestockage}"/>
+						<h:outputText id="forgeviewdisplayitemIdExemplaire" value="#{forgeview:display(_item.idExemplaire)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<ui:include src="/resources/scaffold/paginator.xhtml">
+				<ui:param name="paginatorBean" value='#{destockageArchiveBean}'/>
+			</ui:include>
+		</h:form>
+			
+	</ui:define>
+
+</ui:composition>

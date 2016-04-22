@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 		@NamedQuery(name = "Materiel.findAll", query = "SELECT m FROM Materiel m"),
 		@NamedQuery(name = "Materiel.findByIdMateriel", query = "SELECT m FROM Materiel m WHERE m.idMateriel = :idMateriel"),
 		@NamedQuery(name = "Materiel.findByDesignation", query = "SELECT m FROM Materiel m WHERE m.designation = :designation"),
-		@NamedQuery(name = "Materiel.findByTypeMateriel", query = "SELECT m FROM Materiel m WHERE m.typeMateriel = :typeMateriel"),
-		@NamedQuery(name = "Materiel.findByModelMateriel", query = "SELECT m FROM Materiel m WHERE m.modelMateriel = :modelMateriel")})
+		@NamedQuery(name = "Materiel.findByModelMateriel", query = "SELECT m FROM Materiel m WHERE m.modelMateriel = :modelMateriel"),
+		@NamedQuery(name = "Materiel.findByTypeMateriel", query = "SELECT m FROM Materiel m WHERE m.typeMateriel = :typeMateriel")})
 public class Materiel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -43,10 +43,10 @@ public class Materiel implements Serializable {
 	private Long idMateriel;
 	@Column(name = "designation")
 	private String designation;
-	@Column(name = "type_materiel")
-	private String typeMateriel;
 	@Column(name = "model_materiel")
 	private String modelMateriel;
+	@Column(name = "type_materiel")
+	private String typeMateriel;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idMateriel")
 	private List<ExamplaireMateriel> examplaireMaterielList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idMateriel")
@@ -75,20 +75,20 @@ public class Materiel implements Serializable {
 		this.designation = designation;
 	}
 
-	public String getTypeMateriel() {
-		return typeMateriel;
-	}
-
-	public void setTypeMateriel(String typeMateriel) {
-		this.typeMateriel = typeMateriel;
-	}
-
 	public String getModelMateriel() {
 		return modelMateriel;
 	}
 
 	public void setModelMateriel(String modelMateriel) {
 		this.modelMateriel = modelMateriel;
+	}
+
+	public String getTypeMateriel() {
+		return typeMateriel;
+	}
+
+	public void setTypeMateriel(String typeMateriel) {
+		this.typeMateriel = typeMateriel;
 	}
 
 	@XmlTransient

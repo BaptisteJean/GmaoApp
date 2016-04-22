@@ -36,14 +36,14 @@ public class Emplacement implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
-	@Column(name = "id_Empl")
+	@Column(name = "id_empl")
 	private Long idEmpl;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmplacement")
 	private List<ExamplaireMateriel> examplaireMaterielList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmplacement")
 	private List<EmplacementClient> emplacementClientList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idEmplacement")
-	private List<EmplacementTN> emplacementTNList;
+	private List<EmplacementTn> emplacementTnList;
 
 	public Emplacement() {
 	}
@@ -81,12 +81,12 @@ public class Emplacement implements Serializable {
 	}
 
 	@XmlTransient
-	public List<EmplacementTN> getEmplacementTNList() {
-		return emplacementTNList;
+	public List<EmplacementTn> getEmplacementTnList() {
+		return emplacementTnList;
 	}
 
-	public void setEmplacementTNList(List<EmplacementTN> emplacementTNList) {
-		this.emplacementTNList = emplacementTNList;
+	public void setEmplacementTnList(List<EmplacementTn> emplacementTnList) {
+		this.emplacementTnList = emplacementTnList;
 	}
 
 	@Override

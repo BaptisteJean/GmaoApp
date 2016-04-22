@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author wabo
  */
 @Entity
-@Table(name = "planification_Preventive")
+@Table(name = "planification_preventive")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "PlanificationPreventive.findAll", query = "SELECT p FROM PlanificationPreventive p"),

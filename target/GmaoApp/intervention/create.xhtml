@@ -49,12 +49,6 @@
 					<h:message for="interventionBeanInterventionDescriptionIntervention" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="interventionBeanInterventionTempsMis" value="Temps Mis:"/>
-				<h:panelGroup>
-					<h:inputText id="interventionBeanInterventionTempsMis" value="#{interventionBean.intervention.tempsMis}"/>
-					<h:message for="interventionBeanInterventionTempsMis" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
 				<h:outputLabel for="interventionBeanInterventionStatutRapport" value="Statut Rapport:"/>
 				<h:panelGroup>
 					<h:selectOneMenu id="interventionBeanInterventionStatutRapport" value="#{interventionBean.intervention.statutRapport}">
@@ -65,6 +59,28 @@
 					<h:message for="interventionBeanInterventionStatutRapport" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
+				<h:outputLabel for="interventionBeanInterventionTempsMis" value="Temps Mis:"/>
+				<h:panelGroup>
+					<h:inputText id="interventionBeanInterventionTempsMis" value="#{interventionBean.intervention.tempsMis}"/>
+					<h:message for="interventionBeanInterventionTempsMis" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="interventionBeanInterventionIdDirecteurTech" value="Id Directeur Tech:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{directeurTechniqueBean.converter}" id="interventionBeanInterventionIdDirecteurTech" required="true" value="#{interventionBean.intervention.idDirecteurTech}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{directeurTechniqueBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="interventionBeanInterventionIdDirecteurTech" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
+				<h:outputLabel for="interventionBeanInterventionIdExemplaireMat" value="Id Exemplaire Mat:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{examplaireMaterielBean.converter}" id="interventionBeanInterventionIdExemplaireMat" required="true" value="#{interventionBean.intervention.idExemplaireMat}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{examplaireMaterielBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="interventionBeanInterventionIdExemplaireMat" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
 				<h:outputLabel for="interventionBeanInterventionRapportList" value="Rapport List:"/>
 				<h:panelGroup>
 					<ui:param name="_collection" value="#{interventionBean.intervention.rapportList}"/>
@@ -95,22 +111,6 @@
 					</h:dataTable>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="interventionBeanInterventionIdDirecteurTech" value="Id Directeur Tech:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{directeurTechniqueBean.converter}" id="interventionBeanInterventionIdDirecteurTech" required="true" value="#{interventionBean.intervention.idDirecteurTech}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{directeurTechniqueBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="interventionBeanInterventionIdDirecteurTech" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText value="*"/>
-				<h:outputLabel for="interventionBeanInterventionIdExemplaireMat" value="Id Exemplaire Mat:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{examplaireMaterielBean.converter}" id="interventionBeanInterventionIdExemplaireMat" required="true" value="#{interventionBean.intervention.idExemplaireMat}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{examplaireMaterielBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="interventionBeanInterventionIdExemplaireMat" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText value="*"/>
 			</h:panelGrid>
 
 			<div class="buttons">

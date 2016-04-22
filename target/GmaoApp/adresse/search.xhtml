@@ -29,22 +29,16 @@
 				<h:panelGroup styleClass="search">
 
 					<h:panelGrid columnClasses="label,component,required" columns="3">
-						<h:outputLabel for="adresseBeanExampleCodeAdresse" value="Code Adresse:"/>
-						<h:panelGroup>
-							<h:inputText id="adresseBeanExampleCodeAdresse" value="#{adresseBean.example.codeAdresse}"/>
-							<h:message for="adresseBeanExampleCodeAdresse" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
 						<h:outputLabel for="adresseBeanExampleBoitePostale" value="Boite Postale:"/>
 						<h:panelGroup>
 							<h:inputText id="adresseBeanExampleBoitePostale" value="#{adresseBean.example.boitePostale}"/>
 							<h:message for="adresseBeanExampleBoitePostale" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
-						<h:outputLabel for="adresseBeanExampleNumeroPhone" value="Numero Phone:"/>
+						<h:outputLabel for="adresseBeanExampleCodeAdresse" value="Code Adresse:"/>
 						<h:panelGroup>
-							<h:inputText id="adresseBeanExampleNumeroPhone" value="#{adresseBean.example.numeroPhone}"/>
-							<h:message for="adresseBeanExampleNumeroPhone" styleClass="error"/>
+							<h:inputText id="adresseBeanExampleCodeAdresse" value="#{adresseBean.example.codeAdresse}"/>
+							<h:message for="adresseBeanExampleCodeAdresse" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 						<h:outputLabel for="adresseBeanExampleEmail" value="Email:"/>
@@ -53,10 +47,16 @@
 							<h:message for="adresseBeanExampleEmail" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
-						<h:outputLabel for="adresseBeanExampleRegion" value="Region:"/>
+						<h:outputLabel for="adresseBeanExampleLieuDit" value="Lieu Dit:"/>
 						<h:panelGroup>
-							<h:inputText id="adresseBeanExampleRegion" value="#{adresseBean.example.region}"/>
-							<h:message for="adresseBeanExampleRegion" styleClass="error"/>
+							<h:inputText id="adresseBeanExampleLieuDit" value="#{adresseBean.example.lieuDit}"/>
+							<h:message for="adresseBeanExampleLieuDit" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="adresseBeanExampleNumeroPhone" value="Numero Phone:"/>
+						<h:panelGroup>
+							<h:inputText id="adresseBeanExampleNumeroPhone" value="#{adresseBean.example.numeroPhone}"/>
+							<h:message for="adresseBeanExampleNumeroPhone" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 					</h:panelGrid>
@@ -70,15 +70,6 @@
 			<h:dataTable id="adresseBeanPageItems" styleClass="data-table" value="#{adresseBean.pageItems}" var="_item">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Code Adresse"/>
-					</f:facet>
-					<h:link outcome="/adresse/view">
-						<f:param name="id" value="#{_item.idAdresse}"/>
-						<h:outputText id="itemCodeAdresse" value="#{_item.codeAdresse}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
 						<h:outputText value="Boite Postale"/>
 					</f:facet>
 					<h:link outcome="/adresse/view">
@@ -88,11 +79,11 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Numero Phone"/>
+						<h:outputText value="Code Adresse"/>
 					</f:facet>
 					<h:link outcome="/adresse/view">
 						<f:param name="id" value="#{_item.idAdresse}"/>
-						<h:outputText id="itemNumeroPhone" value="#{_item.numeroPhone}"/>
+						<h:outputText id="itemCodeAdresse" value="#{_item.codeAdresse}"/>
 					</h:link>
 				</h:column>
 				<h:column>
@@ -106,11 +97,20 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Region"/>
+						<h:outputText value="Lieu Dit"/>
 					</f:facet>
 					<h:link outcome="/adresse/view">
 						<f:param name="id" value="#{_item.idAdresse}"/>
-						<h:outputText id="itemRegion" value="#{_item.region}"/>
+						<h:outputText id="itemLieuDit" value="#{_item.lieuDit}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Numero Phone"/>
+					</f:facet>
+					<h:link outcome="/adresse/view">
+						<f:param name="id" value="#{_item.idAdresse}"/>
+						<h:outputText id="itemNumeroPhone" value="#{_item.numeroPhone}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

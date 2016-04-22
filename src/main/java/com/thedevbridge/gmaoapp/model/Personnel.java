@@ -32,7 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
 		@NamedQuery(name = "Personnel.findAll", query = "SELECT p FROM Personnel p"),
 		@NamedQuery(name = "Personnel.findByIdPersonnel", query = "SELECT p FROM Personnel p WHERE p.idPersonnel = :idPersonnel"),
 		@NamedQuery(name = "Personnel.findByNomPersonnel", query = "SELECT p FROM Personnel p WHERE p.nomPersonnel = :nomPersonnel"),
-		@NamedQuery(name = "Personnel.findByPrenomPersonnel", query = "SELECT p FROM Personnel p WHERE p.prenomPersonnel = :prenomPersonnel")})
+		@NamedQuery(name = "Personnel.findByPrenomPersonnel", query = "SELECT p FROM Personnel p WHERE p.prenomPersonnel = :prenomPersonnel"),
+		@NamedQuery(name = "Personnel.findByLogin", query = "SELECT p FROM Personnel p WHERE p.login = :login"),
+		@NamedQuery(name = "Personnel.findByPassword", query = "SELECT p FROM Personnel p WHERE p.password = :password")})
 public class Personnel implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -44,6 +46,10 @@ public class Personnel implements Serializable {
 	private String nomPersonnel;
 	@Column(name = "prenom_personnel")
 	private String prenomPersonnel;
+	@Column(name = "login")
+	private String login;
+	@Column(name = "password")
+	private String password;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonnel")
 	private List<DirecteurTechnique> directeurTechniqueList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idPersonnel")
@@ -78,6 +84,22 @@ public class Personnel implements Serializable {
 
 	public void setPrenomPersonnel(String prenomPersonnel) {
 		this.prenomPersonnel = prenomPersonnel;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@XmlTransient

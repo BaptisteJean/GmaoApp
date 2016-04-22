@@ -37,10 +37,10 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="equipeBeanEquipeLibelleEquipe" value="Libelle Equipe:"/>
+				<h:outputLabel for="equipeBeanEquipeChefEquipe" value="Chef Equipe:"/>
 				<h:panelGroup>
-					<h:inputText id="equipeBeanEquipeLibelleEquipe" value="#{equipeBean.equipe.libelleEquipe}"/>
-					<h:message for="equipeBeanEquipeLibelleEquipe" styleClass="error"/>
+					<h:inputText id="equipeBeanEquipeChefEquipe" value="#{equipeBean.equipe.chefEquipe}"/>
+					<h:message for="equipeBeanEquipeChefEquipe" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="equipeBeanEquipeDescriptionActiviteEquipe" value="Description Activite Equipe:"/>
@@ -49,10 +49,10 @@
 					<h:message for="equipeBeanEquipeDescriptionActiviteEquipe" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="equipeBeanEquipeChefEquipe" value="Chef Equipe:"/>
+				<h:outputLabel for="equipeBeanEquipeLibelleEquipe" value="Libelle Equipe:"/>
 				<h:panelGroup>
-					<h:inputText id="equipeBeanEquipeChefEquipe" value="#{equipeBean.equipe.chefEquipe}"/>
-					<h:message for="equipeBeanEquipeChefEquipe" styleClass="error"/>
+					<h:inputText id="equipeBeanEquipeLibelleEquipe" value="#{equipeBean.equipe.libelleEquipe}"/>
+					<h:message for="equipeBeanEquipeLibelleEquipe" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="equipeBeanEquipeRapportList" value="Rapport List:"/>

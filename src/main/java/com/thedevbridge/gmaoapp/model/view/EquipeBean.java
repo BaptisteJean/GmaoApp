@@ -210,11 +210,11 @@ public class EquipeBean implements Serializable {
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		String libelleEquipe = this.example.getLibelleEquipe();
-		if (libelleEquipe != null && !"".equals(libelleEquipe)) {
+		String chefEquipe = this.example.getChefEquipe();
+		if (chefEquipe != null && !"".equals(chefEquipe)) {
 			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("libelleEquipe")),
-					'%' + libelleEquipe.toLowerCase() + '%'));
+					builder.lower(root.<String> get("chefEquipe")),
+					'%' + chefEquipe.toLowerCase() + '%'));
 		}
 		String descriptionActiviteEquipe = this.example
 				.getDescriptionActiviteEquipe();
@@ -224,11 +224,11 @@ public class EquipeBean implements Serializable {
 					.<String> get("descriptionActiviteEquipe")),
 					'%' + descriptionActiviteEquipe.toLowerCase() + '%'));
 		}
-		String chefEquipe = this.example.getChefEquipe();
-		if (chefEquipe != null && !"".equals(chefEquipe)) {
+		String libelleEquipe = this.example.getLibelleEquipe();
+		if (libelleEquipe != null && !"".equals(libelleEquipe)) {
 			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("chefEquipe")),
-					'%' + chefEquipe.toLowerCase() + '%'));
+					builder.lower(root.<String> get("libelleEquipe")),
+					'%' + libelleEquipe.toLowerCase() + '%'));
 		}
 		Departement idDepartemant = this.example.getIdDepartemant();
 		if (idDepartemant != null) {

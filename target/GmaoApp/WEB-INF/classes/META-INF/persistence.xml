@@ -4,39 +4,65 @@
     <description>Forge Persistence Unit</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>java:/GmaoAppDS</jta-data-source>
-    <class>com.thedevbridge.gmaoapp.model.Intervention</class>
-    <class>com.thedevbridge.gmaoapp.model.Destination</class>
-    <class>com.thedevbridge.gmaoapp.model.ExamplaireMateriel</class>
-    <class>com.thedevbridge.gmaoapp.model.Provient</class>
-    <class>com.thedevbridge.gmaoapp.model.SiteIntervention</class>
-    <class>com.thedevbridge.gmaoapp.model.Provenance</class>
-    <class>com.thedevbridge.gmaoapp.model.Destockage</class>
-    <class>com.thedevbridge.gmaoapp.model.Adresse</class>
-    <class>com.thedevbridge.gmaoapp.model.Client</class>
-    <class>com.thedevbridge.gmaoapp.model.Materiel</class>
-    <class>com.thedevbridge.gmaoapp.model.EmplacementClient</class>
-    <class>com.thedevbridge.gmaoapp.model.Equipe</class>
-    <class>com.thedevbridge.gmaoapp.model.Technicien</class>
-    <class>com.thedevbridge.gmaoapp.model.EmplacementTN</class>
-    <class>com.thedevbridge.gmaoapp.model.Archivage</class>
-    <class>com.thedevbridge.gmaoapp.model.DirecteurTechnique</class>
-    <class>com.thedevbridge.gmaoapp.model.Planification</class>
-    <class>com.thedevbridge.gmaoapp.model.Rapport</class>
-    <class>com.thedevbridge.gmaoapp.model.Fournisseur</class>
-    <class>com.thedevbridge.gmaoapp.model.PlanificationPreventive</class>
-    <class>com.thedevbridge.gmaoapp.model.ArchivageProvoque</class>
-    <class>com.thedevbridge.gmaoapp.model.Personnel</class>
-    <class>com.thedevbridge.gmaoapp.model.ArchivageAutomatique</class>
     <class>com.thedevbridge.gmaoapp.model.Departement</class>
-    <class>com.thedevbridge.gmaoapp.model.Emplacement</class>
+    <class>com.thedevbridge.gmaoapp.model.Provenance</class>
+    <class>com.thedevbridge.gmaoapp.model.Personnel</class>
+    <class>com.thedevbridge.gmaoapp.model.EmplacementClient</class>
+    <class>com.thedevbridge.gmaoapp.model.EmplacementTnArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.MaterielArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.DirecteurTechniqueArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.Materiel</class>
+    <class>com.thedevbridge.gmaoapp.model.FournisseurArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.Client</class>
+    <class>com.thedevbridge.gmaoapp.model.Technicien</class>
+    <class>com.thedevbridge.gmaoapp.model.Provient</class>
+    <class>com.thedevbridge.gmaoapp.model.Planification</class>
+    <class>com.thedevbridge.gmaoapp.model.ArchivageArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.Rapport</class>
     <class>com.thedevbridge.gmaoapp.model.PlanificationCurative</class>
+    <class>com.thedevbridge.gmaoapp.model.Destination</class>
+    <class>com.thedevbridge.gmaoapp.model.Intervention</class>
+    <class>com.thedevbridge.gmaoapp.model.EmplacementClientArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.ClientArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.SiteInterventionArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.ArchivageProvoque</class>
+    <class>com.thedevbridge.gmaoapp.model.DirecteurTechnique</class>
+    <class>com.thedevbridge.gmaoapp.model.ProvenanceArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.RapportArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.DepartementArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.EmplacementTn</class>
+    <class>com.thedevbridge.gmaoapp.model.Adresse</class>
+    <class>com.thedevbridge.gmaoapp.model.EmplacementArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.DestockageArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.PlanificationPreventiveArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.PlanificationArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.Equipe</class>
+    <class>com.thedevbridge.gmaoapp.model.AdresseArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.EquipeArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.ProvientArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.PersonnelArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.ArchivageAutomatiqueArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.TechnicienArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.PlanificationPreventive</class>
+    <class>com.thedevbridge.gmaoapp.model.Emplacement</class>
+    <class>com.thedevbridge.gmaoapp.model.SiteIntervention</class>
+    <class>com.thedevbridge.gmaoapp.model.DestinationArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.Fournisseur</class>
+    <class>com.thedevbridge.gmaoapp.model.Archivage</class>
+    <class>com.thedevbridge.gmaoapp.model.ExamplaireMaterielArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.ExamplaireMateriel</class>
+    <class>com.thedevbridge.gmaoapp.model.ArchivageAutomatique</class>
+    <class>com.thedevbridge.gmaoapp.model.PlanificationCurativeArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.InterventionArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.ArchivageProvoqueArchive</class>
+    <class>com.thedevbridge.gmaoapp.model.Destockage</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.transaction.flush_before_completion" value="true"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
   </persistence-unit>
 </persistence>

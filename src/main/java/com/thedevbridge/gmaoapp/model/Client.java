@@ -34,10 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
 		@NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c"),
 		@NamedQuery(name = "Client.findByIdClient", query = "SELECT c FROM Client c WHERE c.idClient = :idClient"),
 		@NamedQuery(name = "Client.findByCodeClient", query = "SELECT c FROM Client c WHERE c.codeClient = :codeClient"),
+		@NamedQuery(name = "Client.findByNatureActivite", query = "SELECT c FROM Client c WHERE c.natureActivite = :natureActivite"),
 		@NamedQuery(name = "Client.findByNomClient", query = "SELECT c FROM Client c WHERE c.nomClient = :nomClient"),
 		@NamedQuery(name = "Client.findByPrenomClient", query = "SELECT c FROM Client c WHERE c.prenomClient = :prenomClient"),
-		@NamedQuery(name = "Client.findByTypePersonne", query = "SELECT c FROM Client c WHERE c.typePersonne = :typePersonne"),
-		@NamedQuery(name = "Client.findByNatureActivite", query = "SELECT c FROM Client c WHERE c.natureActivite = :natureActivite")})
+		@NamedQuery(name = "Client.findByTypePersonne", query = "SELECT c FROM Client c WHERE c.typePersonne = :typePersonne")})
 public class Client implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -47,25 +47,25 @@ public class Client implements Serializable {
 	private Long idClient;
 	@Column(name = "code_client")
 	private String codeClient;
+	@Column(name = "nature_activite")
+	private String natureActivite;
 	@Column(name = "nom_client")
 	private String nomClient;
 	@Column(name = "prenom_client")
 	private String prenomClient;
 	@Column(name = "type_personne")
 	private String typePersonne;
-	@Column(name = "nature_activite")
-	private String natureActivite;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
+	private List<Archivage> archivageList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
 	private List<Destination> destinationList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
-	private List<SiteIntervention> siteInterventionList;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
 	private List<Provenance> provenanceList;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
+	private List<SiteIntervention> siteInterventionList;
 	@JoinColumn(name = "id_adresse", referencedColumnName = "id_adresse")
 	@ManyToOne(optional = false)
 	private Adresse idAdresse;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idClient")
-	private List<Archivage> archivageList;
 
 	public Client() {
 	}
@@ -88,6 +88,14 @@ public class Client implements Serializable {
 
 	public void setCodeClient(String codeClient) {
 		this.codeClient = codeClient;
+	}
+
+	public String getNatureActivite() {
+		return natureActivite;
+	}
+
+	public void setNatureActivite(String natureActivite) {
+		this.natureActivite = natureActivite;
 	}
 
 	public String getNomClient() {
@@ -114,12 +122,13 @@ public class Client implements Serializable {
 		this.typePersonne = typePersonne;
 	}
 
-	public String getNatureActivite() {
-		return natureActivite;
+	@XmlTransient
+	public List<Archivage> getArchivageList() {
+		return archivageList;
 	}
 
-	public void setNatureActivite(String natureActivite) {
-		this.natureActivite = natureActivite;
+	public void setArchivageList(List<Archivage> archivageList) {
+		this.archivageList = archivageList;
 	}
 
 	@XmlTransient
@@ -132,6 +141,15 @@ public class Client implements Serializable {
 	}
 
 	@XmlTransient
+	public List<Provenance> getProvenanceList() {
+		return provenanceList;
+	}
+
+	public void setProvenanceList(List<Provenance> provenanceList) {
+		this.provenanceList = provenanceList;
+	}
+
+	@XmlTransient
 	public List<SiteIntervention> getSiteInterventionList() {
 		return siteInterventionList;
 	}
@@ -141,30 +159,12 @@ public class Client implements Serializable {
 		this.siteInterventionList = siteInterventionList;
 	}
 
-	@XmlTransient
-	public List<Provenance> getProvenanceList() {
-		return provenanceList;
-	}
-
-	public void setProvenanceList(List<Provenance> provenanceList) {
-		this.provenanceList = provenanceList;
-	}
-
 	public Adresse getIdAdresse() {
 		return idAdresse;
 	}
 
 	public void setIdAdresse(Adresse idAdresse) {
 		this.idAdresse = idAdresse;
-	}
-
-	@XmlTransient
-	public List<Archivage> getArchivageList() {
-		return archivageList;
-	}
-
-	public void setArchivageList(List<Archivage> archivageList) {
-		this.archivageList = archivageList;
 	}
 
 	@Override

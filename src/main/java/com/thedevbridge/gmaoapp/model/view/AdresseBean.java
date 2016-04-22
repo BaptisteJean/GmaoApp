@@ -206,23 +206,17 @@ public class AdresseBean implements Serializable {
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		String codeAdresse = this.example.getCodeAdresse();
-		if (codeAdresse != null && !"".equals(codeAdresse)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("codeAdresse")),
-					'%' + codeAdresse.toLowerCase() + '%'));
-		}
 		String boitePostale = this.example.getBoitePostale();
 		if (boitePostale != null && !"".equals(boitePostale)) {
 			predicatesList.add(builder.like(
 					builder.lower(root.<String> get("boitePostale")),
 					'%' + boitePostale.toLowerCase() + '%'));
 		}
-		String numeroPhone = this.example.getNumeroPhone();
-		if (numeroPhone != null && !"".equals(numeroPhone)) {
+		String codeAdresse = this.example.getCodeAdresse();
+		if (codeAdresse != null && !"".equals(codeAdresse)) {
 			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("numeroPhone")),
-					'%' + numeroPhone.toLowerCase() + '%'));
+					builder.lower(root.<String> get("codeAdresse")),
+					'%' + codeAdresse.toLowerCase() + '%'));
 		}
 		String email = this.example.getEmail();
 		if (email != null && !"".equals(email)) {
@@ -230,11 +224,17 @@ public class AdresseBean implements Serializable {
 					builder.lower(root.<String> get("email")),
 					'%' + email.toLowerCase() + '%'));
 		}
-		String region = this.example.getRegion();
-		if (region != null && !"".equals(region)) {
+		String lieuDit = this.example.getLieuDit();
+		if (lieuDit != null && !"".equals(lieuDit)) {
 			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("region")),
-					'%' + region.toLowerCase() + '%'));
+					builder.lower(root.<String> get("lieuDit")),
+					'%' + lieuDit.toLowerCase() + '%'));
+		}
+		String numeroPhone = this.example.getNumeroPhone();
+		if (numeroPhone != null && !"".equals(numeroPhone)) {
+			predicatesList.add(builder.like(
+					builder.lower(root.<String> get("numeroPhone")),
+					'%' + numeroPhone.toLowerCase() + '%'));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);

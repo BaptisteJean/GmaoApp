@@ -31,13 +31,13 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
 		@NamedQuery(name = "Adresse.findAll", query = "SELECT a FROM Adresse a"),
 		@NamedQuery(name = "Adresse.findByIdAdresse", query = "SELECT a FROM Adresse a WHERE a.idAdresse = :idAdresse"),
-		@NamedQuery(name = "Adresse.findByCodeAdresse", query = "SELECT a FROM Adresse a WHERE a.codeAdresse = :codeAdresse"),
 		@NamedQuery(name = "Adresse.findByBoitePostale", query = "SELECT a FROM Adresse a WHERE a.boitePostale = :boitePostale"),
-		@NamedQuery(name = "Adresse.findByNumeroPhone", query = "SELECT a FROM Adresse a WHERE a.numeroPhone = :numeroPhone"),
+		@NamedQuery(name = "Adresse.findByCodeAdresse", query = "SELECT a FROM Adresse a WHERE a.codeAdresse = :codeAdresse"),
 		@NamedQuery(name = "Adresse.findByEmail", query = "SELECT a FROM Adresse a WHERE a.email = :email"),
+		@NamedQuery(name = "Adresse.findByLieuDit", query = "SELECT a FROM Adresse a WHERE a.lieuDit = :lieuDit"),
+		@NamedQuery(name = "Adresse.findByNumeroPhone", query = "SELECT a FROM Adresse a WHERE a.numeroPhone = :numeroPhone"),
 		@NamedQuery(name = "Adresse.findByRegion", query = "SELECT a FROM Adresse a WHERE a.region = :region"),
-		@NamedQuery(name = "Adresse.findByVille", query = "SELECT a FROM Adresse a WHERE a.ville = :ville"),
-		@NamedQuery(name = "Adresse.findByLieuDit", query = "SELECT a FROM Adresse a WHERE a.lieuDit = :lieuDit")})
+		@NamedQuery(name = "Adresse.findByVille", query = "SELECT a FROM Adresse a WHERE a.ville = :ville")})
 public class Adresse implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -45,20 +45,20 @@ public class Adresse implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id_adresse")
 	private Long idAdresse;
-	@Column(name = "code_adresse")
-	private String codeAdresse;
 	@Column(name = "boite_postale")
 	private String boitePostale;
-	@Column(name = "numero_phone")
-	private String numeroPhone;
+	@Column(name = "code_adresse")
+	private String codeAdresse;
 	@Column(name = "email")
 	private String email;
+	@Column(name = "lieu_dit")
+	private String lieuDit;
+	@Column(name = "numero_phone")
+	private String numeroPhone;
 	@Column(name = "region")
 	private String region;
 	@Column(name = "ville")
 	private String ville;
-	@Column(name = "lieu_dit")
-	private String lieuDit;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idAdresse")
 	private List<Fournisseur> fournisseurList;
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "idAdresse")
@@ -79,14 +79,6 @@ public class Adresse implements Serializable {
 		this.idAdresse = idAdresse;
 	}
 
-	public String getCodeAdresse() {
-		return codeAdresse;
-	}
-
-	public void setCodeAdresse(String codeAdresse) {
-		this.codeAdresse = codeAdresse;
-	}
-
 	public String getBoitePostale() {
 		return boitePostale;
 	}
@@ -95,12 +87,12 @@ public class Adresse implements Serializable {
 		this.boitePostale = boitePostale;
 	}
 
-	public String getNumeroPhone() {
-		return numeroPhone;
+	public String getCodeAdresse() {
+		return codeAdresse;
 	}
 
-	public void setNumeroPhone(String numeroPhone) {
-		this.numeroPhone = numeroPhone;
+	public void setCodeAdresse(String codeAdresse) {
+		this.codeAdresse = codeAdresse;
 	}
 
 	public String getEmail() {
@@ -109,6 +101,22 @@ public class Adresse implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getLieuDit() {
+		return lieuDit;
+	}
+
+	public void setLieuDit(String lieuDit) {
+		this.lieuDit = lieuDit;
+	}
+
+	public String getNumeroPhone() {
+		return numeroPhone;
+	}
+
+	public void setNumeroPhone(String numeroPhone) {
+		this.numeroPhone = numeroPhone;
 	}
 
 	public String getRegion() {
@@ -125,14 +133,6 @@ public class Adresse implements Serializable {
 
 	public void setVille(String ville) {
 		this.ville = ville;
-	}
-
-	public String getLieuDit() {
-		return lieuDit;
-	}
-
-	public void setLieuDit(String lieuDit) {
-		this.lieuDit = lieuDit;
 	}
 
 	@XmlTransient

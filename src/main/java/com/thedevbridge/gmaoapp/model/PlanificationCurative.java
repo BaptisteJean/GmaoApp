@@ -22,16 +22,16 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author wabo
  */
 @Entity
-@Table(name = "planification_Curative")
+@Table(name = "planification_curative")
 @XmlRootElement
 @NamedQueries({
 		@NamedQuery(name = "PlanificationCurative.findAll", query = "SELECT p FROM PlanificationCurative p"),
 		@NamedQuery(name = "PlanificationCurative.findByIdPlanifCurative", query = "SELECT p FROM PlanificationCurative p WHERE p.idPlanifCurative = :idPlanifCurative"),
+		@NamedQuery(name = "PlanificationCurative.findByDescriptionProbleme", query = "SELECT p FROM PlanificationCurative p WHERE p.descriptionProbleme = :descriptionProbleme"),
+		@NamedQuery(name = "PlanificationCurative.findByEtatMaterielApresIntervention", query = "SELECT p FROM PlanificationCurative p WHERE p.etatMaterielApresIntervention = :etatMaterielApresIntervention"),
 		@NamedQuery(name = "PlanificationCurative.findByHeureDebut", query = "SELECT p FROM PlanificationCurative p WHERE p.heureDebut = :heureDebut"),
 		@NamedQuery(name = "PlanificationCurative.findByHeureFin", query = "SELECT p FROM PlanificationCurative p WHERE p.heureFin = :heureFin"),
-		@NamedQuery(name = "PlanificationCurative.findByDescriptionProbleme", query = "SELECT p FROM PlanificationCurative p WHERE p.descriptionProbleme = :descriptionProbleme"),
-		@NamedQuery(name = "PlanificationCurative.findBySolutionApportee", query = "SELECT p FROM PlanificationCurative p WHERE p.solutionApportee = :solutionApportee"),
-		@NamedQuery(name = "PlanificationCurative.findByEtatMaterielApresIntervention", query = "SELECT p FROM PlanificationCurative p WHERE p.etatMaterielApresIntervention = :etatMaterielApresIntervention")})
+		@NamedQuery(name = "PlanificationCurative.findBySolutionApportee", query = "SELECT p FROM PlanificationCurative p WHERE p.solutionApportee = :solutionApportee")})
 public class PlanificationCurative implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -39,16 +39,16 @@ public class PlanificationCurative implements Serializable {
 	@Basic(optional = false)
 	@Column(name = "id_planif_curative")
 	private Long idPlanifCurative;
+	@Column(name = "description_probleme")
+	private String descriptionProbleme;
+	@Column(name = "etat_materiel_apres_intervention")
+	private String etatMaterielApresIntervention;
 	@Column(name = "heure_debut")
 	private String heureDebut;
 	@Column(name = "heure_fin")
 	private String heureFin;
-	@Column(name = "description_probleme")
-	private String descriptionProbleme;
 	@Column(name = "solution_apportee")
 	private String solutionApportee;
-	@Column(name = "etat_materiel_apres_intervention")
-	private String etatMaterielApresIntervention;
 
 	public PlanificationCurative() {
 	}
@@ -63,6 +63,23 @@ public class PlanificationCurative implements Serializable {
 
 	public void setIdPlanifCurative(Long idPlanifCurative) {
 		this.idPlanifCurative = idPlanifCurative;
+	}
+
+	public String getDescriptionProbleme() {
+		return descriptionProbleme;
+	}
+
+	public void setDescriptionProbleme(String descriptionProbleme) {
+		this.descriptionProbleme = descriptionProbleme;
+	}
+
+	public String getEtatMaterielApresIntervention() {
+		return etatMaterielApresIntervention;
+	}
+
+	public void setEtatMaterielApresIntervention(
+			String etatMaterielApresIntervention) {
+		this.etatMaterielApresIntervention = etatMaterielApresIntervention;
 	}
 
 	public String getHeureDebut() {
@@ -81,29 +98,12 @@ public class PlanificationCurative implements Serializable {
 		this.heureFin = heureFin;
 	}
 
-	public String getDescriptionProbleme() {
-		return descriptionProbleme;
-	}
-
-	public void setDescriptionProbleme(String descriptionProbleme) {
-		this.descriptionProbleme = descriptionProbleme;
-	}
-
 	public String getSolutionApportee() {
 		return solutionApportee;
 	}
 
 	public void setSolutionApportee(String solutionApportee) {
 		this.solutionApportee = solutionApportee;
-	}
-
-	public String getEtatMaterielApresIntervention() {
-		return etatMaterielApresIntervention;
-	}
-
-	public void setEtatMaterielApresIntervention(
-			String etatMaterielApresIntervention) {
-		this.etatMaterielApresIntervention = etatMaterielApresIntervention;
 	}
 
 	@Override

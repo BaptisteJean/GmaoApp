@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:forgeview="http://jboss.org/forge/view"
+	template="/resources/scaffold/pageTemplate.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value='#{personnelArchiveBean.id}'/>
+		<f:event type="preRenderView" listener='#{personnelArchiveBean.retrieve}'/>
+	</f:metadata>
+
+	<ui:param name="pageTitle" value="View Personnel Archive"/>
+
+	<ui:define name="header">
+		Personnel Archive
+	</ui:define>
+
+	<ui:define name="subheader">
+		View existing Personnel Archive
+	</ui:define>
+
+	<ui:define name="footer"/>
+
+	<ui:define name="main">
+		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="personnelArchiveBeanPersonnelArchiveNomPersonnel" value="Nom Personnel:"/>
+			<h:outputText id="personnelArchiveBeanPersonnelArchiveNomPersonnel" value="#{personnelArchiveBean.personnelArchive.nomPersonnel}"/>
+			<h:outputText/>
+			<h:outputLabel for="personnelArchiveBeanPersonnelArchivePrenomPersonnel" value="Prenom Personnel:"/>
+			<h:outputText id="personnelArchiveBeanPersonnelArchivePrenomPersonnel" value="#{personnelArchiveBean.personnelArchive.prenomPersonnel}"/>
+			<h:outputText/>
+			<h:outputLabel for="personnelArchiveBeanPersonnelArchiveLogin" value="Login:"/>
+			<h:outputText id="personnelArchiveBeanPersonnelArchiveLogin" value="#{personnelArchiveBean.personnelArchive.login}"/>
+			<h:outputText/>
+			<h:outputLabel for="personnelArchiveBeanPersonnelArchivePassword" value="Password:"/>
+			<h:outputText id="personnelArchiveBeanPersonnelArchivePassword" value="#{personnelArchiveBean.personnelArchive.password}"/>
+			<h:outputText/>
+			<h:outputLabel for="personnelArchiveBeanPersonnelArchiveDirecteurTechniqueArchiveList" value="Directeur Technique Archive List:"/>
+			<h:dataTable id="personnelArchiveBeanPersonnelArchiveDirecteurTechniqueArchiveList" styleClass="data-table" value="#{personnelArchiveBean.personnelArchive.directeurTechniqueArchiveList}" var="_item"/>
+			<h:outputText/>
+			<h:outputLabel for="personnelArchiveBeanPersonnelArchiveTechnicienArchiveList" value="Technicien Archive List:"/>
+			<h:dataTable id="personnelArchiveBeanPersonnelArchiveTechnicienArchiveList" styleClass="data-table" value="#{personnelArchiveBean.personnelArchive.technicienArchiveList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Departement"/>
+					</f:facet>
+					<h:link outcome="/technicienArchive/view">
+						<f:param name="id" value="#{_item.idTechnicien}"/>
+						<h:outputText id="forgeviewdisplayitemIdDepartement" value="#{forgeview:display(_item.idDepartement)}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Equipe"/>
+					</f:facet>
+					<h:link outcome="/technicienArchive/view">
+						<f:param name="id" value="#{_item.idTechnicien}"/>
+						<h:outputText id="forgeviewdisplayitemIdEquipe" value="#{forgeview:display(_item.idEquipe)}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+		</h:panelGrid>
+
+		<div class="buttons">
+			<h:link value="View All" outcome="search" styleClass="btn btn-primary"/> 
+			<h:link value="Edit" outcome="create" includeViewParams="true" styleClass="btn btn-primary"/>
+			<h:link value="Create New" outcome="create" styleClass="btn btn-primary"/>
+		</div>
+	</ui:define>
+
+</ui:composition>

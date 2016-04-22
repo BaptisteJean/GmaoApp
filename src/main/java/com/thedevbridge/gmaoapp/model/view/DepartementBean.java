@@ -207,11 +207,11 @@ public class DepartementBean implements Serializable {
 		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 		List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		String libelleDepartemnt = this.example.getLibelleDepartemnt();
-		if (libelleDepartemnt != null && !"".equals(libelleDepartemnt)) {
+		String chefDepartement = this.example.getChefDepartement();
+		if (chefDepartement != null && !"".equals(chefDepartement)) {
 			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("libelleDepartemnt")),
-					'%' + libelleDepartemnt.toLowerCase() + '%'));
+					builder.lower(root.<String> get("chefDepartement")),
+					'%' + chefDepartement.toLowerCase() + '%'));
 		}
 		String descriptionActiviteDepartement = this.example
 				.getDescriptionActiviteDepartement();
@@ -221,11 +221,11 @@ public class DepartementBean implements Serializable {
 					.<String> get("descriptionActiviteDepartement")),
 					'%' + descriptionActiviteDepartement.toLowerCase() + '%'));
 		}
-		String chefDepartement = this.example.getChefDepartement();
-		if (chefDepartement != null && !"".equals(chefDepartement)) {
+		String libelleDepartemnt = this.example.getLibelleDepartemnt();
+		if (libelleDepartemnt != null && !"".equals(libelleDepartemnt)) {
 			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("chefDepartement")),
-					'%' + chefDepartement.toLowerCase() + '%'));
+					builder.lower(root.<String> get("libelleDepartemnt")),
+					'%' + libelleDepartemnt.toLowerCase() + '%'));
 		}
 
 		return predicatesList.toArray(new Predicate[predicatesList.size()]);
