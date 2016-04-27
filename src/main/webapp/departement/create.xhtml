@@ -1,34 +1,136 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:forgeview="http://jboss.org/forge/view"
-	template="/resources/scaffold/pageTemplate.xhtml">
+        xmlns:p="http://primefaces.org/ui"
+	>
 
 	<f:metadata>
-		<f:viewParam name="id" value='#{departementBean.id}'/>
-		<f:event type="preRenderView" listener='#{departementBean.retrieve}'/>
+		<f:viewParam name="id" value='#{rapportBean.id}'/>
+		<f:event type="preRenderView" listener='#{rapportBean.retrieve}'/>
 	</f:metadata>
-
-	<ui:param name="pageTitle" value="Create Departement"/>
+<ui:composition template="/resources/scaffold/pageTemplate.xhtml">
+	<ui:param name="pageTitle" value="Create Rapport"/>
 
 	<ui:define name="header">
-		Departement
+		Rapport
 	</ui:define>
-
-	<ui:define name="subheader">
-		<c:choose>
-			<c:when test='#{!empty departementBean.id}'>
-				Edit existing Departement
-			</c:when>
-			<c:otherwise>
-				Create a new Departement
-			</c:otherwise>
-		</c:choose>
-	</ui:define>
+        <ui:define name="left">
+                <div id="wrapper">
+                    <div class="menuleft">
+                  <ul class="nav navbar-default navbar-side" >
+           
+              
+        
+                    <li >
+                        <a  href="../dashboard/dashboard.xhtml" >Tableau de bord</a>
+                    </li>
+                    <li>
+                        <a href="../materiel/create.xhtml" >Materiel </a>
+                         
+                    </li>
+                     <li>
+                        <a href="../client/create.xhtml"  >Clients </a>
+                        
+                    </li>
+                    <li>
+                        <a href="../intervention/create.xhtml">Interventions </a>
+                        
+                    </li>
+                     <li>
+                        <a href="../technicien/create.xhtml">Techniciens </a>
+                         
+                    </li>
+      
+                     <li>
+                        <a href="../planification/create.xhtml">Planification</a>
+                    </li>
+                    <li>
+                        <a href="../equipe/create.xhtml">Equipe</a>
+                    </li>
+                    <li>
+                        <a href="../archivage/create.xhtml">Archivage </a>
+                    </li>
+                     <li>
+                        <a href="../rapport/create.xhtml">Rapport</a>
+                    </li>
+                    <li>
+                        <a href="../departement/create.xhtml" class="active-menu">Departement </a>
+                    </li>
+                        </ul>
+               
+        
+                </div>
+                </div>
+            </ui:define>
+<ui:define name="content">
+               <h:form id="form">
+    <p:growl id="msgs" />
+    <h3 style="margin-top:0;color:#18547c;font-weight: bold;">Departement</h3>
+    <p:panel header="Nouveau departement" style="margin-bottom:20px">
+        <h:panelGrid columns="3" columnClasses="cols1, cols2"  cellpadding="5" style="text-align: left;width: 70%;margin-left:170px" styleClass="connex-tech">
+            
+            
+            <h:outputLabel value="Libelle : *" for="libelle"></h:outputLabel>
+             <p:spacer width="50px"/>
+              <p:inputText  value="#{equipeBean.equipe.libelleEquipe}" required="true"/>
+            <h:outputLabel value="Description des activites : *" for="description"></h:outputLabel>
+             <p:spacer width="50px"/>
+            <p:inputTextarea id="description" value="" required="true"/>
+            
+            
+            
+            
+        <p:outputLabel value="Chef de departement" />
+         <p:spacer width="50px"/>
+ <p:inputText  value="#{equipeBean.equipe.libelleEquipe}" required="true"/>
+            
+        </h:panelGrid>
+        <p style="text-align: center; margin-top:20px;">
+             <p:commandButton   action="confirmSignIn"  value="Annuler"  style="background-color: #3e5288; color: white;"/>
+             <p:spacer width="50px"/>
+              <p:commandButton    action="confirmSignIn"  value="Ajouter" style="background-color: #3e5288; color: white;"/>
+             </p>
+    </p:panel>
+               </h:form>
+                <h:form >
+ 
+    <p:outputPanel id="books">
+        <p:dataTable value="#{collectorView.books}" var="book" id="booksTable">
+ <f:facet name="header">
+            Liste des departements
+        </f:facet>
+            <p:column headerText="Libelle">
+                <h:outputText value="#{book.title}" />
+            </p:column>
+ 
+            <p:column headerText="Prenom(s)">
+                <f:facet name="header">
+                    <h:outputText value="Description des activites" />
+                </f:facet>
+                <h:outputText value="#{book.author}" />
+            </p:column>
+            
+            
+            <p:column headerText="Chef de departement ">
+                <h:outputText value="#{book.title}" />
+            </p:column>
+ 
+            <p:column headerText="Action">
+                <p:commandLink value="Remove" update=":form:books" process=":form:books">
+                    <p:collector value="" removeFrom="" unique="true"/>
+                </p:commandLink>
+            </p:column>
+ 
+        </p:dataTable><br/><br/>
+        
+       
+    </p:outputPanel>
+</h:form>
+            </ui:define>
+	
 
 	<ui:define name="footer"/>
 
@@ -37,140 +139,39 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="departementBeanDepartementLibelleDepartemnt" value="Libelle Departemnt:"/>
+				<h:outputLabel for="rapportBeanRapportDescriptionRapport" value="Description Rapport:"/>
 				<h:panelGroup>
-					<h:inputText id="departementBeanDepartementLibelleDepartemnt" value="#{departementBean.departement.libelleDepartemnt}"/>
-					<h:message for="departementBeanDepartementLibelleDepartemnt" styleClass="error"/>
+					<h:inputText id="rapportBeanRapportDescriptionRapport" value="#{rapportBean.rapport.descriptionRapport}"/>
+					<h:message for="rapportBeanRapportDescriptionRapport" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="departementBeanDepartementDescriptionActiviteDepartement" value="Description Activite Departement:"/>
+				<h:outputLabel for="rapportBeanRapportDateRedaction" value="Date Redaction:"/>
 				<h:panelGroup>
-					<h:inputText id="departementBeanDepartementDescriptionActiviteDepartement" value="#{departementBean.departement.descriptionActiviteDepartement}"/>
-					<h:message for="departementBeanDepartementDescriptionActiviteDepartement" styleClass="error"/>
+					<h:inputText id="rapportBeanRapportDateRedaction" value="#{rapportBean.rapport.dateRedaction}"/>
+					<h:message for="rapportBeanRapportDateRedaction" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="departementBeanDepartementChefDepartement" value="Chef Departement:"/>
+				<h:outputLabel for="rapportBeanRapportIdEquipe" value="Id Equipe:"/>
 				<h:panelGroup>
-					<h:inputText id="departementBeanDepartementChefDepartement" value="#{departementBean.departement.chefDepartement}"/>
-					<h:message for="departementBeanDepartementChefDepartement" styleClass="error"/>
+					<h:selectOneMenu converter="#{equipeBean.converter}" id="rapportBeanRapportIdEquipe" required="true" value="#{rapportBean.rapport.idEquipe}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{equipeBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="rapportBeanRapportIdEquipe" styleClass="error"/>
 				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="departementBeanDepartementTechnicienList" value="Technicien List:"/>
+				<h:outputText value="*"/>
+				<h:outputLabel for="rapportBeanRapportIdIntervention" value="Id Intervention:"/>
 				<h:panelGroup>
-					<ui:param name="_collection" value="#{departementBean.departement.technicienList}"/>
-					<h:dataTable id="departementBeanDepartementTechnicienList" styleClass="data-table" value="#{_collection}" var="_item">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Id Equipe"/>
-							</f:facet>
-							<h:link outcome="/technicien/view">
-								<f:param name="id" value="#{_item.idTechnicien}"/>
-								<h:outputText id="forgeviewdisplayitemIdEquipe" value="#{forgeview:display(_item.idEquipe)}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:selectOneMenu converter="#{equipeBean.converter}" id="technicienBeanAddIdEquipe" value="#{technicienBean.add.idEquipe}">
-									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{equipeBean.all}" var="_item"/>
-								</h:selectOneMenu>
-								<h:message for="technicienBeanAddIdEquipe" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Id Personnel"/>
-							</f:facet>
-							<h:link outcome="/technicien/view">
-								<f:param name="id" value="#{_item.idTechnicien}"/>
-								<h:outputText id="forgeviewdisplayitemIdPersonnel" value="#{forgeview:display(_item.idPersonnel)}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:selectOneMenu converter="#{personnelBean.converter}" id="technicienBeanAddIdPersonnel" value="#{technicienBean.add.idPersonnel}">
-									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{personnelBean.all}" var="_item"/>
-								</h:selectOneMenu>
-								<h:message for="technicienBeanAddIdPersonnel" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column footerClass="remove-column" headerClass="remove-column">
-							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
-							<f:facet name="footer">
-								<h:commandLink action="#{_collection.add(technicienBean.added)}" id="departementBeanDepartementTechnicienListAdd" styleClass="add-button">
-									<f:setPropertyActionListener target="#{technicienBean.add.idDepartement}" value="#{departementBean.departement}"/>
-								</h:commandLink>
-							</f:facet>
-						</h:column>
-					</h:dataTable>
+					<h:selectOneMenu converter="#{interventionBean.converter}" id="rapportBeanRapportIdIntervention" required="true" value="#{rapportBean.rapport.idIntervention}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{interventionBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="rapportBeanRapportIdIntervention" styleClass="error"/>
 				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="departementBeanDepartementEquipeList" value="Equipe List:"/>
-				<h:panelGroup>
-					<ui:param name="_collection" value="#{departementBean.departement.equipeList}"/>
-					<h:dataTable id="departementBeanDepartementEquipeList" styleClass="data-table" value="#{_collection}" var="_item">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Libelle Equipe"/>
-							</f:facet>
-							<h:link outcome="/equipe/view">
-								<f:param name="id" value="#{_item.idEquipe}"/>
-								<h:outputText id="itemLibelleEquipe" value="#{_item.libelleEquipe}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:inputText id="equipeBeanAddLibelleEquipe" value="#{equipeBean.add.libelleEquipe}"/>
-								<h:message for="equipeBeanAddLibelleEquipe" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Description Activite Equipe"/>
-							</f:facet>
-							<h:link outcome="/equipe/view">
-								<f:param name="id" value="#{_item.idEquipe}"/>
-								<h:outputText id="itemDescriptionActiviteEquipe" value="#{_item.descriptionActiviteEquipe}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:inputText id="equipeBeanAddDescriptionActiviteEquipe" value="#{equipeBean.add.descriptionActiviteEquipe}"/>
-								<h:message for="equipeBeanAddDescriptionActiviteEquipe" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Chef Equipe"/>
-							</f:facet>
-							<h:link outcome="/equipe/view">
-								<f:param name="id" value="#{_item.idEquipe}"/>
-								<h:outputText id="itemChefEquipe" value="#{_item.chefEquipe}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:inputText id="equipeBeanAddChefEquipe" value="#{equipeBean.add.chefEquipe}"/>
-								<h:message for="equipeBeanAddChefEquipe" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column footerClass="remove-column" headerClass="remove-column">
-							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
-							<f:facet name="footer">
-								<h:commandLink action="#{_collection.add(equipeBean.added)}" id="departementBeanDepartementEquipeListAdd" styleClass="add-button">
-									<f:setPropertyActionListener target="#{equipeBean.add.idDepartemant}" value="#{departementBean.departement}"/>
-								</h:commandLink>
-							</f:facet>
-						</h:column>
-					</h:dataTable>
-				</h:panelGroup>
-				<h:outputText/>
+				<h:outputText value="*"/>
 			</h:panelGrid>
 
-			<div class="buttons">
-				<h:commandLink value="Save" action='#{departementBean.update}' styleClass="btn btn-primary"/>
-				<c:choose>
-					<c:when test='#{!empty departementBean.id}'>
-						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
-							<f:param name="id" value='#{departementBean.id}'/>
-						</h:link>
-						<h:commandLink value="Delete" action='#{departementBean.delete}' styleClass="btn btn-primary"/>
-					</c:when>
-					<c:otherwise>
-						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
-					</c:otherwise>
-				</c:choose>
-			</div>
+			
 		</h:form>
 	</ui:define>
 
 </ui:composition>
+</html>

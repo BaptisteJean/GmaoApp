@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+   
+
+	<ui:param name="pageTitle" value="Create Client"/>
+
+	 <ui:composition template="/resources/scaffold/pageTemplate.xhtml">
+            
+            <ui:define name="left">
+                <div id="wrapper">
+                    <div id="menu">
+                  <ul class="nav navbar-default navbar-side" >
+           
+              
+        
+                    <li >
+                        <a  href="../dashboard/dashboard.xhtml" class="active-menu">Tableau de bord</a>
+                    </li>
+                    <li>
+                        <a href="../materiel/create.xhtml" >Materiel </a>
+                         
+                    </li>
+                     <li>
+                        <a href="../client/create.xhtml"  >Clients </a>
+                        
+                    </li>
+                    <li>
+                        <a href="../intervention/create.xhtml">Interventions </a>
+                        
+                    </li>
+                     <li>
+                        <a href="../technicien/create.xhtml">Techniciens </a>
+                         
+                    </li>
+      
+                     <li>
+                        <a href="../planification/create.xhtml">Planification</a>
+                    </li>
+                    <li>
+                        <a href="../equipe/create.xhtml">Equipe</a>
+                    </li>
+                    <li>
+                        <a href="../archivage/create.xhtml">Archivage </a>
+                    </li>
+                    <li>
+                        <a href="../rapport/create.xhtml">Rapport</a>
+                    </li>
+                    <li>
+                        <a href="../departement/create.xhtml">Departement </a>
+                    </li>
+                        </ul>
+               
+        
+                </div>
+                </div>
+            </ui:define>
+
+            <ui:define name="content">
+              
+                 
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+    <h3 style="margin-top:0;color:#18547c;font-weight: bold">Tableau de bord</h3>
+   
+        
+     <p:panel header="Nouveau client" style="margin-bottom:20px">
+         <h:form id="loginForm">
+			<p:fieldset styleClass="fieldset" legend="informations personnelles">
+			 <h:panelGrid  styleClass="connex-tech" id="logPanelGrid" style="margin: 0 auto; margin-top: 25px; text-align: left" cellspacing="8" columns="3">
+				<h:panelGroup style="text-align:left">
+					<h:outputLabel value="Nom(s) : *" for="txt_title"/>
+				</h:panelGroup>
+                                <p:spacer width="20px"/>
+				<h:panelGroup>
+                                    <p:inputText  value="#{clientBean.client.nomClient}" required="true"/>
+				</h:panelGroup>
+					
+				<h:panelGroup style="text-align:left">
+					 <h:outputLabel value="Prenom*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+                                <p:spacer width="50px"/>
+                                <h:panelGroup>
+                                    <p:inputText  value="#{clientBean.client.prenomClient}" required="true"/>
+				</h:panelGroup>
+                                
+					
+					
+				</h:panelGrid>
+			</p:fieldset>
+             <br/>
+                        <p:fieldset styleClass="fieldset" legend="Adresse">
+                            <h:panelGrid  styleClass="connex-tech" id="lPanelGrid" style="margin-top: 25px;text-align: left" cellspacing="8" columns="3">
+                                <h:panelGroup style="text-align:left">
+					<h:outputLabel value="B.P.: *" for="txt_title"/>
+				</h:panelGroup>
+                                <p:spacer width="20px"/>
+				<h:panelGroup>
+                                    <p:inputText  value="#{adresseBean.adresse.boitePostale}" required="true"/>
+				</h:panelGroup>
+					
+				<h:panelGroup style="text-align:left">
+					 <h:outputLabel value="Telephone*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+				<p:spacer width="50px"/>	
+				<h:panelGroup>
+                                    <p:inputText  value="#{adresseBean.adresse.numeroPhone}" required="true"/>
+				</h:panelGroup>
+                                        
+                                <p:spacer width="50px"/>	
+                                <h:panelGroup>
+                                </h:panelGroup>
+                                <h:panelGroup>
+                                    <p:inputText  value="#{adresseBean.adresse.numeroPhone}" required="true"/>
+                                </h:panelGroup>
+                                 
+                                  <h:panelGroup>
+                                       <h:outputLabel value="Email*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+                                   <p:spacer width="50px"/>
+                                   <h:panelGroup>
+                                       <p:inputText  value="#{adresseBean.adresse.email}" required="true"/>
+                                </h:panelGroup>
+                                   
+                                   <h:panelGroup>
+                                       <h:outputLabel value="Region*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+                                   <p:spacer width="50px"/>
+                                   <h:panelGroup>
+                                       <p:selectOneMenu id="region" value="#{adresseBean.adresse.region}" style="width:203px">
+                                        <f:selectItem itemLabel="Choisir une region" itemValue="" />
+                                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                                     </p:selectOneMenu>  
+                                </h:panelGroup>
+                                   
+                                   
+                                   <h:panelGroup>
+                                       <h:outputLabel value="Ville*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+                                   <p:spacer width="50px"/>
+                                   <h:panelGroup>
+                                       <p:selectOneMenu id="ville" value="#{adresseBean.adresse.ville}" style="width:203px">
+                                        <f:selectItem itemLabel="Choisir une ville" itemValue="" />
+                                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                                    </p:selectOneMenu>  
+                                </h:panelGroup>
+					
+					
+					
+				</h:panelGrid>
+			</p:fieldset>
+             <p style="text-align: center; margin-top:20px;">
+             <p:commandButton   action="confirmSignIn"  value="Annuler" style="background-color: #3e5288; color: white;"/>
+             <p:spacer width="50px"/>
+              <p:commandButton    action="confirmSignIn"  value="Ajouter" style="background-color: #3e5288; color: white;"/>
+             </p>
+		</h:form>
+     </p:panel>    
+                <br/>
+                
+                <h:form>
+    <p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                 paginator="true" rows="10" style="margin-bottom:20px">
+ 
+        <f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage name="/img/excel.png" width="24"/>
+                <p:dataExporter type="xls" target="tbl" fileName="cars" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/img/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/img/csv.png" width="24"/>
+                <p:dataExporter type="csv" target="tbl" fileName="cars" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/img/xml.png" width="24"/>
+                <p:dataExporter type="xml" target="tbl" fileName="cars" />
+            </h:commandLink>
+        </f:facet>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Nom" />
+            </f:facet>
+            <h:outputText value="#{car.id}" />
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Statut"/>
+            </f:facet>
+            <h:outputText value="#{car.year}" />
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Localisation" />
+            </f:facet>
+            <h:outputText value="#{car.brand}" />
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="site d'intervention" />
+            </f:facet>
+            <h:outputText value="#{car.color}" />
+        </p:column>
+        
+        
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Materiel" />
+            </f:facet>
+            <h:outputText value="#{car.color}" />
+        </p:column>
+        
+        
+    </p:dataTable>
+ 
+    <h4>Exporter les donnees du tableau</h4>
+    <h:commandLink>
+        <p:graphicImage name="/img/excel.png" />
+        <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/>
+    </h:commandLink>
+ 
+    <h:commandLink>
+        <p:graphicImage name="/img/pdf.png" />
+        <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" />
+    </h:commandLink>
+ 
+    <h:commandLink>
+        <p:graphicImage name="/img/csv.png" />
+        <p:dataExporter type="csv" target="tbl" fileName="cars" pageOnly="true" />
+    </h:commandLink>
+ 
+    <h:commandLink>
+        <p:graphicImage name="/img/xml.png" />
+        <p:dataExporter type="xml" target="tbl" fileName="cars" pageOnly="true" />
+    </h:commandLink>
+</h:form>
+            </ui:define>
+
+        </ui:composition>
+
+</html>

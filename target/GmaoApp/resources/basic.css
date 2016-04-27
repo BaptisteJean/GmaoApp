@@ -168,8 +168,10 @@ body {
 
 .navbar-side {
     border: none;
+    font-size: 14px;
     background-color: #fff;
     min-height: 200px;
+    
 }
 
 .navbar-cls-top {
