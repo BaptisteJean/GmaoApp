@@ -36,16 +36,16 @@
 							<h:message for="emplacementClientBeanExampleBloc" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
-						<h:outputLabel for="emplacementClientBeanExampleDateInstallation" value="Date Installation:"/>
-						<h:panelGroup>
-							<h:inputText id="emplacementClientBeanExampleDateInstallation" value="#{emplacementClientBean.example.dateInstallation}"/>
-							<h:message for="emplacementClientBeanExampleDateInstallation" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
 						<h:outputLabel for="emplacementClientBeanExampleSalle" value="Salle:"/>
 						<h:panelGroup>
 							<h:inputText id="emplacementClientBeanExampleSalle" value="#{emplacementClientBean.example.salle}"/>
 							<h:message for="emplacementClientBeanExampleSalle" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
+						<h:outputLabel for="emplacementClientBeanExampleDateInstallation" value="Date Installation:"/>
+						<h:panelGroup>
+							<h:inputText id="emplacementClientBeanExampleDateInstallation" value="#{emplacementClientBean.example.dateInstallation}"/>
+							<h:message for="emplacementClientBeanExampleDateInstallation" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 						<h:outputLabel for="emplacementClientBeanExampleIdEmplacement" value="Id Emplacement:"/>
@@ -71,7 +71,7 @@
 						<h:outputText value="Id Emplacement"/>
 					</f:facet>
 					<h:link outcome="/emplacementClient/view">
-						<f:param name="id" value="#{_item.idEmplclient}"/>
+						<f:param name="id" value="#{_item.idEmplClient}"/>
 						<h:outputText id="forgeviewdisplayitemIdEmplacement" value="#{forgeview:display(_item.idEmplacement)}"/>
 					</h:link>
 				</h:column>

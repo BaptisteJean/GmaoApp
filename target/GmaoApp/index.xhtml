@@ -1,30 +1,60 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	template="/resources/scaffold/pageTemplate.xhtml">
+        xmlns:p="http://primefaces.org/ui">
 
-	<ui:param name="pageTitle" value="Welcome to Forge" />
+<h:head>
+	<title>#{empty pageTitle ? 'Page Title' : pageTitle}</title>
+	<link rel="icon" href='#{resource["favicon.ico"]}' />
+	<h:outputStylesheet name="bootstrap.css" />
+         <h:outputStylesheet name="font-awesome.css"/>
+        <h:outputStylesheet name="basic.css"/>
+        <h:outputStylesheet name="custom.css"/>
+        <h:outputStylesheet name="default.css"/>
+        <h:outputStylesheet name="cssLayout.css"/>
+</h:head>
 
-	<ui:define name="header">
-		Welcome to Forge
-	</ui:define>
+<h:body>
 
-	<ui:define name="main">
-		<h2 class="success">
-			Your application is running.
-		</h2>
-		<p>
-			<a target="_blank"
-				href="http://forge.jboss.org/documentation">Documentation</a>
-			| <a target="_blank"
-				href="http://twitter.com/intent/tweet?text=I+just+built+and+deployed+a+webapp+using+%23Forge,+from+%23JBoss+-+Super+easy!+(+http://jboss.org/forge+)">Get
-				Excited!</a><br /> <a target="_blank" href="http://jboss.org/forge"><br />
-				Forge Project</a> | <a target="_blank"
-				href="https://community.jboss.org/en/forge">User
-				Forums</a> | <a target="_blank"
-				href="https://issues.jboss.org/browse/FORGE">Report an issue</a>
-		</p>
-	</ui:define>
+	 <div id="top">
+          
+        </div>
 
-</ui:composition>
+        <div id="content" class="center_content">
+           <p><h3 style="text-align: center;font-size: 22px">Bienvenu sur GMAO</h3></p>
+                    <p style="text-align: center;">Veuillez vous identifier...</p>
+                <p:layoutUnit position="center" id="interne">
+                    <p:growl id="growl"  sticky="true"  showDetail="true"/>        
+        <h:form>
+            <p:panel id="panel" styleClass="connexhead" >
+ 
+        <p:messages id="msgs" />
+ 
+        <h:panelGrid columns="3" style="border-radius: 5px;" styleClass="connex" cellpadding="5">
+            <p:outputLabel for="login" style="font-weight: bold;" value="Login" />
+            <p:inputText id="login" value="#{User.login}" required="true" label="Firstname"/>
+              
+                <p:message for="login" display="icon" />
+ 
+            <p:outputLabel for="lastname" style="font-weight: bold;" value="password" />
+            <p:password id="lastname" value="#{User.pass}" label="Lastname" required="true"/>
+                
+            <p:message for="lastname" id="msgLastname"  display="icon" />
+ 
+        </h:panelGrid>
+        <p align="center">
+            <p:commandButton value="Connexion" action="#{User.userLogin()}" update="panel" style="background-color: #3e5288; color: white;"/></p>
+    </p:panel>
+</h:form>
+    </p:layoutUnit>
+        </div>
+
+        <div id="bottomx">
+            <ui:insert name="bottom"></ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

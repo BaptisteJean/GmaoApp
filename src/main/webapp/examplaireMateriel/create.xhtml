@@ -37,10 +37,10 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielFabricantMarque" value="Fabricant Marque:"/>
+				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" value="Quantite Exemplaire:"/>
 				<h:panelGroup>
-					<h:inputText id="examplaireMaterielBeanExamplaireMaterielFabricantMarque" value="#{examplaireMaterielBean.examplaireMateriel.fabricantMarque}"/>
-					<h:message for="examplaireMaterielBeanExamplaireMaterielFabricantMarque" styleClass="error"/>
+					<h:inputText id="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" value="#{examplaireMaterielBean.examplaireMateriel.quantiteExemplaire}"/>
+					<h:message for="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielLibelleExemplaire" value="Libelle Exemplaire:"/>
@@ -55,16 +55,16 @@
 					<h:message for="examplaireMaterielBeanExamplaireMaterielNumeroSerie" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
+				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielFabricantMarque" value="Fabricant Marque:"/>
+				<h:panelGroup>
+					<h:inputText id="examplaireMaterielBeanExamplaireMaterielFabricantMarque" value="#{examplaireMaterielBean.examplaireMateriel.fabricantMarque}"/>
+					<h:message for="examplaireMaterielBeanExamplaireMaterielFabricantMarque" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
 				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielPuissance" value="Puissance:"/>
 				<h:panelGroup>
 					<h:inputText id="examplaireMaterielBeanExamplaireMaterielPuissance" value="#{examplaireMaterielBean.examplaireMateriel.puissance}"/>
 					<h:message for="examplaireMaterielBeanExamplaireMaterielPuissance" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" value="Quantite Exemplaire:"/>
-				<h:panelGroup>
-					<h:inputText id="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" value="#{examplaireMaterielBean.examplaireMateriel.quantiteExemplaire}"/>
-					<h:message for="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielDestockageList" value="Destockage List:"/>
@@ -113,6 +113,34 @@
 					<h:message for="examplaireMaterielBeanExamplaireMaterielIdMateriel" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText value="*"/>
+				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielPlanificationList" value="Planification List:"/>
+				<h:panelGroup>
+					<ui:param name="_collection" value="#{examplaireMaterielBean.examplaireMateriel.planificationList}"/>
+					<h:dataTable id="examplaireMaterielBeanExamplaireMaterielPlanificationList" styleClass="data-table" value="#{_collection}" var="_item">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Date Planification"/>
+							</f:facet>
+							<h:link outcome="/planification/view">
+								<f:param name="id" value="#{_item.idPlanification}"/>
+								<h:outputText id="itemDatePlanification" value="#{_item.datePlanification}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="planificationBeanAddDatePlanification" value="#{planificationBean.add.datePlanification}"/>
+								<h:message for="planificationBeanAddDatePlanification" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column footerClass="remove-column" headerClass="remove-column">
+							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
+							<f:facet name="footer">
+								<h:commandLink action="#{_collection.add(planificationBean.added)}" id="examplaireMaterielBeanExamplaireMaterielPlanificationListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{planificationBean.add.idExemplaireMat}" value="#{examplaireMaterielBean.examplaireMateriel}"/>
+								</h:commandLink>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+				<h:outputText/>
 				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielInterventionList" value="Intervention List:"/>
 				<h:panelGroup>
 					<ui:param name="_collection" value="#{examplaireMaterielBean.examplaireMateriel.interventionList}"/>
@@ -137,34 +165,6 @@
 							<f:facet name="footer">
 								<h:commandLink action="#{_collection.add(interventionBean.added)}" id="examplaireMaterielBeanExamplaireMaterielInterventionListAdd" styleClass="add-button">
 									<f:setPropertyActionListener target="#{interventionBean.add.idExemplaireMat}" value="#{examplaireMaterielBean.examplaireMateriel}"/>
-								</h:commandLink>
-							</f:facet>
-						</h:column>
-					</h:dataTable>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielPlanificationList" value="Planification List:"/>
-				<h:panelGroup>
-					<ui:param name="_collection" value="#{examplaireMaterielBean.examplaireMateriel.planificationList}"/>
-					<h:dataTable id="examplaireMaterielBeanExamplaireMaterielPlanificationList" styleClass="data-table" value="#{_collection}" var="_item">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Date Planification"/>
-							</f:facet>
-							<h:link outcome="/planification/view">
-								<f:param name="id" value="#{_item.idPlanification}"/>
-								<h:outputText id="itemDatePlanification" value="#{_item.datePlanification}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:inputText id="planificationBeanAddDatePlanification" value="#{planificationBean.add.datePlanification}"/>
-								<h:message for="planificationBeanAddDatePlanification" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column footerClass="remove-column" headerClass="remove-column">
-							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
-							<f:facet name="footer">
-								<h:commandLink action="#{_collection.add(planificationBean.added)}" id="examplaireMaterielBeanExamplaireMaterielPlanificationListAdd" styleClass="add-button">
-									<f:setPropertyActionListener target="#{planificationBean.add.idExemplaireMat}" value="#{examplaireMaterielBean.examplaireMateriel}"/>
 								</h:commandLink>
 							</f:facet>
 						</h:column>

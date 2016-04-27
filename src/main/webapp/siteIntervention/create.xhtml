@@ -37,16 +37,16 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="siteInterventionBeanSiteInterventionLibeleBureau" value="Libele Bureau:"/>
-				<h:panelGroup>
-					<h:inputText id="siteInterventionBeanSiteInterventionLibeleBureau" value="#{siteInterventionBean.siteIntervention.libeleBureau}"/>
-					<h:message for="siteInterventionBeanSiteInterventionLibeleBureau" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
 				<h:outputLabel for="siteInterventionBeanSiteInterventionNumeroBatiment" value="Numero Batiment:"/>
 				<h:panelGroup>
 					<h:inputText id="siteInterventionBeanSiteInterventionNumeroBatiment" value="#{siteInterventionBean.siteIntervention.numeroBatiment}"/>
 					<h:message for="siteInterventionBeanSiteInterventionNumeroBatiment" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="siteInterventionBeanSiteInterventionLibeleBureau" value="Libele Bureau:"/>
+				<h:panelGroup>
+					<h:inputText id="siteInterventionBeanSiteInterventionLibeleBureau" value="#{siteInterventionBean.siteIntervention.libeleBureau}"/>
+					<h:message for="siteInterventionBeanSiteInterventionLibeleBureau" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 				<h:outputLabel for="siteInterventionBeanSiteInterventionIdClient" value="Id Client:"/>

@@ -30,10 +30,10 @@
 				<h:panelGroup styleClass="search">
 
 					<h:panelGrid columnClasses="label,component,required" columns="3">
-						<h:outputLabel for="examplaireMaterielBeanExampleFabricantMarque" value="Fabricant Marque:"/>
+						<h:outputLabel for="examplaireMaterielBeanExampleQuantiteExemplaire" value="Quantite Exemplaire:"/>
 						<h:panelGroup>
-							<h:inputText id="examplaireMaterielBeanExampleFabricantMarque" value="#{examplaireMaterielBean.example.fabricantMarque}"/>
-							<h:message for="examplaireMaterielBeanExampleFabricantMarque" styleClass="error"/>
+							<h:inputText id="examplaireMaterielBeanExampleQuantiteExemplaire" value="#{examplaireMaterielBean.example.quantiteExemplaire}"/>
+							<h:message for="examplaireMaterielBeanExampleQuantiteExemplaire" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 						<h:outputLabel for="examplaireMaterielBeanExampleLibelleExemplaire" value="Libelle Exemplaire:"/>
@@ -48,16 +48,16 @@
 							<h:message for="examplaireMaterielBeanExampleNumeroSerie" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
+						<h:outputLabel for="examplaireMaterielBeanExampleFabricantMarque" value="Fabricant Marque:"/>
+						<h:panelGroup>
+							<h:inputText id="examplaireMaterielBeanExampleFabricantMarque" value="#{examplaireMaterielBean.example.fabricantMarque}"/>
+							<h:message for="examplaireMaterielBeanExampleFabricantMarque" styleClass="error"/>
+						</h:panelGroup>
+						<h:outputText/>
 						<h:outputLabel for="examplaireMaterielBeanExamplePuissance" value="Puissance:"/>
 						<h:panelGroup>
 							<h:inputText id="examplaireMaterielBeanExamplePuissance" value="#{examplaireMaterielBean.example.puissance}"/>
 							<h:message for="examplaireMaterielBeanExamplePuissance" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
-						<h:outputLabel for="examplaireMaterielBeanExampleQuantiteExemplaire" value="Quantite Exemplaire:"/>
-						<h:panelGroup>
-							<h:inputText id="examplaireMaterielBeanExampleQuantiteExemplaire" value="#{examplaireMaterielBean.example.quantiteExemplaire}"/>
-							<h:message for="examplaireMaterielBeanExampleQuantiteExemplaire" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
 					</h:panelGrid>

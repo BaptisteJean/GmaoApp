@@ -25,26 +25,26 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="adresseBeanAdresseBoitePostale" value="Boite Postale:"/>
-			<h:outputText id="adresseBeanAdresseBoitePostale" value="#{adresseBean.adresse.boitePostale}"/>
-			<h:outputText/>
 			<h:outputLabel for="adresseBeanAdresseCodeAdresse" value="Code Adresse:"/>
 			<h:outputText id="adresseBeanAdresseCodeAdresse" value="#{adresseBean.adresse.codeAdresse}"/>
 			<h:outputText/>
-			<h:outputLabel for="adresseBeanAdresseEmail" value="Email:"/>
-			<h:outputText id="adresseBeanAdresseEmail" value="#{adresseBean.adresse.email}"/>
-			<h:outputText/>
-			<h:outputLabel for="adresseBeanAdresseLieuDit" value="Lieu Dit:"/>
-			<h:outputText id="adresseBeanAdresseLieuDit" value="#{adresseBean.adresse.lieuDit}"/>
+			<h:outputLabel for="adresseBeanAdresseBoitePostale" value="Boite Postale:"/>
+			<h:outputText id="adresseBeanAdresseBoitePostale" value="#{adresseBean.adresse.boitePostale}"/>
 			<h:outputText/>
 			<h:outputLabel for="adresseBeanAdresseNumeroPhone" value="Numero Phone:"/>
 			<h:outputText id="adresseBeanAdresseNumeroPhone" value="#{adresseBean.adresse.numeroPhone}"/>
+			<h:outputText/>
+			<h:outputLabel for="adresseBeanAdresseEmail" value="Email:"/>
+			<h:outputText id="adresseBeanAdresseEmail" value="#{adresseBean.adresse.email}"/>
 			<h:outputText/>
 			<h:outputLabel for="adresseBeanAdresseRegion" value="Region:"/>
 			<h:outputText id="adresseBeanAdresseRegion" value="#{adresseBean.adresse.region}"/>
 			<h:outputText/>
 			<h:outputLabel for="adresseBeanAdresseVille" value="Ville:"/>
 			<h:outputText id="adresseBeanAdresseVille" value="#{adresseBean.adresse.ville}"/>
+			<h:outputText/>
+			<h:outputLabel for="adresseBeanAdresseLieuDit" value="Lieu Dit:"/>
+			<h:outputText id="adresseBeanAdresseLieuDit" value="#{adresseBean.adresse.lieuDit}"/>
 			<h:outputText/>
 			<h:outputLabel for="adresseBeanAdresseFournisseurList" value="Fournisseur List:"/>
 			<h:dataTable id="adresseBeanAdresseFournisseurList" styleClass="data-table" value="#{adresseBean.adresse.fournisseurList}" var="_item">
@@ -72,15 +72,6 @@
 				</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="Nature Activite"/>
-					</f:facet>
-					<h:link outcome="/client/view">
-						<f:param name="id" value="#{_item.idClient}"/>
-						<h:outputText id="itemNatureActivite" value="#{_item.natureActivite}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
 						<h:outputText value="Nom Client"/>
 					</f:facet>
 					<h:link outcome="/client/view">
@@ -104,6 +95,15 @@
 					<h:link outcome="/client/view">
 						<f:param name="id" value="#{_item.idClient}"/>
 						<h:outputText id="itemTypePersonne" value="#{_item.typePersonne}"/>
+					</h:link>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Nature Activite"/>
+					</f:facet>
+					<h:link outcome="/client/view">
+						<f:param name="id" value="#{_item.idClient}"/>
+						<h:outputText id="itemNatureActivite" value="#{_item.natureActivite}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

@@ -26,8 +26,8 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielFabricantMarque" value="Fabricant Marque:"/>
-			<h:outputText id="examplaireMaterielBeanExamplaireMaterielFabricantMarque" value="#{examplaireMaterielBean.examplaireMateriel.fabricantMarque}"/>
+			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" value="Quantite Exemplaire:"/>
+			<h:outputText id="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" value="#{examplaireMaterielBean.examplaireMateriel.quantiteExemplaire}"/>
 			<h:outputText/>
 			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielLibelleExemplaire" value="Libelle Exemplaire:"/>
 			<h:outputText id="examplaireMaterielBeanExamplaireMaterielLibelleExemplaire" value="#{examplaireMaterielBean.examplaireMateriel.libelleExemplaire}"/>
@@ -35,11 +35,11 @@
 			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielNumeroSerie" value="Numero Serie:"/>
 			<h:outputText id="examplaireMaterielBeanExamplaireMaterielNumeroSerie" value="#{examplaireMaterielBean.examplaireMateriel.numeroSerie}"/>
 			<h:outputText/>
+			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielFabricantMarque" value="Fabricant Marque:"/>
+			<h:outputText id="examplaireMaterielBeanExamplaireMaterielFabricantMarque" value="#{examplaireMaterielBean.examplaireMateriel.fabricantMarque}"/>
+			<h:outputText/>
 			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielPuissance" value="Puissance:"/>
 			<h:outputText id="examplaireMaterielBeanExamplaireMaterielPuissance" value="#{examplaireMaterielBean.examplaireMateriel.puissance}"/>
-			<h:outputText/>
-			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" value="Quantite Exemplaire:"/>
-			<h:outputText id="examplaireMaterielBeanExamplaireMaterielQuantiteExemplaire" value="#{examplaireMaterielBean.examplaireMateriel.quantiteExemplaire}"/>
 			<h:outputText/>
 			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielDestockageList" value="Destockage List:"/>
 			<h:dataTable id="examplaireMaterielBeanExamplaireMaterielDestockageList" styleClass="data-table" value="#{examplaireMaterielBean.examplaireMateriel.destockageList}" var="_item">
@@ -64,19 +64,6 @@
 				<f:param name="id" value="#{examplaireMaterielBean.examplaireMateriel.idMateriel.idMateriel}"/>
 			</h:link>
 			<h:outputText/>
-			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielInterventionList" value="Intervention List:"/>
-			<h:dataTable id="examplaireMaterielBeanExamplaireMaterielInterventionList" styleClass="data-table" value="#{examplaireMaterielBean.examplaireMateriel.interventionList}" var="_item">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Id Directeur Tech"/>
-					</f:facet>
-					<h:link outcome="/intervention/view">
-						<f:param name="id" value="#{_item.idIntervention}"/>
-						<h:outputText id="forgeviewdisplayitemIdDirecteurTech" value="#{forgeview:display(_item.idDirecteurTech)}"/>
-					</h:link>
-				</h:column>
-			</h:dataTable>
-			<h:outputText/>
 			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielPlanificationList" value="Planification List:"/>
 			<h:dataTable id="examplaireMaterielBeanExamplaireMaterielPlanificationList" styleClass="data-table" value="#{examplaireMaterielBean.examplaireMateriel.planificationList}" var="_item">
 				<h:column>
@@ -86,6 +73,19 @@
 					<h:link outcome="/planification/view">
 						<f:param name="id" value="#{_item.idPlanification}"/>
 						<h:outputText id="itemDatePlanification" value="#{_item.datePlanification}"/>
+					</h:link>
+				</h:column>
+			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="examplaireMaterielBeanExamplaireMaterielInterventionList" value="Intervention List:"/>
+			<h:dataTable id="examplaireMaterielBeanExamplaireMaterielInterventionList" styleClass="data-table" value="#{examplaireMaterielBean.examplaireMateriel.interventionList}" var="_item">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Id Directeur Tech"/>
+					</f:facet>
+					<h:link outcome="/intervention/view">
+						<f:param name="id" value="#{_item.idIntervention}"/>
+						<h:outputText id="forgeviewdisplayitemIdDirecteurTech" value="#{forgeview:display(_item.idDirecteurTech)}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>

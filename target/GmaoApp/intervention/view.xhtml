@@ -32,21 +32,11 @@
 			<h:outputLabel for="interventionBeanInterventionDescriptionIntervention" value="Description Intervention:"/>
 			<h:outputText id="interventionBeanInterventionDescriptionIntervention" value="#{interventionBean.intervention.descriptionIntervention}"/>
 			<h:outputText/>
-			<h:outputLabel for="interventionBeanInterventionStatutRapport" value="Statut Rapport:"/>
-			<h:outputText id="interventionBeanInterventionStatutRapport" value="#{interventionBean.intervention.statutRapport}"/>
-			<h:outputText/>
 			<h:outputLabel for="interventionBeanInterventionTempsMis" value="Temps Mis:"/>
 			<h:outputText id="interventionBeanInterventionTempsMis" value="#{interventionBean.intervention.tempsMis}"/>
 			<h:outputText/>
-			<h:outputLabel for="interventionBeanInterventionIdDirecteurTech" value="Id Directeur Tech:"/>
-			<h:link id="interventionBeanInterventionIdDirecteurTech" outcome="/directeurTechnique/view" rendered="#{!empty interventionBean.intervention.idDirecteurTech}" value="#{interventionBean.intervention.idDirecteurTech}">
-				<f:param name="id" value="#{interventionBean.intervention.idDirecteurTech.idDirecteurTech}"/>
-			</h:link>
-			<h:outputText/>
-			<h:outputLabel for="interventionBeanInterventionIdExemplaireMat" value="Id Exemplaire Mat:"/>
-			<h:link id="interventionBeanInterventionIdExemplaireMat" outcome="/examplaireMateriel/view" rendered="#{!empty interventionBean.intervention.idExemplaireMat}" value="#{interventionBean.intervention.idExemplaireMat}">
-				<f:param name="id" value="#{interventionBean.intervention.idExemplaireMat.idExemplaireMateriel}"/>
-			</h:link>
+			<h:outputLabel for="interventionBeanInterventionStatutRapport" value="Statut Rapport:"/>
+			<h:outputText id="interventionBeanInterventionStatutRapport" value="#{interventionBean.intervention.statutRapport}"/>
 			<h:outputText/>
 			<h:outputLabel for="interventionBeanInterventionRapportList" value="Rapport List:"/>
 			<h:dataTable id="interventionBeanInterventionRapportList" styleClass="data-table" value="#{interventionBean.intervention.rapportList}" var="_item">
@@ -60,6 +50,16 @@
 					</h:link>
 				</h:column>
 			</h:dataTable>
+			<h:outputText/>
+			<h:outputLabel for="interventionBeanInterventionIdDirecteurTech" value="Id Directeur Tech:"/>
+			<h:link id="interventionBeanInterventionIdDirecteurTech" outcome="/directeurTechnique/view" rendered="#{!empty interventionBean.intervention.idDirecteurTech}" value="#{interventionBean.intervention.idDirecteurTech}">
+				<f:param name="id" value="#{interventionBean.intervention.idDirecteurTech.idDirecteurTech}"/>
+			</h:link>
+			<h:outputText/>
+			<h:outputLabel for="interventionBeanInterventionIdExemplaireMat" value="Id Exemplaire Mat:"/>
+			<h:link id="interventionBeanInterventionIdExemplaireMat" outcome="/examplaireMateriel/view" rendered="#{!empty interventionBean.intervention.idExemplaireMat}" value="#{interventionBean.intervention.idExemplaireMat}">
+				<f:param name="id" value="#{interventionBean.intervention.idExemplaireMat.idExemplaireMateriel}"/>
+			</h:link>
 			<h:outputText/>
 		</h:panelGrid>
 

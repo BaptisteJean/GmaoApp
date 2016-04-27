@@ -1,89 +1,167 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:forgeview="http://jboss.org/forge/view"
-	template="/resources/scaffold/pageTemplate.xhtml">
+	xmlns:p="http://primefaces.org/ui">
 
 	<f:metadata>
 		<f:viewParam name="id" value='#{technicienBean.id}'/>
 		<f:event type="preRenderView" listener='#{technicienBean.retrieve}'/>
 	</f:metadata>
+    
+  
 
-	<ui:param name="pageTitle" value="Create Technicien"/>
+	<ui:composition template="/resources/scaffold/pageTemplate.xhtml">
+                <ui:define name="left">
+                <div id="wrapper">
+                    <div id="menu">
+                 <ul class="nav navbar-default navbar-side" >
+           
+              
+        
+                    <li >
+                        <a  href="./../pages/dashboard.xhtml" ><i class="fa fa-dashboard "></i>Tableau de bord</a>
+                    </li>
+                    <li>
+                        <a href="../materiel/create.xhtml" ><i class="fa fa-desktop "></i>Materiel </a>
+                         
+                    </li>
+                     <li>
+                        <a href="../client/create.xhtml"  ><i class="glyphicon glyphicon glyphicon-user "></i>Clients </a>
+                        
+                    </li>
+                    <li>
+                        <a href="../intervention/create.xhtml"><i class="fa fa-flash "></i>Interventions </a>
+                        
+                    </li>
+                     <li>
+                        <a href="../technicien/create.xhtml" class="active-menu"><i class="glyphicon glyphicons-user-vr "></i>Techniciens </a>
+                         
+                    </li>
+      
+                     <li>
+                        <a href="../planification/create.xhtml"><i class="fa fa-bug "></i>Planification</a>
+                    </li>
+                    <li>
+                        <a href="../equipe/create.xhtml"><i class="fa fa-sign-in "></i>Equipe</a>
+                    </li>
+                    <li>
+                        <a href="../archivage/create.xhtml"><i class="fa fa-sitemap "></i>Archivage </a>
+                         
 
-	<ui:define name="header">
-		Technicien
-	</ui:define>
-
-	<ui:define name="subheader">
-		<c:choose>
-			<c:when test='#{!empty technicienBean.id}'>
-				Edit existing Technicien
-			</c:when>
-			<c:otherwise>
-				Create a new Technicien
-			</c:otherwise>
-		</c:choose>
-	</ui:define>
-
-	<ui:define name="footer"/>
-
-	<ui:define name="main">
-		<h:form id="create">
-			<h:messages globalOnly="true" styleClass="error"/>
-
-			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="technicienBeanTechnicienFonctionTechicien" value="Fonction Techicien:"/>
-				<h:panelGroup>
-					<h:inputText id="technicienBeanTechnicienFonctionTechicien" value="#{technicienBean.technicien.fonctionTechicien}"/>
-					<h:message for="technicienBeanTechnicienFonctionTechicien" styleClass="error"/>
+                            </li>
+                        </ul>
+               
+        
+                </div>
+                </div>
+            </ui:define>
+            <ui:define name="content">
+                <h:form id="form">
+    <p:growl id="msgs" />
+    <h3 style="margin-top:0;color:#18547c;font-weight: bold">Techniciens</h3>
+    <p:panel header="Nouveau technicien" style="margin-bottom:20px">
+        
+            <h:panelGrid  styleClass="connex-tech" id="logPanelGrid" style=" margin-top: 25px; text-align: left" cellspacing="8" columns="3">
+                                <h:panelGroup style="text-align:left">
+					<h:outputLabel value="Nom(s) : *" for="txt_title"/>
 				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="technicienBeanTechnicienIdDepartement" value="Id Departement:"/>
+                                <p:spacer width="20px"/>
 				<h:panelGroup>
-					<h:selectOneMenu converter="#{departementBean.converter}" id="technicienBeanTechnicienIdDepartement" required="true" value="#{technicienBean.technicien.idDepartement}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{departementBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="technicienBeanTechnicienIdDepartement" styleClass="error"/>
+                                    <p:inputText  value="" required="true"/>
 				</h:panelGroup>
-				<h:outputText value="*"/>
-				<h:outputLabel for="technicienBeanTechnicienIdEquipe" value="Id Equipe:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{equipeBean.converter}" id="technicienBeanTechnicienIdEquipe" required="true" value="#{technicienBean.technicien.idEquipe}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{equipeBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="technicienBeanTechnicienIdEquipe" styleClass="error"/>
+					
+				<h:panelGroup style="text-align:left">
+					 <h:outputLabel value="Telephone*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+                                <p:spacer width="50px"/>
+                                <h:panelGroup>
+						<p:inputText  value="" required="true"/>
 				</h:panelGroup>
-				<h:outputText value="*"/>
-				<h:outputLabel for="technicienBeanTechnicienIdPersonnel" value="Id Personnel:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{personnelBean.converter}" id="technicienBeanTechnicienIdPersonnel" required="true" value="#{technicienBean.technicien.idPersonnel}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{personnelBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="technicienBeanTechnicienIdPersonnel" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText value="*"/>
-			</h:panelGrid>
+                                
+                                <h:panelGroup>
+                                    <p:outputLabel for="departement" value="Departement" />
+                                </h:panelGroup>
+                                          <p:spacer width="50px"/>
+                                <h:panelGroup >
+                                     <p:selectOneMenu id="departement" value="" style="width:203px">
+                <f:selectItem itemLabel="chosir un departement" itemValue="" />
+                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+            </p:selectOneMenu>  
+                                </h:panelGroup>
+                       
+           
+                                <h:panelGroup>
+                                    <p:outputLabel for="fonction" value="Fonction * " />
+                                </h:panelGroup>
+                                           <p:spacer width="50px"/>
+                                 <h:panelGroup>
+            <p:selectOneMenu id="fonction" value="" style="width:203px">
+                <f:selectItem itemLabel="Choisir une fonction" itemValue="" />
+                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+            </p:selectOneMenu>
+                                 </h:panelGroup>
 
-			<div class="buttons">
-				<h:commandLink value="Save" action='#{technicienBean.update}' styleClass="btn btn-primary"/>
-				<c:choose>
-					<c:when test='#{!empty technicienBean.id}'>
-						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
-							<f:param name="id" value='#{technicienBean.id}'/>
-						</h:link>
-						<h:commandLink value="Delete" action='#{technicienBean.delete}' styleClass="btn btn-primary"/>
-					</c:when>
-					<c:otherwise>
-						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</h:form>
-	</ui:define>
+                  
 
-</ui:composition>
+
+
+                   
+                    
+                                           
+           </h:panelGrid>
+            <p style="text-align: center; margin-top:20px;">
+                 <p:commandButton  value="Annuler" type="reset" style="background-color: #3e5288; color: white;"/>
+                 <p:spacer width="30px"/>
+                  <p:commandButton value="Enregistrer" type="submit" style="background-color: #3e5288; color: white;" />
+
+                 </p>
+    </p:panel>
+    
+                </h:form>
+                <h:form>
+    <p:outputPanel id="books">
+        <p:dataTable value="#{collectorView.books}" var="book" id="booksTable">
+ 
+            <p:column headerText="Nom(s)">
+                <h:outputText value="#{book.title}" />
+            </p:column>
+ 
+            <p:column headerText="Prenom(s)">
+                <f:facet name="header">
+                    <h:outputText value="Prenom(s)" />
+                </f:facet>
+                <h:outputText value="#{book.author}" />
+            </p:column>
+            
+            
+            <p:column headerText="Departement">
+                <h:outputText value="#{book.title}" />
+            </p:column>
+ 
+            <p:column headerText="Fonction">
+                <f:facet name="header">
+                    <h:outputText value="Fonction" />
+                </f:facet>
+            </p:column>
+ 
+            <p:column headerText="Action">
+                <p:commandLink value="Remove" update=":form:books" process=":form:books">
+                    <p:collector value="" removeFrom="" unique="true"/>
+                </p:commandLink>
+            </p:column>
+ 
+        </p:dataTable>
+    </p:outputPanel>
+</h:form>
+                       
+            </ui:define>
+
+        </ui:composition>
+</html>

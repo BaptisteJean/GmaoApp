@@ -26,6 +26,11 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
+			<h:outputLabel for="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" value="Id Personnel:"/>
+			<h:link id="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" outcome="/personnel/view" rendered="#{!empty directeurTechniqueBean.directeurTechnique.idPersonnel}" value="#{directeurTechniqueBean.directeurTechnique.idPersonnel}">
+				<f:param name="id" value="#{directeurTechniqueBean.directeurTechnique.idPersonnel.idPersonnel}"/>
+			</h:link>
+			<h:outputText/>
 			<h:outputLabel for="directeurTechniqueBeanDirecteurTechniqueArchivageList" value="Archivage List:"/>
 			<h:dataTable id="directeurTechniqueBeanDirecteurTechniqueArchivageList" styleClass="data-table" value="#{directeurTechniqueBean.directeurTechnique.archivageList}" var="_item">
 				<h:column>
@@ -51,11 +56,6 @@
 					</h:link>
 				</h:column>
 			</h:dataTable>
-			<h:outputText/>
-			<h:outputLabel for="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" value="Id Personnel:"/>
-			<h:link id="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" outcome="/personnel/view" rendered="#{!empty directeurTechniqueBean.directeurTechnique.idPersonnel}" value="#{directeurTechniqueBean.directeurTechnique.idPersonnel}">
-				<f:param name="id" value="#{directeurTechniqueBean.directeurTechnique.idPersonnel.idPersonnel}"/>
-			</h:link>
 			<h:outputText/>
 		</h:panelGrid>
 

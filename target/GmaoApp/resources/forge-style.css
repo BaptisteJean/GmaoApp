@@ -126,6 +126,7 @@ label {
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 2px 4px #000000;
 	padding: 0 10px 20px 10px;
+    margin-top: auto;
 }
 
 footer {
@@ -471,7 +472,7 @@ label {
 
 
 #menu {
-	width:auto;
+	width:200px;
 	margin:0 auto;
     padding-left: 15px;
     padding-right: 15px;	

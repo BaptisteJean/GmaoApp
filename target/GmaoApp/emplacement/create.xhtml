@@ -76,7 +76,7 @@
 								<h:outputText value="Bloc"/>
 							</f:facet>
 							<h:link outcome="/emplacementClient/view">
-								<f:param name="id" value="#{_item.idEmplclient}"/>
+								<f:param name="id" value="#{_item.idEmplClient}"/>
 								<h:outputText id="itemBloc" value="#{_item.bloc}"/>
 							</h:link>
 							<f:facet name="footer">
@@ -86,28 +86,28 @@
 						</h:column>
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="Date Installation"/>
-							</f:facet>
-							<h:link outcome="/emplacementClient/view">
-								<f:param name="id" value="#{_item.idEmplclient}"/>
-								<h:outputText id="itemDateInstallation" value="#{_item.dateInstallation}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:inputText id="emplacementClientBeanAddDateInstallation" value="#{emplacementClientBean.add.dateInstallation}"/>
-								<h:message for="emplacementClientBeanAddDateInstallation" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
 								<h:outputText value="Salle"/>
 							</f:facet>
 							<h:link outcome="/emplacementClient/view">
-								<f:param name="id" value="#{_item.idEmplclient}"/>
+								<f:param name="id" value="#{_item.idEmplClient}"/>
 								<h:outputText id="itemSalle" value="#{_item.salle}"/>
 							</h:link>
 							<f:facet name="footer">
 								<h:inputText id="emplacementClientBeanAddSalle" value="#{emplacementClientBean.add.salle}"/>
 								<h:message for="emplacementClientBeanAddSalle" styleClass="error"/>
+							</f:facet>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Date Installation"/>
+							</f:facet>
+							<h:link outcome="/emplacementClient/view">
+								<f:param name="id" value="#{_item.idEmplClient}"/>
+								<h:outputText id="itemDateInstallation" value="#{_item.dateInstallation}"/>
+							</h:link>
+							<f:facet name="footer">
+								<h:inputText id="emplacementClientBeanAddDateInstallation" value="#{emplacementClientBean.add.dateInstallation}"/>
+								<h:message for="emplacementClientBeanAddDateInstallation" styleClass="error"/>
 							</f:facet>
 						</h:column>
 						<h:column footerClass="remove-column" headerClass="remove-column">
@@ -121,41 +121,41 @@
 					</h:dataTable>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="emplacementBeanEmplacementEmplacementTnList" value="Emplacement Tn List:"/>
+				<h:outputLabel for="emplacementBeanEmplacementEmplacementTNList" value="Emplacement TN List:"/>
 				<h:panelGroup>
-					<ui:param name="_collection" value="#{emplacementBean.emplacement.emplacementTnList}"/>
-					<h:dataTable id="emplacementBeanEmplacementEmplacementTnList" styleClass="data-table" value="#{_collection}" var="_item">
+					<ui:param name="_collection" value="#{emplacementBean.emplacement.emplacementTNList}"/>
+					<h:dataTable id="emplacementBeanEmplacementEmplacementTNList" styleClass="data-table" value="#{_collection}" var="_item">
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Libelle Caisse"/>
 							</f:facet>
-							<h:link outcome="/emplacementTn/view">
-								<f:param name="id" value="#{_item.idEmpltn}"/>
+							<h:link outcome="/emplacementTN/view">
+								<f:param name="id" value="#{_item.idEmplTN}"/>
 								<h:outputText id="itemLibelleCaisse" value="#{_item.libelleCaisse}"/>
 							</h:link>
 							<f:facet name="footer">
-								<h:inputText id="emplacementTnBeanAddLibelleCaisse" value="#{emplacementTnBean.add.libelleCaisse}"/>
-								<h:message for="emplacementTnBeanAddLibelleCaisse" styleClass="error"/>
+								<h:inputText id="emplacementTNBeanAddLibelleCaisse" value="#{emplacementTNBean.add.libelleCaisse}"/>
+								<h:message for="emplacementTNBeanAddLibelleCaisse" styleClass="error"/>
 							</f:facet>
 						</h:column>
 						<h:column>
 							<f:facet name="header">
 								<h:outputText value="Libelle Tirroir"/>
 							</f:facet>
-							<h:link outcome="/emplacementTn/view">
-								<f:param name="id" value="#{_item.idEmpltn}"/>
+							<h:link outcome="/emplacementTN/view">
+								<f:param name="id" value="#{_item.idEmplTN}"/>
 								<h:outputText id="itemLibelleTirroir" value="#{_item.libelleTirroir}"/>
 							</h:link>
 							<f:facet name="footer">
-								<h:inputText id="emplacementTnBeanAddLibelleTirroir" value="#{emplacementTnBean.add.libelleTirroir}"/>
-								<h:message for="emplacementTnBeanAddLibelleTirroir" styleClass="error"/>
+								<h:inputText id="emplacementTNBeanAddLibelleTirroir" value="#{emplacementTNBean.add.libelleTirroir}"/>
+								<h:message for="emplacementTNBeanAddLibelleTirroir" styleClass="error"/>
 							</f:facet>
 						</h:column>
 						<h:column footerClass="remove-column" headerClass="remove-column">
 							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
 							<f:facet name="footer">
-								<h:commandLink action="#{_collection.add(emplacementTnBean.added)}" id="emplacementBeanEmplacementEmplacementTnListAdd" styleClass="add-button">
-									<f:setPropertyActionListener target="#{emplacementTnBean.add.idEmplacement}" value="#{emplacementBean.emplacement}"/>
+								<h:commandLink action="#{_collection.add(emplacementTNBean.added)}" id="emplacementBeanEmplacementEmplacementTNListAdd" styleClass="add-button">
+									<f:setPropertyActionListener target="#{emplacementTNBean.add.idEmplacement}" value="#{emplacementBean.emplacement}"/>
 								</h:commandLink>
 							</f:facet>
 						</h:column>

@@ -37,6 +37,14 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" value="Id Personnel:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{personnelBean.converter}" id="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" required="true" value="#{directeurTechniqueBean.directeurTechnique.idPersonnel}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{personnelBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
 				<h:outputLabel for="directeurTechniqueBeanDirecteurTechniqueArchivageList" value="Archivage List:"/>
 				<h:panelGroup>
 					<ui:param name="_collection" value="#{directeurTechniqueBean.directeurTechnique.archivageList}"/>
@@ -97,14 +105,6 @@
 					</h:dataTable>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" value="Id Personnel:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{personnelBean.converter}" id="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" required="true" value="#{directeurTechniqueBean.directeurTechnique.idPersonnel}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{personnelBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="directeurTechniqueBeanDirecteurTechniqueIdPersonnel" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText value="*"/>
 			</h:panelGrid>
 
 			<div class="buttons">

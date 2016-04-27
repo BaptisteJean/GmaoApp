@@ -36,18 +36,6 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="planificationCurativeBeanPlanificationCurativeDescriptionProbleme" value="Description Probleme:"/>
-				<h:panelGroup>
-					<h:inputText id="planificationCurativeBeanPlanificationCurativeDescriptionProbleme" value="#{planificationCurativeBean.planificationCurative.descriptionProbleme}"/>
-					<h:message for="planificationCurativeBeanPlanificationCurativeDescriptionProbleme" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="planificationCurativeBeanPlanificationCurativeEtatMaterielApresIntervention" value="Etat Materiel Apres Intervention:"/>
-				<h:panelGroup>
-					<h:inputText id="planificationCurativeBeanPlanificationCurativeEtatMaterielApresIntervention" value="#{planificationCurativeBean.planificationCurative.etatMaterielApresIntervention}"/>
-					<h:message for="planificationCurativeBeanPlanificationCurativeEtatMaterielApresIntervention" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
 				<h:outputLabel for="planificationCurativeBeanPlanificationCurativeHeureDebut" value="Heure Debut:"/>
 				<h:panelGroup>
 					<h:inputText id="planificationCurativeBeanPlanificationCurativeHeureDebut" value="#{planificationCurativeBean.planificationCurative.heureDebut}"/>
@@ -60,10 +48,22 @@
 					<h:message for="planificationCurativeBeanPlanificationCurativeHeureFin" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
+				<h:outputLabel for="planificationCurativeBeanPlanificationCurativeDescriptionProbleme" value="Description Probleme:"/>
+				<h:panelGroup>
+					<h:inputText id="planificationCurativeBeanPlanificationCurativeDescriptionProbleme" value="#{planificationCurativeBean.planificationCurative.descriptionProbleme}"/>
+					<h:message for="planificationCurativeBeanPlanificationCurativeDescriptionProbleme" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
 				<h:outputLabel for="planificationCurativeBeanPlanificationCurativeSolutionApportee" value="Solution Apportee:"/>
 				<h:panelGroup>
 					<h:inputText id="planificationCurativeBeanPlanificationCurativeSolutionApportee" value="#{planificationCurativeBean.planificationCurative.solutionApportee}"/>
 					<h:message for="planificationCurativeBeanPlanificationCurativeSolutionApportee" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText/>
+				<h:outputLabel for="planificationCurativeBeanPlanificationCurativeEtatMaterielApresIntervention" value="Etat Materiel Apres Intervention:"/>
+				<h:panelGroup>
+					<h:inputText id="planificationCurativeBeanPlanificationCurativeEtatMaterielApresIntervention" value="#{planificationCurativeBean.planificationCurative.etatMaterielApresIntervention}"/>
+					<h:message for="planificationCurativeBeanPlanificationCurativeEtatMaterielApresIntervention" styleClass="error"/>
 				</h:panelGroup>
 				<h:outputText/>
 			</h:panelGrid>

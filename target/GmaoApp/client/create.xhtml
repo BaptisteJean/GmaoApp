@@ -1,12 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:forgeview="http://jboss.org/forge/view"
-	template="/resources/scaffold/pageTemplate.xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 	<f:metadata>
 		<f:viewParam name="id" value='#{clientBean.id}'/>
@@ -15,190 +13,249 @@
 
 	<ui:param name="pageTitle" value="Create Client"/>
 
-	<ui:define name="header">
-		Client
-	</ui:define>
+	 <ui:composition template="/resources/scaffold/pageTemplate.xhtml">
+            
+            <ui:define name="left">
+                <div id="wrapper">
+                    <div id="menu">
+                  <ul class="nav navbar-default navbar-side" >
+           
+              
+        
+                    <li >
+                        <a  href="./../pages/dashboard.xhtml" ><i class="fa fa-dashboard "></i>Tableau de bord</a>
+                    </li>
+                    <li>
+                        <a href="../materiel/create.xhtml" ><i class="fa fa-desktop "></i>Materiel </a>
+                         
+                    </li>
+                     <li>
+                        <a href="../client/create.xhtml"  class="active-menu"><i class="glyphicon glyphicon glyphicon-user "></i>Clients </a>
+                        
+                    </li>
+                    <li>
+                        <a href="../intervention/create.xhtml"><i class="fa fa-flash "></i>Interventions </a>
+                        
+                    </li>
+                     <li>
+                        <a href="../technicien/create.xhtml"><i class="glyphicon glyphicons-user-vr "></i>Techniciens </a>
+                         
+                    </li>
+      
+                     <li>
+                        <a href="../planification/create.xhtml"><i class="fa fa-bug "></i>Planification</a>
+                    </li>
+                    <li>
+                        <a href="../equipe/create.xhtml"><i class="fa fa-sign-in "></i>Equipe</a>
+                    </li>
+                      
+                      
+                    <li>
+                        <a href="../archivage/create.xhtml"><i class="fa fa-sitemap "></i>Archivage </a>
+                         
 
-	<ui:define name="subheader">
-		<c:choose>
-			<c:when test='#{!empty clientBean.id}'>
-				Edit existing Client
-			</c:when>
-			<c:otherwise>
-				Create a new Client
-			</c:otherwise>
-		</c:choose>
-	</ui:define>
+                            </li>
+                        </ul>
+               
+        
+                </div>
+                </div>
+            </ui:define>
 
-	<ui:define name="footer"/>
-
-	<ui:define name="main">
-		<h:form id="create">
-			<h:messages globalOnly="true" styleClass="error"/>
-
-			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="clientBeanClientCodeClient" value="Code Client:"/>
-				<h:panelGroup>
-					<h:inputText id="clientBeanClientCodeClient" value="#{clientBean.client.codeClient}"/>
-					<h:message for="clientBeanClientCodeClient" styleClass="error"/>
+            <ui:define name="content">
+              
+                 
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+    <h3 style="margin-top:0;color:#18547c;font-weight: bold">Clients</h3>
+   
+        
+     <p:panel header="Nouveau client" style="margin-bottom:20px">
+         <h:form id="loginForm">
+			<p:fieldset styleClass="fieldset" legend="informations personnelles">
+			 <h:panelGrid  styleClass="connex-tech" id="logPanelGrid" style="margin: 0 auto; margin-top: 25px; text-align: left" cellspacing="8" columns="3">
+				<h:panelGroup style="text-align:left">
+					<h:outputLabel value="Nom(s) : *" for="txt_title"/>
 				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="clientBeanClientNatureActivite" value="Nature Activite:"/>
+                                <p:spacer width="20px"/>
 				<h:panelGroup>
-					<h:inputText id="clientBeanClientNatureActivite" value="#{clientBean.client.natureActivite}"/>
-					<h:message for="clientBeanClientNatureActivite" styleClass="error"/>
+                                    <p:inputText  value="#{clientBean.client.nomClient}" required="true"/>
 				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="clientBeanClientNomClient" value="Nom Client:"/>
+					
+				<h:panelGroup style="text-align:left">
+					 <h:outputLabel value="Prenom*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+                                <p:spacer width="50px"/>
+                                <h:panelGroup>
+                                    <p:inputText  value="#{clientBean.client.prenomClient}" required="true"/>
+				</h:panelGroup>
+                                
+					
+					
+				</h:panelGrid>
+			</p:fieldset>
+             <br/>
+                        <p:fieldset styleClass="fieldset" legend="Adresse">
+                            <h:panelGrid  styleClass="connex-tech" id="lPanelGrid" style="margin-top: 25px;text-align: left" cellspacing="8" columns="3">
+                                <h:panelGroup style="text-align:left">
+					<h:outputLabel value="B.P.: *" for="txt_title"/>
+				</h:panelGroup>
+                                <p:spacer width="20px"/>
 				<h:panelGroup>
-					<h:inputText id="clientBeanClientNomClient" value="#{clientBean.client.nomClient}"/>
-					<h:message for="clientBeanClientNomClient" styleClass="error"/>
+                                    <p:inputText  value="#{adresseBean.adresse.boitePostale}" required="true"/>
 				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="clientBeanClientPrenomClient" value="Prenom Client:"/>
+					
+				<h:panelGroup style="text-align:left">
+					 <h:outputLabel value="Telephone*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+				<p:spacer width="50px"/>	
 				<h:panelGroup>
-					<h:inputText id="clientBeanClientPrenomClient" value="#{clientBean.client.prenomClient}"/>
-					<h:message for="clientBeanClientPrenomClient" styleClass="error"/>
+                                    <p:inputText  value="#{adresseBean.adresse.numeroPhone}" required="true"/>
 				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="clientBeanClientTypePersonne" value="Type Personne:"/>
-				<h:panelGroup>
-					<h:inputText id="clientBeanClientTypePersonne" value="#{clientBean.client.typePersonne}"/>
-					<h:message for="clientBeanClientTypePersonne" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="clientBeanClientArchivageList" value="Archivage List:"/>
-				<h:panelGroup>
-					<ui:param name="_collection" value="#{clientBean.client.archivageList}"/>
-					<h:dataTable id="clientBeanClientArchivageList" styleClass="data-table" value="#{_collection}" var="_item">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Id Directeur Technique"/>
-							</f:facet>
-							<h:link outcome="/archivage/view">
-								<f:param name="id" value="#{_item.idArchivage}"/>
-								<h:outputText id="forgeviewdisplayitemIdDirecteurTechnique" value="#{forgeview:display(_item.idDirecteurTechnique)}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:selectOneMenu converter="#{directeurTechniqueBean.converter}" id="archivageBeanAddIdDirecteurTechnique" value="#{archivageBean.add.idDirecteurTechnique}">
-									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{directeurTechniqueBean.all}" var="_item"/>
-								</h:selectOneMenu>
-								<h:message for="archivageBeanAddIdDirecteurTechnique" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column footerClass="remove-column" headerClass="remove-column">
-							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
-							<f:facet name="footer">
-								<h:commandLink action="#{_collection.add(archivageBean.added)}" id="clientBeanClientArchivageListAdd" styleClass="add-button">
-									<f:setPropertyActionListener target="#{archivageBean.add.idClient}" value="#{clientBean.client}"/>
-								</h:commandLink>
-							</f:facet>
-						</h:column>
-					</h:dataTable>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="clientBeanClientDestinationList" value="Destination List:"/>
-				<h:panelGroup>
-					<ui:param name="_collection" value="#{clientBean.client.destinationList}"/>
-					<h:dataTable id="clientBeanClientDestinationList" styleClass="data-table" value="#{_collection}" var="_item"/>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="clientBeanClientProvenanceList" value="Provenance List:"/>
-				<h:panelGroup>
-					<ui:param name="_collection" value="#{clientBean.client.provenanceList}"/>
-					<h:dataTable id="clientBeanClientProvenanceList" styleClass="data-table" value="#{_collection}" var="_item">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Id Fournisseur"/>
-							</f:facet>
-							<h:link outcome="/provenance/view">
-								<f:param name="id" value="#{_item.idProvenance}"/>
-								<h:outputText id="forgeviewdisplayitemIdFournisseur" value="#{forgeview:display(_item.idFournisseur)}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:selectOneMenu converter="#{fournisseurBean.converter}" id="provenanceBeanAddIdFournisseur" value="#{provenanceBean.add.idFournisseur}">
-									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{fournisseurBean.all}" var="_item"/>
-								</h:selectOneMenu>
-								<h:message for="provenanceBeanAddIdFournisseur" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column footerClass="remove-column" headerClass="remove-column">
-							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
-							<f:facet name="footer">
-								<h:commandLink action="#{_collection.add(provenanceBean.added)}" id="clientBeanClientProvenanceListAdd" styleClass="add-button">
-									<f:setPropertyActionListener target="#{provenanceBean.add.idClient}" value="#{clientBean.client}"/>
-								</h:commandLink>
-							</f:facet>
-						</h:column>
-					</h:dataTable>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="clientBeanClientSiteInterventionList" value="Site Intervention List:"/>
-				<h:panelGroup>
-					<ui:param name="_collection" value="#{clientBean.client.siteInterventionList}"/>
-					<h:dataTable id="clientBeanClientSiteInterventionList" styleClass="data-table" value="#{_collection}" var="_item">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Libele Bureau"/>
-							</f:facet>
-							<h:link outcome="/siteIntervention/view">
-								<f:param name="id" value="#{_item.idsiteintervention}"/>
-								<h:outputText id="itemLibeleBureau" value="#{_item.libeleBureau}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:inputText id="siteInterventionBeanAddLibeleBureau" value="#{siteInterventionBean.add.libeleBureau}"/>
-								<h:message for="siteInterventionBeanAddLibeleBureau" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Numero Batiment"/>
-							</f:facet>
-							<h:link outcome="/siteIntervention/view">
-								<f:param name="id" value="#{_item.idsiteintervention}"/>
-								<h:outputText id="itemNumeroBatiment" value="#{_item.numeroBatiment}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:inputText id="siteInterventionBeanAddNumeroBatiment" value="#{siteInterventionBean.add.numeroBatiment}"/>
-								<h:message for="siteInterventionBeanAddNumeroBatiment" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column footerClass="remove-column" headerClass="remove-column">
-							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
-							<f:facet name="footer">
-								<h:commandLink action="#{_collection.add(siteInterventionBean.added)}" id="clientBeanClientSiteInterventionListAdd" styleClass="add-button">
-									<f:setPropertyActionListener target="#{siteInterventionBean.add.idClient}" value="#{clientBean.client}"/>
-								</h:commandLink>
-							</f:facet>
-						</h:column>
-					</h:dataTable>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="clientBeanClientIdAdresse" value="Id Adresse:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{adresseBean.converter}" id="clientBeanClientIdAdresse" required="true" value="#{clientBean.client.idAdresse}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{adresseBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="clientBeanClientIdAdresse" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText value="*"/>
-			</h:panelGrid>
-
-			<div class="buttons">
-				<h:commandLink value="Save" action='#{clientBean.update}' styleClass="btn btn-primary"/>
-				<c:choose>
-					<c:when test='#{!empty clientBean.id}'>
-						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
-							<f:param name="id" value='#{clientBean.id}'/>
-						</h:link>
-						<h:commandLink value="Delete" action='#{clientBean.delete}' styleClass="btn btn-primary"/>
-					</c:when>
-					<c:otherwise>
-						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
-					</c:otherwise>
-				</c:choose>
-			</div>
+                                        
+                                <p:spacer width="50px"/>	
+                                <h:panelGroup>
+                                </h:panelGroup>
+                                <h:panelGroup>
+                                    <p:inputText  value="#{adresseBean.adresse.numeroPhone}" required="true"/>
+                                </h:panelGroup>
+                                 
+                                  <h:panelGroup>
+                                       <h:outputLabel value="Email*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+                                   <p:spacer width="50px"/>
+                                   <h:panelGroup>
+                                       <p:inputText  value="#{adresseBean.adresse.email}" required="true"/>
+                                </h:panelGroup>
+                                   
+                                   <h:panelGroup>
+                                       <h:outputLabel value="Region*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+                                   <p:spacer width="50px"/>
+                                   <h:panelGroup>
+                                       <p:selectOneMenu id="region" value="#{adresseBean.adresse.region}" style="width:203px">
+                                        <f:selectItem itemLabel="Choisir une region" itemValue="" />
+                                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                                     </p:selectOneMenu>  
+                                </h:panelGroup>
+                                   
+                                   
+                                   <h:panelGroup>
+                                       <h:outputLabel value="Ville*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+                                   <p:spacer width="50px"/>
+                                   <h:panelGroup>
+                                       <p:selectOneMenu id="ville" value="#{adresseBean.adresse.ville}" style="width:203px">
+                                        <f:selectItem itemLabel="Choisir une ville" itemValue="" />
+                                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                                    </p:selectOneMenu>  
+                                </h:panelGroup>
+					
+					
+					
+				</h:panelGrid>
+			</p:fieldset>
+             <p style="text-align: center; margin-top:20px;">
+             <p:commandButton   action="confirmSignIn"  value="Annuler" style="background-color: #3e5288; color: white;"/>
+             <p:spacer width="50px"/>
+              <p:commandButton    action="confirmSignIn"  value="Ajouter" style="background-color: #3e5288; color: white;"/>
+             </p>
 		</h:form>
-	</ui:define>
+     </p:panel>    
+                <br/>
+                
+                <h:form>
+    <p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                 paginator="true" rows="10" style="margin-bottom:20px">
+ 
+        <f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage name="/img/excel.png" width="24"/>
+                <p:dataExporter type="xls" target="tbl" fileName="cars" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/img/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/img/csv.png" width="24"/>
+                <p:dataExporter type="csv" target="tbl" fileName="cars" />
+            </h:commandLink>
+ 
+            <h:commandLink>
+                <p:graphicImage name="/img/xml.png" width="24"/>
+                <p:dataExporter type="xml" target="tbl" fileName="cars" />
+            </h:commandLink>
+        </f:facet>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Nom" />
+            </f:facet>
+            <h:outputText value="#{car.id}" />
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Statut"/>
+            </f:facet>
+            <h:outputText value="#{car.year}" />
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Localisation" />
+            </f:facet>
+            <h:outputText value="#{car.brand}" />
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="site d'intervention" />
+            </f:facet>
+            <h:outputText value="#{car.color}" />
+        </p:column>
+        
+        
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Materiel" />
+            </f:facet>
+            <h:outputText value="#{car.color}" />
+        </p:column>
+        
+        
+    </p:dataTable>
+ 
+    <h4>Exporter les donnees du tableau</h4>
+    <h:commandLink>
+        <p:graphicImage name="/img/excel.png" />
+        <p:dataExporter type="xls" target="tbl" fileName="cars" pageOnly="true"/>
+    </h:commandLink>
+ 
+    <h:commandLink>
+        <p:graphicImage name="/img/pdf.png" />
+        <p:dataExporter type="pdf" target="tbl" fileName="cars" pageOnly="true" />
+    </h:commandLink>
+ 
+    <h:commandLink>
+        <p:graphicImage name="/img/csv.png" />
+        <p:dataExporter type="csv" target="tbl" fileName="cars" pageOnly="true" />
+    </h:commandLink>
+ 
+    <h:commandLink>
+        <p:graphicImage name="/img/xml.png" />
+        <p:dataExporter type="xml" target="tbl" fileName="cars" pageOnly="true" />
+    </h:commandLink>
+</h:form>
+            </ui:define>
 
-</ui:composition>
+        </ui:composition>
+
+</html>

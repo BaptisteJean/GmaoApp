@@ -37,6 +37,14 @@
 			<h:messages globalOnly="true" styleClass="error"/>
 
 			<h:panelGrid columnClasses="label,component,required" columns="3">
+				<h:outputLabel for="destinationBeanDestinationIdClient" value="Id Client:"/>
+				<h:panelGroup>
+					<h:selectOneMenu converter="#{clientBean.converter}" id="destinationBeanDestinationIdClient" required="true" value="#{destinationBean.destination.idClient}">
+						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{clientBean.all}" var="_item"/>
+					</h:selectOneMenu>
+					<h:message for="destinationBeanDestinationIdClient" styleClass="error"/>
+				</h:panelGroup>
+				<h:outputText value="*"/>
 				<h:outputLabel for="destinationBeanDestinationDestockageList" value="Destockage List:"/>
 				<h:panelGroup>
 					<ui:param name="_collection" value="#{destinationBean.destination.destockageList}"/>
@@ -67,14 +75,6 @@
 					</h:dataTable>
 				</h:panelGroup>
 				<h:outputText/>
-				<h:outputLabel for="destinationBeanDestinationIdClient" value="Id Client:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{clientBean.converter}" id="destinationBeanDestinationIdClient" required="true" value="#{destinationBean.destination.idClient}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{clientBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="destinationBeanDestinationIdClient" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText value="*"/>
 			</h:panelGrid>
 
 			<div class="buttons">

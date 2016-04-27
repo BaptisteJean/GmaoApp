@@ -1,12 +1,11 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:forgeview="http://jboss.org/forge/view"
-	template="/resources/scaffold/pageTemplate.xhtml">
+        xmlns:p="http://primefaces.org/ui"
+	>
 
 	<f:metadata>
 		<f:viewParam name="id" value='#{interventionBean.id}'/>
@@ -15,119 +14,172 @@
 
 	<ui:param name="pageTitle" value="Create Intervention"/>
 
-	<ui:define name="header">
-		Intervention
-	</ui:define>
+	 <ui:composition template="/resources/scaffold/pageTemplate.xhtml">
+            <ui:define name="left">
+                <div id="wrapper">
+                    <div id="menu">
+                  <ul class="nav navbar-default navbar-side" >
+           
+              
+        
+                    <li >
+                        <a  href="./../pages/dashboard.xhtml" ><i class="fa fa-dashboard "></i>Tableau de bord</a>
+                    </li>
+                    <li>
+                        <a href="../materiel/create.xhtml" ><i class="fa fa-desktop "></i>Materiel </a>
+                         
+                    </li>
+                     <li>
+                        <a href="../client/create.xhtml"  ><i class="glyphicon glyphicon glyphicon-user "></i>Clients </a>
+                        
+                    </li>
+                    <li>
+                        <a href="../intervention/create.xhtml" class="active-menu"><i class="fa fa-flash "></i>Interventions </a>
+                        
+                    </li>
+                     <li>
+                        <a href="../technicien/create.xhtml"><i class="glyphicon glyphicons-user-vr "></i>Techniciens </a>
+                         
+                    </li>
+      
+                     <li>
+                        <a href="../planification/create.xhtml"><i class="fa fa-bug "></i>Planification</a>
+                    </li>
+                    <li>
+                        <a href="../equipe/create.xhtml"><i class="fa fa-sign-in "></i>Equipe</a>
+                    </li>
+                    <li>
+                        <a href="../archivage/create.xhtml"><i class="fa fa-sitemap "></i>Archivage </a>
+                         
 
-	<ui:define name="subheader">
-		<c:choose>
-			<c:when test='#{!empty interventionBean.id}'>
-				Edit existing Intervention
-			</c:when>
-			<c:otherwise>
-				Create a new Intervention
-			</c:otherwise>
-		</c:choose>
-	</ui:define>
+                            </li>
+                        </ul>
+               
+        
+                </div>
+                </div>
+            </ui:define>
+            <ui:define name="content">
+                <h:form id="form">
+    <p:growl id="msgs" />
+    <h3 style="margin-top:0;color:#18547c;font-weight: bold;">Interventions</h3>
+    <p:panel header="Nouvelle intervention" style="margin-bottom:20px">
+        <h:panelGrid  styleClass="connex-tech" id="logPanelGrid" style=" margin-top: 25px; text-align: left" cellpadding="2" columns="3">
+            <h:panelGroup>
+                <h:outputLabel value="chef d'equipe: " for="intervenant"></h:outputLabel>
+            </h:panelGroup>
+            <p:spacer width="50px"/>
+            <h:panelGroup>
+                <p:inputText id="intervenant" value="#{equipeBean.equipe.chefEquipe}" required="true"/>
+            </h:panelGroup>
+            
+            <h:panelGroup>
+            <p:outputLabel for="Client" value="Client * " />
+            </h:panelGroup>
+            <p:spacer width="20px"/>
+            <h:panelGroup>
+                <p:selectOneMenu id="Client" value="#{clientBean.client.nomClient}" style="width:203px">
+            <f:selectItem itemLabel="choisir un client" itemValue="" />
+            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+        </p:selectOneMenu>
+            </h:panelGroup>
+            
+            
+            <h:panelGroup style="width: 50px">
+            <p:outputLabel for="site" value="Site* " />
+            </h:panelGroup>
+            <p:spacer width="20px"/>
+            
+        <p:selectOneMenu id="site" value="#{selectOneMenuView.console}" style="width:203px">
+            <f:selectItem itemLabel="choisir le site" itemValue="" />
+            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+        </p:selectOneMenu>  
+            
+            <h:panelGroup>
+                <p:outputLabel for="materiel" value="Materiel" />
+            </h:panelGroup>
+            <p:spacer width="20px"/>
+            <h:panelGroup>
+        <p:selectOneMenu id="materiel" value="#{selectOneMenuView.console}" style="width:203px">
+            <f:selectItem itemLabel="choisir le materiel" itemValue="" />
+            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+        </p:selectOneMenu>
+            </h:panelGroup>
+            
+            <h:panelGroup>
+            <h:outputLabel value="Description " for="description"/>
+            </h:panelGroup>
+            <p:spacer width="20px"/>
+            <h:panelGroup>
+                <p:inputTextarea id="description" value="#{interventionBean.intervention.descriptionIntervention}" required="true"/>
+            </h:panelGroup>
+            
+            
+            
+            <h:panelGroup>
+            <p:outputLabel for="date" value="Date:" />
+            </h:panelGroup>
+            <p:spacer width="20px"/>
+            <h:panelGroup>
+                <p:calendar id="date" value="#{interventionBean.intervention.dateIntervention}" pattern="dd-MMMM-yyyy"  />
+            </h:panelGroup  >
+            
+        </h:panelGrid>
+        <p style="text-align: center;margin-top: 15px">
+                <p:commandButton id="btn_reset" value="Annuler" type="reset"/>
+                <p:spacer width="50px"/>
+                <p:commandButton id="btn_add" value="Enregistrer" />
+            </p>
+    </p:panel>
+                </h:form>
+                
+                <h:form>
+                    
+                    <p:outputPanel id="books">
+        <p:dataTable value="#{collectorView.books}" var="book" id="booksTable">
+ <f:facet name="header">
+            Liste des interventions 
+        </f:facet>
+            <p:column headerText="Chef d'equipe">
+                <h:outputText value="#{book.title}" />
+            </p:column>
+ 
+            <p:column headerText="Description">
+                <f:facet name="header">
+                    <h:outputText value="Description" />
+                </f:facet>
+                <h:outputText value="#{book.author}" />
+            </p:column>
+            
+            
+            <p:column headerText="Client">
+                <h:outputText value="#{book.title}" />
+            </p:column>
+ 
+            <p:column headerText="Materiel concerne">
+                <f:facet name="header">
+                    <h:outputText value="Materiel" />
+                </f:facet>
+            </p:column>
+ 
+            <p:column headerText="Action">
+                <p:commandLink value="Remove" update=":form:books" process=":form:books">
+                    <p:collector value="" removeFrom="" unique="true"/>
+                </p:commandLink>
+            </p:column>
+ 
+        </p:dataTable>
+        
+       
+    </p:outputPanel>
+                </h:form>
+            </ui:define>
 
-	<ui:define name="footer"/>
-
-	<ui:define name="main">
-		<h:form id="create">
-			<h:messages globalOnly="true" styleClass="error"/>
-
-			<h:panelGrid columnClasses="label,component,required" columns="3">
-				<h:outputLabel for="interventionBeanInterventionDateIntervention" value="Date Intervention:"/>
-				<h:panelGroup>
-					<h:inputText id="interventionBeanInterventionDateIntervention" value="#{interventionBean.intervention.dateIntervention}"/>
-					<h:message for="interventionBeanInterventionDateIntervention" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="interventionBeanInterventionDescriptionIntervention" value="Description Intervention:"/>
-				<h:panelGroup>
-					<h:inputText id="interventionBeanInterventionDescriptionIntervention" value="#{interventionBean.intervention.descriptionIntervention}"/>
-					<h:message for="interventionBeanInterventionDescriptionIntervention" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="interventionBeanInterventionStatutRapport" value="Statut Rapport:"/>
-				<h:panelGroup>
-					<h:selectOneMenu id="interventionBeanInterventionStatutRapport" value="#{interventionBean.intervention.statutRapport}">
-						<f:selectItem/>
-						<f:selectItem itemLabel="Yes" itemValue="true"/>
-						<f:selectItem itemLabel="No" itemValue="false"/>
-					</h:selectOneMenu>
-					<h:message for="interventionBeanInterventionStatutRapport" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="interventionBeanInterventionTempsMis" value="Temps Mis:"/>
-				<h:panelGroup>
-					<h:inputText id="interventionBeanInterventionTempsMis" value="#{interventionBean.intervention.tempsMis}"/>
-					<h:message for="interventionBeanInterventionTempsMis" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText/>
-				<h:outputLabel for="interventionBeanInterventionIdDirecteurTech" value="Id Directeur Tech:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{directeurTechniqueBean.converter}" id="interventionBeanInterventionIdDirecteurTech" required="true" value="#{interventionBean.intervention.idDirecteurTech}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{directeurTechniqueBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="interventionBeanInterventionIdDirecteurTech" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText value="*"/>
-				<h:outputLabel for="interventionBeanInterventionIdExemplaireMat" value="Id Exemplaire Mat:"/>
-				<h:panelGroup>
-					<h:selectOneMenu converter="#{examplaireMaterielBean.converter}" id="interventionBeanInterventionIdExemplaireMat" required="true" value="#{interventionBean.intervention.idExemplaireMat}">
-						<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{examplaireMaterielBean.all}" var="_item"/>
-					</h:selectOneMenu>
-					<h:message for="interventionBeanInterventionIdExemplaireMat" styleClass="error"/>
-				</h:panelGroup>
-				<h:outputText value="*"/>
-				<h:outputLabel for="interventionBeanInterventionRapportList" value="Rapport List:"/>
-				<h:panelGroup>
-					<ui:param name="_collection" value="#{interventionBean.intervention.rapportList}"/>
-					<h:dataTable id="interventionBeanInterventionRapportList" styleClass="data-table" value="#{_collection}" var="_item">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Id Equipe"/>
-							</f:facet>
-							<h:link outcome="/rapport/view">
-								<f:param name="id" value="#{_item.idRapport}"/>
-								<h:outputText id="forgeviewdisplayitemIdEquipe" value="#{forgeview:display(_item.idEquipe)}"/>
-							</h:link>
-							<f:facet name="footer">
-								<h:selectOneMenu converter="#{equipeBean.converter}" id="rapportBeanAddIdEquipe" value="#{rapportBean.add.idEquipe}">
-									<f:selectItems itemLabel="#{forgeview:display(_item)}" itemValue="#{_item}" value="#{equipeBean.all}" var="_item"/>
-								</h:selectOneMenu>
-								<h:message for="rapportBeanAddIdEquipe" styleClass="error"/>
-							</f:facet>
-						</h:column>
-						<h:column footerClass="remove-column" headerClass="remove-column">
-							<h:commandLink action="#{_collection.remove(_item)}" styleClass="remove-button"/>
-							<f:facet name="footer">
-								<h:commandLink action="#{_collection.add(rapportBean.added)}" id="interventionBeanInterventionRapportListAdd" styleClass="add-button">
-									<f:setPropertyActionListener target="#{rapportBean.add.idIntervention}" value="#{interventionBean.intervention}"/>
-								</h:commandLink>
-							</f:facet>
-						</h:column>
-					</h:dataTable>
-				</h:panelGroup>
-				<h:outputText/>
-			</h:panelGrid>
-
-			<div class="buttons">
-				<h:commandLink value="Save" action='#{interventionBean.update}' styleClass="btn btn-primary"/>
-				<c:choose>
-					<c:when test='#{!empty interventionBean.id}'>
-						<h:link value="Cancel" outcome="view" styleClass="btn btn-primary">
-							<f:param name="id" value='#{interventionBean.id}'/>
-						</h:link>
-						<h:commandLink value="Delete" action='#{interventionBean.delete}' styleClass="btn btn-primary"/>
-					</c:when>
-					<c:otherwise>
-						<h:link value="Cancel" outcome="search" styleClass="btn btn-primary"/>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</h:form>
-	</ui:define>
-
-</ui:composition>
+        </ui:composition>
+</html>

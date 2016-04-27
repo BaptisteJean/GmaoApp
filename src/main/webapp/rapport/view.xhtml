@@ -25,11 +25,11 @@
 
 	<ui:define name="main">
 		<h:panelGrid columnClasses="label,component,required" columns="3">
-			<h:outputLabel for="rapportBeanRapportDateRedaction" value="Date Redaction:"/>
-			<h:outputText id="rapportBeanRapportDateRedaction" value="#{rapportBean.rapport.dateRedaction}"/>
-			<h:outputText/>
 			<h:outputLabel for="rapportBeanRapportDescriptionRapport" value="Description Rapport:"/>
 			<h:outputText id="rapportBeanRapportDescriptionRapport" value="#{rapportBean.rapport.descriptionRapport}"/>
+			<h:outputText/>
+			<h:outputLabel for="rapportBeanRapportDateRedaction" value="Date Redaction:"/>
+			<h:outputText id="rapportBeanRapportDateRedaction" value="#{rapportBean.rapport.dateRedaction}"/>
 			<h:outputText/>
 			<h:outputLabel for="rapportBeanRapportIdEquipe" value="Id Equipe:"/>
 			<h:link id="rapportBeanRapportIdEquipe" outcome="/equipe/view" rendered="#{!empty rapportBean.rapport.idEquipe}" value="#{rapportBean.rapport.idEquipe}">

@@ -41,18 +41,6 @@
 							<h:message for="personnelBeanExamplePrenomPersonnel" styleClass="error"/>
 						</h:panelGroup>
 						<h:outputText/>
-						<h:outputLabel for="personnelBeanExampleLogin" value="Login:"/>
-						<h:panelGroup>
-							<h:inputText id="personnelBeanExampleLogin" value="#{personnelBean.example.login}"/>
-							<h:message for="personnelBeanExampleLogin" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
-						<h:outputLabel for="personnelBeanExamplePassword" value="Password:"/>
-						<h:panelGroup>
-							<h:inputText id="personnelBeanExamplePassword" value="#{personnelBean.example.password}"/>
-							<h:message for="personnelBeanExamplePassword" styleClass="error"/>
-						</h:panelGroup>
-						<h:outputText/>
 					</h:panelGrid>
 					<h:panelGroup styleClass="buttons">
 						<h:commandLink value="Search" action='#{personnelBean.search}' styleClass="btn btn-primary"/>
@@ -78,24 +66,6 @@
 					<h:link outcome="/personnel/view">
 						<f:param name="id" value="#{_item.idPersonnel}"/>
 						<h:outputText id="itemPrenomPersonnel" value="#{_item.prenomPersonnel}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Login"/>
-					</f:facet>
-					<h:link outcome="/personnel/view">
-						<f:param name="id" value="#{_item.idPersonnel}"/>
-						<h:outputText id="itemLogin" value="#{_item.login}"/>
-					</h:link>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="Password"/>
-					</f:facet>
-					<h:link outcome="/personnel/view">
-						<f:param name="id" value="#{_item.idPersonnel}"/>
-						<h:outputText id="itemPassword" value="#{_item.password}"/>
 					</h:link>
 				</h:column>
 			</h:dataTable>
