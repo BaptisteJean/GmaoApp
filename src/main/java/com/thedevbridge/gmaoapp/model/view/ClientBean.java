@@ -49,55 +49,60 @@ import javax.persistence.Persistence;
 @ConversationScoped
 public class ClientBean implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
         
-    //private EntityManagerFactory emf = Persistence.createEntityManagerFactory("GmaoApp-persistence-unit");
-    //private EntityManager em = emf.createEntityManager();
-    //EntityTransaction et = em.getTransaction();
+    
+
+    @Inject
+    private Conversation conversation;
+
+    @PersistenceContext(unitName = "GmaoApp-persistence-unit", type = PersistenceContextType.EXTENDED)
+    private EntityManager entityManager;
+    //EntityTransaction et = entityManager.getTransaction();
 
 	/*
 	 * Support creating and retrieving Client entities
 	 */
-private Adresse adresse;
-	private Long id;
+    private Adresse adresse;
+    private Long id;
         
-        private boolean showTable = false;
+    private boolean showTable = false;
         
-        List<Client> allClient;
+    List<Client> allClient;
 
-	public Long getId() {
-		return this.id;
-	}
+    public Long getId() {
+	return this.id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+	this.id = id;
+    }
 
-	private Client client;
+    private Client client;
 
-	public Client getClient() {
-		return this.client;
-	}
+    public Client getClient() {
+	return this.client;
+    }
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
+    public void setClient(Client client) {
+	this.client = client;
+    }
         
-        public boolean getShowTable(){
-            return this.showTable;
-        }
+    public boolean getShowTable(){
+        return this.showTable;
+    }
         
-        public void setShowTable(boolean showTable){
-            this.showTable = showTable;
-        }
+    public void setShowTable(boolean showTable){
+    this.showTable = showTable;
+    }
         
-        public List<Client> getAllClient(){
-            return this.allClient;
-        }
+    public List<Client> getAllClient(){
+        return this.allClient;
+    }
         
-        public void setAllClient(List<Client> allClient){
-            this.allClient = allClient;
-        }
+    public void setAllClient(List<Client> allClient){
+        this.allClient = allClient;
+    }
 
     public Adresse getAdresse() {
         return adresse;
@@ -117,40 +122,34 @@ private Adresse adresse;
         }
     }
 
-	@Inject
-	private Conversation conversation;
+    public String create() {
 
-	@PersistenceContext(unitName = "GmaoApp-persistence-unit", type = PersistenceContextType.EXTENDED)
-	private EntityManager entityManager;
+	this.conversation.begin();
+	this.conversation.setTimeout(1800000L);
+	return "create?faces-redirect=true";
+    }
 
-	public String create() {
+    public void retrieve() {
 
-		this.conversation.begin();
-		this.conversation.setTimeout(1800000L);
-		return "create?faces-redirect=true";
+	if (FacesContext.getCurrentInstance().isPostback()) {
+            return;
 	}
 
-	public void retrieve() {
+	if (this.conversation.isTransient()) {
+            this.conversation.begin();
+            this.conversation.setTimeout(1800000L);
+	}
 
-		if (FacesContext.getCurrentInstance().isPostback()) {
-			return;
-		}
-
-		if (this.conversation.isTransient()) {
-			this.conversation.begin();
-			this.conversation.setTimeout(1800000L);
-		}
-
-		if (this.id == null) {
-			this.client = this.example;
-		} else {
-			this.client = findById(getId());
-		}
+	if (this.id == null) {
+            this.client = this.example;
+            } else {
+		this.client = findById(getId());
+            }
 	}
 
 	public Client findById(Long id) {
 
-		return this.entityManager.find(Client.class, id);
+            return this.entityManager.find(Client.class, id);
 	}
 
 	/*
@@ -170,18 +169,18 @@ private Adresse adresse;
             
             adresse = client.getIdAdresse();
                    
-		this.conversation.end();
+            this.conversation.end();
                 
-                adresse.setIdAdresse(random.nextLong());
-                this.entityManager.persist(adresse);
+            adresse.setIdAdresse(random.nextLong());
+            this.entityManager.persist(adresse);
                 
-                List<Adresse> adresseSaved = (List<Adresse>)entityManager.createNamedQuery("Adresse.findByIdAdresse").setParameter("idAdresse", adresse.getIdAdresse()).getResultList();
-                client.setIdAdresse(adresseSaved.get(adresseSaved.size() - 1));
+            List<Adresse> adresseSaved = (List<Adresse>)entityManager.createNamedQuery("Adresse.findByIdAdresse").setParameter("idAdresse", adresse.getIdAdresse()).getResultList();
+            client.setIdAdresse(adresseSaved.get(adresseSaved.size() - 1));
                 //client.setIdAdresse(adresseSaved);
-                client.setIdClient(random.nextLong());
-                this.entityManager.persist(client);
+            client.setIdClient(random.nextLong());
+            this.entityManager.persist(client);
                 
-                System.out.println("******************** OK ******************");
+            System.out.println("******************** OK ******************");
                 
                 
 
@@ -200,27 +199,27 @@ private Adresse adresse;
 			return null;
 		}*/
                 
-                String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-                return viewId + "?faces-redirect=true";
+            String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return viewId + "?faces-redirect=true";
 	}
 
 	public String delete() {
-		this.conversation.end();
+            this.conversation.end();
 
-		try {
-			Client deletableEntity = findById(getId());
-			Adresse idAdresse = deletableEntity.getIdAdresse();
-			idAdresse.getClientList().remove(deletableEntity);
-			deletableEntity.setIdAdresse(null);
-			this.entityManager.merge(idAdresse);
-			this.entityManager.remove(deletableEntity);
-			this.entityManager.flush();
-			return "search?faces-redirect=true";
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(e.getMessage()));
-			return null;
-		}
+            try {
+		Client deletableEntity = findById(getId());
+		Adresse idAdresse = deletableEntity.getIdAdresse();
+		idAdresse.getClientList().remove(deletableEntity);
+		deletableEntity.setIdAdresse(null);
+		this.entityManager.merge(idAdresse);
+		this.entityManager.remove(deletableEntity);
+		this.entityManager.flush();
+		return "search?faces-redirect=true";
+            } catch (Exception e) {
+		FacesContext.getCurrentInstance().addMessage(null,
+		new FacesMessage(e.getMessage()));
+		return null;
+            }
 	}
 
 	/*
@@ -260,69 +259,69 @@ private Adresse adresse;
 
 	public void paginate() {
 
-		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+            CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 
-		// Populate this.count
+            // Populate this.count
 
-		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
-		Root<Client> root = countCriteria.from(Client.class);
-		countCriteria = countCriteria.select(builder.count(root)).where(
-				getSearchPredicates(root));
-		this.count = this.entityManager.createQuery(countCriteria)
-				.getSingleResult();
+            CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
+            Root<Client> root = countCriteria.from(Client.class);
+            countCriteria = countCriteria.select(builder.count(root)).where(
+			getSearchPredicates(root));
+            this.count = this.entityManager.createQuery(countCriteria)
+			.getSingleResult();
 
 		// Populate this.pageItems
 
-		CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
-		root = criteria.from(Client.class);
-		TypedQuery<Client> query = this.entityManager.createQuery(criteria
-				.select(root).where(getSearchPredicates(root)));
-		query.setFirstResult(this.page * getPageSize()).setMaxResults(
-				getPageSize());
-		this.pageItems = query.getResultList();
+            CriteriaQuery<Client> criteria = builder.createQuery(Client.class);
+            root = criteria.from(Client.class);
+            TypedQuery<Client> query = this.entityManager.createQuery(criteria
+			.select(root).where(getSearchPredicates(root)));
+            query.setFirstResult(this.page * getPageSize()).setMaxResults(
+			getPageSize());
+            this.pageItems = query.getResultList();
 	}
 
 	private Predicate[] getSearchPredicates(Root<Client> root) {
 
-		CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
-		List<Predicate> predicatesList = new ArrayList<Predicate>();
+            CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+            List<Predicate> predicatesList = new ArrayList<Predicate>();
 
-		String codeClient = this.example.getCodeClient();
-		if (codeClient != null && !"".equals(codeClient)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("codeClient")),
-					'%' + codeClient.toLowerCase() + '%'));
-		}
-		String natureActivite = this.example.getNatureActivite();
-		if (natureActivite != null && !"".equals(natureActivite)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("natureActivite")),
-					'%' + natureActivite.toLowerCase() + '%'));
-		}
-		String nomClient = this.example.getNomClient();
-		if (nomClient != null && !"".equals(nomClient)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("nomClient")),
-					'%' + nomClient.toLowerCase() + '%'));
-		}
-		String prenomClient = this.example.getPrenomClient();
-		if (prenomClient != null && !"".equals(prenomClient)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("prenomClient")),
-					'%' + prenomClient.toLowerCase() + '%'));
-		}
-		String typePersonne = this.example.getTypePersonne();
-		if (typePersonne != null && !"".equals(typePersonne)) {
-			predicatesList.add(builder.like(
-					builder.lower(root.<String> get("typePersonne")),
-					'%' + typePersonne.toLowerCase() + '%'));
-		}
+            String codeClient = this.example.getCodeClient();
+            if (codeClient != null && !"".equals(codeClient)) {
+                predicatesList.add(builder.like(
+			builder.lower(root.<String> get("codeClient")),
+			'%' + codeClient.toLowerCase() + '%'));
+            }
+            String natureActivite = this.example.getNatureActivite();
+            if (natureActivite != null && !"".equals(natureActivite)) {
+		predicatesList.add(builder.like(
+			builder.lower(root.<String> get("natureActivite")),
+			'%' + natureActivite.toLowerCase() + '%'));
+            }
+            String nomClient = this.example.getNomClient();
+            if (nomClient != null && !"".equals(nomClient)) {
+		predicatesList.add(builder.like(
+			builder.lower(root.<String> get("nomClient")),
+			'%' + nomClient.toLowerCase() + '%'));
+            }
+            String prenomClient = this.example.getPrenomClient();
+            if (prenomClient != null && !"".equals(prenomClient)) {
+		predicatesList.add(builder.like(
+			builder.lower(root.<String> get("prenomClient")),
+			'%' + prenomClient.toLowerCase() + '%'));
+            }
+            String typePersonne = this.example.getTypePersonne();
+            if (typePersonne != null && !"".equals(typePersonne)) {
+		predicatesList.add(builder.like(
+			builder.lower(root.<String> get("typePersonne")),
+			'%' + typePersonne.toLowerCase() + '%'));
+            }
 
-		return predicatesList.toArray(new Predicate[predicatesList.size()]);
+            return predicatesList.toArray(new Predicate[predicatesList.size()]);
 	}
 
 	public List<Client> getPageItems() {
-		return this.pageItems;
+            return this.pageItems;
 	}
 
 	public long getCount() {
@@ -336,10 +335,10 @@ private Adresse adresse;
 
 	public List<Client> getAll() {
 
-		CriteriaQuery<Client> criteria = this.entityManager
-				.getCriteriaBuilder().createQuery(Client.class);
-		return this.entityManager.createQuery(
-				criteria.select(criteria.from(Client.class))).getResultList();
+            CriteriaQuery<Client> criteria = this.entityManager
+		.getCriteriaBuilder().createQuery(Client.class);
+            return this.entityManager.createQuery(
+		criteria.select(criteria.from(Client.class))).getResultList();
 	}
 
 	@Resource
@@ -347,29 +346,29 @@ private Adresse adresse;
 
 	public Converter getConverter() {
 
-		final ClientBean ejbProxy = this.sessionContext
-				.getBusinessObject(ClientBean.class);
+            final ClientBean ejbProxy = this.sessionContext
+		.getBusinessObject(ClientBean.class);
 
-		return new Converter() {
+            return new Converter() {
 
-			@Override
-			public Object getAsObject(FacesContext context,
-					UIComponent component, String value) {
+            @Override
+            public Object getAsObject(FacesContext context,
+		UIComponent component, String value) {
 
-				return ejbProxy.findById(Long.valueOf(value));
-			}
+                    return ejbProxy.findById(Long.valueOf(value));
+		}
 
-			@Override
-			public String getAsString(FacesContext context,
-					UIComponent component, Object value) {
+            @Override
+            public String getAsString(FacesContext context,
+		UIComponent component, Object value) {
 
-				if (value == null) {
-					return "";
-				}
+                    if (value == null) {
+			return "";
+                    }
 
-				return String.valueOf(((Client) value).getIdClient());
-			}
-		};
+                    return String.valueOf(((Client) value).getIdClient());
+                }
+            };
 	}
 
 	/*

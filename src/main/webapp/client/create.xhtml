@@ -94,7 +94,7 @@
                                 
                                  
                                  <h:panelGroup style="text-align:left">
-                           <h:outputLabel value="Type*" ></h:outputLabel>
+                           <h:outputLabel value="Statut*" ></h:outputLabel>
                                                 </h:panelGroup>
                                                 <p:spacer width="50px"/>
                                                 <h:panelGroup>
@@ -135,13 +135,6 @@
 				<h:panelGroup>
                                     <p:inputText  value="#{clientBean.client.idAdresse.numeroPhone}" required="true"/>
 				</h:panelGroup>
-                                        
-                                <p:spacer width="50px"/>	
-                                <h:panelGroup>
-                                </h:panelGroup>
-                                <h:panelGroup>
-                                    <p:inputText  />
-                                </h:panelGroup>
                                  
                                   <h:panelGroup>
                                        <h:outputLabel value="Email*" for="txt_author"></h:outputLabel>
@@ -178,7 +171,15 @@
                                     </p:selectOneMenu>  
                                 </h:panelGroup>
 					
+				
 					
+				<h:panelGroup style="text-align:left">
+					 <h:outputLabel value="Lieu Dit*" for="txt_author"></h:outputLabel>
+                                </h:panelGroup>
+				<p:spacer width="50px"/>	
+				<h:panelGroup>
+                                    <p:inputText  value="#{clientBean.client.idAdresse.lieuDit}" required="true"/>
+				</h:panelGroup>
 					
 				</h:panelGrid>
 			</p:fieldset>
@@ -224,6 +225,13 @@
             </f:facet>
             <h:outputText value="#{client.nomClient}" />
         </p:column>
+        
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Prenom" />
+            </f:facet>
+            <h:outputText value="#{client.prenomClient}" />
+        </p:column>
  
         <p:column>
             <f:facet name="header">
@@ -231,16 +239,48 @@
             </f:facet>
             <h:outputText value="#{client.typePersonne}" />
         </p:column>
+        
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Activité"/>
+            </f:facet>
+            <h:outputText value="#{client.natureActivite}" />
+        </p:column>
+        
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Pays" />
+            </f:facet>
+            <h:outputText value="#{client.idAdresse.region}" />
+        </p:column>
+ 
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Ville" />
+            </f:facet>
+            <h:outputText value="#{client.idAdresse.ville}" />
+        </p:column>
  
         <p:column>
             <f:facet name="header">
                 <h:outputText value="Localisation" />
             </f:facet>
-            <h:outputText value="#{client.idAdresse.ville}" />
+            <h:outputText value="#{client.idAdresse.lieuDit}" />
         </p:column>
- 
         
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Numero Tel" />
+            </f:facet>
+            <h:outputText value="#{client.idAdresse.numeroPhone}" />
+        </p:column>
         
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="Email" />
+            </f:facet>
+            <h:outputText value="#{client.idAdresse.email}" />
+        </p:column>
         
     </p:dataTable>
  
