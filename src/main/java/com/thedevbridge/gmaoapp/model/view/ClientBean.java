@@ -47,7 +47,7 @@ public class ClientBean implements Serializable {
 	/*
 	 * Support creating and retrieving Client entities
 	 */
-
+private Adresse adresse;
 	private Long id;
 
 	public Long getId() {
@@ -67,6 +67,14 @@ public class ClientBean implements Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
 
 	@Inject
 	private Conversation conversation;
@@ -108,7 +116,14 @@ public class ClientBean implements Serializable {
 	 * Support updating and deleting Client entities
 	 */
 
+        public Long setAdresseId(){
+           adresse.setIdAdresse(this.client.getIdClient());
+           
+           return adresse.getIdAdresse();
+        }
 	public String update() {
+            //
+                   
 		this.conversation.end();
 
 		try {

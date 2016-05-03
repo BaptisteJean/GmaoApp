@@ -92,6 +92,22 @@
                                     <p:inputText  value="#{clientBean.client.prenomClient}" required="true"/>
 				</h:panelGroup>
                                 
+                                 
+                                 <h:panelGroup style="text-align:left">
+                           <h:outputLabel value="Type*" ></h:outputLabel>
+                                                </h:panelGroup>
+                                                <p:spacer width="50px"/>
+                                                <h:panelGroup>
+                                                    <p:inputText  value="#{clientBean.client.typePersonne}" required="true"/>
+                        </h:panelGroup>
+
+                                                <h:panelGroup style="text-align:left">
+                           <h:outputLabel value="Nature activite*" ></h:outputLabel>
+                                                </h:panelGroup>
+                                                <p:spacer width="50px"/>
+                                                <h:panelGroup>
+                                                    <p:inputText  value="#{clientBean.client.natureActivite}" required="true"/>
+                        </h:panelGroup>
 					
 					
 				</h:panelGrid>
@@ -99,12 +115,17 @@
              <br/>
                         <p:fieldset styleClass="fieldset" legend="Adresse">
                             <h:panelGrid  styleClass="connex-tech" id="lPanelGrid" style="margin-top: 25px;text-align: left" cellspacing="8" columns="3">
+                                
+                                
                                 <h:panelGroup style="text-align:left">
+                                    
+                                    
+                                    
 					<h:outputLabel value="B.P.: *" for="txt_title"/>
 				</h:panelGroup>
                                 <p:spacer width="20px"/>
 				<h:panelGroup>
-                                    <p:inputText  value="#{adresseBean.adresse.boitePostale}" required="true"/>
+                                    <p:inputText  value="#{adresseBean.add.boitePostale}" required="true"/>
 				</h:panelGroup>
 					
 				<h:panelGroup style="text-align:left">
@@ -112,14 +133,14 @@
                                 </h:panelGroup>
 				<p:spacer width="50px"/>	
 				<h:panelGroup>
-                                    <p:inputText  value="#{adresseBean.adresse.numeroPhone}" required="true"/>
+                                    <p:inputText  value="#{adresseBean.add.numeroPhone}" required="true"/>
 				</h:panelGroup>
                                         
                                 <p:spacer width="50px"/>	
                                 <h:panelGroup>
                                 </h:panelGroup>
                                 <h:panelGroup>
-                                    <p:inputText  value="#{adresseBean.adresse.numeroPhone}" required="true"/>
+                                    <p:inputText  />
                                 </h:panelGroup>
                                  
                                   <h:panelGroup>
@@ -127,7 +148,7 @@
                                 </h:panelGroup>
                                    <p:spacer width="50px"/>
                                    <h:panelGroup>
-                                       <p:inputText  value="#{adresseBean.adresse.email}" required="true"/>
+                                       <p:inputText  value="#{adresseBean.add.email}" required="true"/>
                                 </h:panelGroup>
                                    
                                    <h:panelGroup>
@@ -135,7 +156,7 @@
                                 </h:panelGroup>
                                    <p:spacer width="50px"/>
                                    <h:panelGroup>
-                                       <p:selectOneMenu id="region" value="#{adresseBean.adresse.region}" style="width:203px">
+                                       <p:selectOneMenu id="region" value="#{adresseBean.add.region}" style="width:203px">
                                         <f:selectItem itemLabel="Choisir une region" itemValue="" />
                                         <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
                                         <f:selectItem itemLabel="PS4" itemValue="PS4" />
@@ -149,7 +170,7 @@
                                 </h:panelGroup>
                                    <p:spacer width="50px"/>
                                    <h:panelGroup>
-                                       <p:selectOneMenu id="ville" value="#{adresseBean.adresse.ville}" style="width:203px">
+                                       <p:selectOneMenu id="ville" value="#{adresseBean.add.ville}" style="width:203px">
                                         <f:selectItem itemLabel="Choisir une ville" itemValue="" />
                                         <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
                                         <f:selectItem itemLabel="PS4" itemValue="PS4" />
@@ -164,14 +185,14 @@
              <p style="text-align: center; margin-top:20px;">
              <p:commandButton   action="confirmSignIn"  value="Annuler" style="background-color: #3e5288; color: white;"/>
              <p:spacer width="50px"/>
-              <p:commandButton    action="confirmSignIn"  value="Ajouter" style="background-color: #3e5288; color: white;"/>
+              <p:commandButton    action="#{clientBean.update()}"  value="Ajouter" style="background-color: #3e5288; color: white;"/>
              </p>
 		</h:form>
      </p:panel>    
                 <br/>
                 
                 <h:form>
-    <p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}"
+    <p:dataTable id="tbl" var="car" value="#{clientBean.all}"
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                  paginator="true" rows="10" style="margin-bottom:20px">
  
@@ -201,37 +222,24 @@
             <f:facet name="header">
                 <h:outputText value="Nom" />
             </f:facet>
-            <h:outputText value="#{car.id}" />
+            <h:outputText value="#{client.nomClient}" />
         </p:column>
  
         <p:column>
             <f:facet name="header">
                 <h:outputText value="Statut"/>
             </f:facet>
-            <h:outputText value="#{car.year}" />
+            <h:outputText value="#{client.typePersonne}" />
         </p:column>
  
         <p:column>
             <f:facet name="header">
                 <h:outputText value="Localisation" />
             </f:facet>
-            <h:outputText value="#{car.brand}" />
+            <h:outputText value="#{client.idAdresse.ville}" />
         </p:column>
  
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="site d'intervention" />
-            </f:facet>
-            <h:outputText value="#{car.color}" />
-        </p:column>
         
-        
-        <p:column>
-            <f:facet name="header">
-                <h:outputText value="Materiel" />
-            </f:facet>
-            <h:outputText value="#{car.color}" />
-        </p:column>
         
         
     </p:dataTable>
