@@ -26,6 +26,13 @@ import javax.persistence.criteria.Root;
 
 import com.thedevbridge.gmaoapp.model.Client;
 import com.thedevbridge.gmaoapp.model.Adresse;
+import java.util.Random;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 /**
  * Backing bean for Client entities.
@@ -43,12 +50,20 @@ import com.thedevbridge.gmaoapp.model.Adresse;
 public class ClientBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+        
+    //private EntityManagerFactory emf = Persistence.createEntityManagerFactory("GmaoApp-persistence-unit");
+    //private EntityManager em = emf.createEntityManager();
+    //EntityTransaction et = em.getTransaction();
 
 	/*
 	 * Support creating and retrieving Client entities
 	 */
 private Adresse adresse;
 	private Long id;
+        
+        private boolean showTable = false;
+        
+        List<Client> allClient;
 
 	public Long getId() {
 		return this.id;
@@ -67,6 +82,22 @@ private Adresse adresse;
 	public void setClient(Client client) {
 		this.client = client;
 	}
+        
+        public boolean getShowTable(){
+            return this.showTable;
+        }
+        
+        public void setShowTable(boolean showTable){
+            this.showTable = showTable;
+        }
+        
+        public List<Client> getAllClient(){
+            return this.allClient;
+        }
+        
+        public void setAllClient(List<Client> allClient){
+            this.allClient = allClient;
+        }
 
     public Adresse getAdresse() {
         return adresse;
@@ -74,6 +105,16 @@ private Adresse adresse;
 
     public void setAdresse(Adresse adresse) {
         this.adresse = adresse;
+    }
+    
+    @PostConstruct
+    public void loadClient(){
+        allClient = (List<Client>)entityManager.createNamedQuery("Client.findAll").getResultList();
+        if(allClient.isEmpty()){
+            this.showTable = false;
+        }else{
+            this.showTable = true;
+        }
     }
 
 	@Inject
@@ -121,12 +162,30 @@ private Adresse adresse;
            
            return adresse.getIdAdresse();
         }
+        
 	public String update() {
-            //
+            System.out.println("******************** Going to Save ******************");
+                
+            Random random = new Random();
+            
+            adresse = client.getIdAdresse();
                    
 		this.conversation.end();
+                
+                adresse.setIdAdresse(random.nextLong());
+                this.entityManager.persist(adresse);
+                
+                List<Adresse> adresseSaved = (List<Adresse>)entityManager.createNamedQuery("Adresse.findByIdAdresse").setParameter("idAdresse", adresse.getIdAdresse()).getResultList();
+                client.setIdAdresse(adresseSaved.get(adresseSaved.size() - 1));
+                //client.setIdAdresse(adresseSaved);
+                client.setIdClient(random.nextLong());
+                this.entityManager.persist(client);
+                
+                System.out.println("******************** OK ******************");
+                
+                
 
-		try {
+		/*try {
 			if (this.id == null) {
 				this.entityManager.persist(this.client);
 				return "search?faces-redirect=true";
@@ -139,7 +198,10 @@ private Adresse adresse;
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));
 			return null;
-		}
+		}*/
+                
+                String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+                return viewId + "?faces-redirect=true";
 	}
 
 	public String delete() {

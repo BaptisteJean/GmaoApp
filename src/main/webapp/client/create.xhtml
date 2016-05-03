@@ -125,7 +125,7 @@
 				</h:panelGroup>
                                 <p:spacer width="20px"/>
 				<h:panelGroup>
-                                    <p:inputText  value="#{adresseBean.add.boitePostale}" required="true"/>
+                                    <p:inputText  value="#{clientBean.client.idAdresse.boitePostale}" required="true"/>
 				</h:panelGroup>
 					
 				<h:panelGroup style="text-align:left">
@@ -133,7 +133,7 @@
                                 </h:panelGroup>
 				<p:spacer width="50px"/>	
 				<h:panelGroup>
-                                    <p:inputText  value="#{adresseBean.add.numeroPhone}" required="true"/>
+                                    <p:inputText  value="#{clientBean.client.idAdresse.numeroPhone}" required="true"/>
 				</h:panelGroup>
                                         
                                 <p:spacer width="50px"/>	
@@ -148,7 +148,7 @@
                                 </h:panelGroup>
                                    <p:spacer width="50px"/>
                                    <h:panelGroup>
-                                       <p:inputText  value="#{adresseBean.add.email}" required="true"/>
+                                       <p:inputText  value="#{clientBean.client.idAdresse.email}" required="true"/>
                                 </h:panelGroup>
                                    
                                    <h:panelGroup>
@@ -156,7 +156,7 @@
                                 </h:panelGroup>
                                    <p:spacer width="50px"/>
                                    <h:panelGroup>
-                                       <p:selectOneMenu id="region" value="#{adresseBean.add.region}" style="width:203px">
+                                       <p:selectOneMenu id="region" value="#{clientBean.client.idAdresse.region}" style="width:203px">
                                         <f:selectItem itemLabel="Choisir une region" itemValue="" />
                                         <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
                                         <f:selectItem itemLabel="PS4" itemValue="PS4" />
@@ -170,7 +170,7 @@
                                 </h:panelGroup>
                                    <p:spacer width="50px"/>
                                    <h:panelGroup>
-                                       <p:selectOneMenu id="ville" value="#{adresseBean.add.ville}" style="width:203px">
+                                       <p:selectOneMenu id="ville" value="#{clientBean.client.idAdresse.ville}" style="width:203px">
                                         <f:selectItem itemLabel="Choisir une ville" itemValue="" />
                                         <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
                                         <f:selectItem itemLabel="PS4" itemValue="PS4" />
@@ -185,16 +185,16 @@
              <p style="text-align: center; margin-top:20px;">
              <p:commandButton   action="confirmSignIn"  value="Annuler" style="background-color: #3e5288; color: white;"/>
              <p:spacer width="50px"/>
-              <p:commandButton    action="#{clientBean.update()}"  value="Ajouter" style="background-color: #3e5288; color: white;"/>
+             <p:commandButton    action="#{clientBean.update()}"  value="Ajouter" style="background-color: #3e5288; color: white;"/>
              </p>
 		</h:form>
      </p:panel>    
                 <br/>
                 
                 <h:form>
-    <p:dataTable id="tbl" var="car" value="#{clientBean.all}"
+    <p:dataTable id="tbl" var="client" value="#{clientBean.all}"
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                 paginator="true" rows="10" style="margin-bottom:20px">
+                 paginator="true" rows="10" style="margin-bottom:20px" rendered="#{clientBean.showTable}">
  
         <f:facet name="{Exporters}">
             <h:commandLink>
