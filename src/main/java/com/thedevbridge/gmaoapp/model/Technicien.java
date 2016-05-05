@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Technicien implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id_technicien")
 	private Long idTechnicien;
@@ -50,6 +50,11 @@ public class Technicien implements Serializable {
 	private Personnel idPersonnel;
 
 	public Technicien() {
+            this.idDepartement = new Departement();
+            this.idEquipe = new Equipe();
+            this.idPersonnel = new Personnel();
+            
+            
 	}
 
 	public Technicien(Long idTechnicien) {

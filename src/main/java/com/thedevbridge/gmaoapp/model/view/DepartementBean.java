@@ -25,6 +25,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import com.thedevbridge.gmaoapp.model.Departement;
+import java.util.Random;
 
 /**
  * Backing bean for Departement entities.
@@ -109,8 +110,16 @@ public class DepartementBean implements Serializable {
 
 	public String update() {
 		this.conversation.end();
+                
+                Random random = new Random();
+                
+                departement.setIdDepartement(random.nextLong());
+                this.entityManager.persist(departement);
+                
+                String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+                return viewId + "?faces-redirect=true";
 
-		try {
+		/*try {
 			if (this.id == null) {
 				this.entityManager.persist(this.departement);
 				return "search?faces-redirect=true";
@@ -123,7 +132,7 @@ public class DepartementBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));
 			return null;
-		}
+		}*/
 	}
 
 	public String delete() {

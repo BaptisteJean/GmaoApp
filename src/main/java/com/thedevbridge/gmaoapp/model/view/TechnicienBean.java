@@ -28,6 +28,9 @@ import com.thedevbridge.gmaoapp.model.Technicien;
 import com.thedevbridge.gmaoapp.model.Departement;
 import com.thedevbridge.gmaoapp.model.Equipe;
 import com.thedevbridge.gmaoapp.model.Personnel;
+import java.util.Random;
+import javax.annotation.PostConstruct;
+import javax.faces.convert.ConverterException;
 
 /**
  * Backing bean for Technicien entities.
@@ -46,11 +49,22 @@ public class TechnicienBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@PersistenceContext(unitName = "GmaoApp-persistence-unit", type = PersistenceContextType.EXTENDED)
+	private EntityManager entityManager;
+
 	/*
 	 * Support creating and retrieving Technicien entities
 	 */
 
 	private Long id;
+	private Technicien technicien;
+        private Departement departement;
+        private Equipe equipe;
+        private Personnel personnel;
+        
+        private boolean showTable = false;
+        private List<Technicien> allTechnicien;
+        private List<Departement> allDepartement;
 
 	public Long getId() {
 		return this.id;
@@ -60,8 +74,6 @@ public class TechnicienBean implements Serializable {
 		this.id = id;
 	}
 
-	private Technicien technicien;
-
 	public Technicien getTechnicien() {
 		return this.technicien;
 	}
@@ -69,12 +81,69 @@ public class TechnicienBean implements Serializable {
 	public void setTechnicien(Technicien technicien) {
 		this.technicien = technicien;
 	}
+        
+        public Departement getDepartement() {
+		return this.departement;
+	}
+
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
+	}
+        
+        public Equipe getEquipe() {
+		return this.equipe;
+	}
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+        
+        public Personnel getPersonnel() {
+		return this.personnel;
+	}
+
+	public void setPersonnel(Personnel personnel) {
+		this.personnel = personnel;
+	}
+        
+        public boolean getShowTable(){
+            return this.showTable;
+        }
+
+        public void setShowTable(boolean showTable){
+            this.showTable = showTable;
+        }
+        
+        public List<Technicien> getAllTechnicien(){
+            return this.allTechnicien;
+        }
+        
+        public void setAllTechnicien(List<Technicien> allTechnicien){
+            this.allTechnicien = allTechnicien;
+        }
+        
+        public List<Departement> getAllDepartement(){
+            return this.allDepartement;
+        }
+        
+        public void setAllDepartement(List<Departement> allDepartement){
+            this.allDepartement = allDepartement;
+        }
+        
+        @PostConstruct
+        public void loadTechnicien(){
+            allTechnicien = (List<Technicien>)entityManager.createNamedQuery("Technicien.findAll").getResultList();
+            allDepartement = (List<Departement>)entityManager.createNamedQuery("Departement.findAll").getResultList();
+            
+            if(allTechnicien.isEmpty()){
+                this.showTable = false;
+            }else{
+                this.showTable = true;
+            }
+        }
 
 	@Inject
 	private Conversation conversation;
-
-	@PersistenceContext(unitName = "GmaoApp-persistence-unit", type = PersistenceContextType.EXTENDED)
-	private EntityManager entityManager;
 
 	public String create() {
 
@@ -112,8 +181,40 @@ public class TechnicienBean implements Serializable {
 
 	public String update() {
 		this.conversation.end();
+                
+                Random random = new Random();
+                
+                //departement = technicien.getIdDepartement();
+                equipe = technicien.getIdEquipe();
+                personnel = technicien.getIdPersonnel();
+                
+                //departement.setIdDepartement(random.nextLong());
+                equipe.setIdEquipe(random.nextLong());
+                //equipe.setIdDepartemant(departement);
+                personnel.setIdPersonnel(random.nextLong());
+                
+                //this.entityManager.persist(departement);
+                //List<Departement> departementSaved = (List<Departement>)entityManager.createNamedQuery("Departement.findByIdDepartement").setParameter("idDepartement", departement.getIdDepartement()).getResultList();
+                //equipe.setIdDepartemant(departementSaved.get(departementSaved.size() - 1));
+                equipe.setIdDepartemant(this.technicien.getIdDepartement());
+                
+                this.entityManager.persist(equipe);
+                this.entityManager.persist(personnel);
+                
+                //technicien.setIdDepartement(departementSaved.get(departementSaved.size() - 1));
+                //technicien.setIdDepartement(this.technicien.getIdDepartement());
+                List<Equipe> equipeSaved = (List<Equipe>)entityManager.createNamedQuery("Equipe.findByIdEquipe").setParameter("idEquipe", equipe.getIdEquipe()).getResultList();
+                technicien.setIdEquipe(equipeSaved.get(equipeSaved.size() - 1));
+                List<Personnel> personnelSaved = (List<Personnel>)entityManager.createNamedQuery("Personnel.findByIdPersonnel").setParameter("idPersonnel", personnel.getIdPersonnel()).getResultList();
+                technicien.setIdPersonnel(personnelSaved.get(personnelSaved.size() - 1));
+                
+                technicien.setIdTechnicien(random.nextLong());
+                this.entityManager.persist(technicien);
+                
+                String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+                return viewId + "?faces-redirect=true";
 
-		try {
+		/*try {
 			if (this.id == null) {
 				this.entityManager.persist(this.technicien);
 				return "search?faces-redirect=true";
@@ -126,7 +227,7 @@ public class TechnicienBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));
 			return null;
-		}
+		}*/
 	}
 
 	public String delete() {
@@ -274,6 +375,8 @@ public class TechnicienBean implements Serializable {
 
 		final TechnicienBean ejbProxy = this.sessionContext
 				.getBusinessObject(TechnicienBean.class);
+                    
+                    System.out.println("Starting convertion");
 
 		return new Converter() {
 

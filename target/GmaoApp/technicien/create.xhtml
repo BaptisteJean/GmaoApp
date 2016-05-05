@@ -63,106 +63,163 @@
                 </div>
             </ui:define>
             <ui:define name="content">
-                <h:form id="form">
+<h:form id="form">
     <p:growl id="msgs" />
     <h3 style="margin-top:0;color:#18547c;font-weight: bold">Techniciens</h3>
     <p:panel header="Nouveau technicien" style="margin-bottom:20px">
         
-            <h:panelGrid  styleClass="connex-tech" id="logPanelGrid" style=" margin-top: 25px; text-align: left" cellspacing="8" columns="3">
-                                <h:panelGroup style="text-align:left">
-					<h:outputLabel value="Nom(s) : *" for="txt_title"/>
-				</h:panelGroup>
-                                <p:spacer width="20px"/>
-				<h:panelGroup>
-                                    <p:inputText  value="" required="true"/>
-				</h:panelGroup>
+        <h:panelGrid  styleClass="connex-tech" id="logPanelGrid" style=" margin-top: 25px; text-align: left" cellspacing="8" columns="3">
+            <h:panelGroup style="text-align:left">
+		<h:outputLabel value="Nom(s) : *" for="txt_title"/>
+            </h:panelGroup>
+            <p:spacer width="20px"/>
+            <h:panelGroup>
+                <p:inputText  value="#{technicienBean.technicien.idPersonnel.nomPersonnel}" required="true"/>
+            </h:panelGroup>
 					
-				<h:panelGroup style="text-align:left">
-					 <h:outputLabel value="Telephone*" for="txt_author"></h:outputLabel>
-                                </h:panelGroup>
-                                <p:spacer width="50px"/>
-                                <h:panelGroup>
-						<p:inputText  value="" required="true"/>
-				</h:panelGroup>
+            <h:panelGroup style="text-align:left">
+		<h:outputLabel value="Prenom(s) *" for="txt_author"></h:outputLabel>
+            </h:panelGroup>
+            <p:spacer width="50px"/>
+            <h:panelGroup>
+                <p:inputText  value="#{technicienBean.technicien.idPersonnel.prenomPersonnel}" required="true"/>
+            </h:panelGroup>
+            
+            <h:panelGroup style="text-align:left">
+		<h:outputLabel value="Login *" for="txt_author"></h:outputLabel>
+            </h:panelGroup>
+            <p:spacer width="50px"/>
+            <h:panelGroup>
+                <p:inputText  value="#{technicienBean.technicien.idPersonnel.login}" required="true"/>
+            </h:panelGroup>
+            
+            <h:panelGroup style="text-align:left">
+		<h:outputLabel value="Mot de Passe *" for="txt_author"></h:outputLabel>
+            </h:panelGroup>
+            <p:spacer width="50px"/>
+            <h:panelGroup>
+                <p:inputText  value="#{technicienBean.technicien.idPersonnel.password}" required="true"/>
+            </h:panelGroup>
+            
+            <h:panelGroup>
+                <p:outputLabel for="fonction" value="Fonction * " />
+            </h:panelGroup>
+            <p:spacer width="50px"/>
+            <h:panelGroup>
+                <p:selectOneMenu id="fonction" value="#{technicienBean.technicien.fonctionTechicien}" style="width:203px">
+                    <f:selectItem itemLabel="Choisir une fonction" itemValue="" />
+                    <f:selectItem itemLabel="Technicien Froid" itemValue="Technicien Froid" />
+                    <f:selectItem itemLabel="Technicien Climatiseur" itemValue="Technicien Climatiseur" />
+                    <f:selectItem itemLabel="Technicien Electricité" itemValue="Technicien Electricité" />
+                </p:selectOneMenu>
+            </h:panelGroup>
                                 
-                                <h:panelGroup>
-                                    <p:outputLabel for="departement" value="Departement" />
-                                </h:panelGroup>
-                                          <p:spacer width="50px"/>
-                                <h:panelGroup >
-                                     <p:selectOneMenu id="departement" value="" style="width:203px">
-                <f:selectItem itemLabel="chosir un departement" itemValue="" />
-                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-            </p:selectOneMenu>  
-                                </h:panelGroup>
-                       
-           
-                                <h:panelGroup>
-                                    <p:outputLabel for="fonction" value="Fonction * " />
-                                </h:panelGroup>
-                                           <p:spacer width="50px"/>
-                                 <h:panelGroup>
-            <p:selectOneMenu id="fonction" value="" style="width:203px">
-                <f:selectItem itemLabel="Choisir une fonction" itemValue="" />
-                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-            </p:selectOneMenu>
-                                 </h:panelGroup>
+            <h:panelGroup>
+                <p:outputLabel for="departement" value="Departement *" />
+            </h:panelGroup>
+            <p:spacer width="50px"/>
+            <!--<h:panelGroup >
+                <p:selectOneMenu id="departement" value="#{technicienBean.technicien.idDepartement.libelleDepartemnt}" style="width:203px">
+                    <f:selectItem itemLabel="chosir un departement" itemValue="" />
+                    <f:selectItem itemLabel="Departement Froid et Climatiseur" itemValue="Departement Froid et Climatiseur" />
+                    <f:selectItem itemLabel="Departement Elrctricité" itemValue="Departement Elrctricité" />
+                </p:selectOneMenu>  
+            </h:panelGroup>-->
+            
+            <h:panelGroup >
+                <p:selectOneMenu id="departement" value="#{technicienBean.technicien.idDepartement}" converter="#{departementBean.converter}" style="width:203px">
+                    <!--<f:selectItem itemLabel="chosir un departement" itemValue="" />-->
+                    <f:selectItems value="#{technicienBean.allDepartement}" var="departement" itemValue="#{departement}"
+                                   itemLabel="#{departement.libelleDepartemnt} - #{departement.chefDepartement}" />
+                </p:selectOneMenu>  
+            </h:panelGroup>
 
-                  
+                                
+        </h:panelGrid>
+        <p style="text-align: center; margin-top:20px;">
+            <p:commandButton  value="Annuler" type="reset" style="background-color: #3e5288; color: white;"/>
+            <p:spacer width="30px"/>
+            <p:commandButton value="Enregistrer" action="#{technicienBean.update()}" style="background-color: #3e5288; color: white;" />
 
-
-
-                   
-                    
-                                           
-           </h:panelGrid>
-            <p style="text-align: center; margin-top:20px;">
-                 <p:commandButton  value="Annuler" type="reset" style="background-color: #3e5288; color: white;"/>
-                 <p:spacer width="30px"/>
-                  <p:commandButton value="Enregistrer" type="submit" style="background-color: #3e5288; color: white;" />
-
-                 </p>
+        </p>
     </p:panel>
     
-                </h:form>
-                <h:form>
-    <p:outputPanel id="books">
-        <p:dataTable value="#{collectorView.books}" var="book" id="booksTable">
+</h:form>
+<h:form>
+    <!--<p:outputPanel id="books">-->
+        <p:dataTable var="technicien" value="#{technicienBean.all}" id="techTable"
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                    paginator="true" rows="10" style="margin-bottom:20px" rendered="#{technicienBean.showTable}">
+            
+            <f:facet name="{Exporters}">
+                <h:commandLink>
+                    <p:graphicImage name="/img/excel.png" width="24"/>
+                    <p:dataExporter type="xls" target="techTable" fileName="cars" />
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage name="/img/pdf.png" width="24"/>
+                    <p:dataExporter type="pdf" target="techTable" fileName="cars"/>
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage name="/img/csv.png" width="24"/>
+                    <p:dataExporter type="csv" target="techTable" fileName="cars" />
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage name="/img/xml.png" width="24"/>
+                    <p:dataExporter type="xml" target="techTable" fileName="cars" />
+                </h:commandLink>
+            </f:facet>
  
             <p:column headerText="Nom(s)">
-                <h:outputText value="#{book.title}" />
+                <h:outputText value="#{technicien.idPersonnel.nomPersonnel}" />
             </p:column>
  
             <p:column headerText="Prenom(s)">
                 <f:facet name="header">
                     <h:outputText value="Prenom(s)" />
                 </f:facet>
-                <h:outputText value="#{book.author}" />
+                <h:outputText value="#{technicien.idPersonnel.prenomPersonnel}" />
             </p:column>
             
+            <p:column headerText="Login">
+                <f:facet name="header">
+                    <h:outputText value="Login" />
+                </f:facet>
+                <h:outputText value="#{technicien.idPersonnel.login}" />
+            </p:column>
             
-            <p:column headerText="Departement">
-                <h:outputText value="#{book.title}" />
+            <p:column headerText="Mot de Passe">
+                <f:facet name="header">
+                    <h:outputText value="Mot de Passe" />
+                </f:facet>
+                <h:outputText value="#{technicien.idPersonnel.password}" />
             </p:column>
  
             <p:column headerText="Fonction">
                 <f:facet name="header">
                     <h:outputText value="Fonction" />
                 </f:facet>
+                <h:outputText value="#{technicien.fonctionTechicien}" />
+            </p:column>
+            
+            <p:column headerText="Departement">
+                <f:facet name="header">
+                    <h:outputText value="Departement" />
+                </f:facet>
+                <h:outputText value="#{technicien.idDepartement.libelleDepartemnt}" />
             </p:column>
  
-            <p:column headerText="Action">
+            <!--<p:column headerText="Action">
                 <p:commandLink value="Remove" update=":form:books" process=":form:books">
                     <p:collector value="" removeFrom="" unique="true"/>
                 </p:commandLink>
-            </p:column>
+            </p:column>-->
  
         </p:dataTable>
-    </p:outputPanel>
+    <!--</p:outputPanel>-->
 </h:form>
                        
             </ui:define>

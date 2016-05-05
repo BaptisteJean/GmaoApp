@@ -77,7 +77,7 @@
 			<p:fieldset styleClass="fieldset" legend="informations personnelles">
 			 <h:panelGrid  styleClass="connex-tech" id="logPanelGrid" style="margin: 0 auto; margin-top: 25px; text-align: left" cellspacing="8" columns="3">
 				<h:panelGroup style="text-align:left">
-					<h:outputLabel value="Nom(s) : *" for="txt_title"/>
+                                    <h:outputLabel value="Nom(s) : *" for="txt_title"/>
 				</h:panelGroup>
                                 <p:spacer width="20px"/>
 				<h:panelGroup>
@@ -93,21 +93,21 @@
 				</h:panelGroup>
                                 
                                  
-                                 <h:panelGroup style="text-align:left">
-                           <h:outputLabel value="Statut*" ></h:outputLabel>
-                                                </h:panelGroup>
-                                                <p:spacer width="50px"/>
-                                                <h:panelGroup>
-                                                    <p:inputText  value="#{clientBean.client.typePersonne}" required="true"/>
-                        </h:panelGroup>
+                                <h:panelGroup style="text-align:left">
+                                    <h:outputLabel value="Statut*" ></h:outputLabel>
+                                </h:panelGroup>
+                                <p:spacer width="50px"/>
+                                <h:panelGroup>
+                                    <p:inputText  value="#{clientBean.client.typePersonne}" required="true"/>
+                                </h:panelGroup>
 
-                                                <h:panelGroup style="text-align:left">
-                           <h:outputLabel value="Nature activite*" ></h:outputLabel>
-                                                </h:panelGroup>
-                                                <p:spacer width="50px"/>
-                                                <h:panelGroup>
-                                                    <p:inputText  value="#{clientBean.client.natureActivite}" required="true"/>
-                        </h:panelGroup>
+                                <h:panelGroup style="text-align:left">
+                                    <h:outputLabel value="Nature activite*" ></h:outputLabel>
+                                </h:panelGroup>
+                                <p:spacer width="50px"/>
+                                <h:panelGroup>
+                                    <p:inputText  value="#{clientBean.client.natureActivite}" required="true"/>
+                                </h:panelGroup>
 					
 					
 				</h:panelGrid>
@@ -118,10 +118,7 @@
                                 
                                 
                                 <h:panelGroup style="text-align:left">
-                                    
-                                    
-                                    
-					<h:outputLabel value="B.P.: *" for="txt_title"/>
+                                    <h:outputLabel value="B.P.: *" for="txt_title"/>
 				</h:panelGroup>
                                 <p:spacer width="20px"/>
 				<h:panelGroup>
@@ -192,7 +189,7 @@
      </p:panel>    
                 <br/>
                 
-                <h:form>
+<h:form>
     <p:dataTable id="tbl" var="client" value="#{clientBean.all}"
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                  paginator="true" rows="10" style="margin-bottom:20px" rendered="#{clientBean.showTable}">

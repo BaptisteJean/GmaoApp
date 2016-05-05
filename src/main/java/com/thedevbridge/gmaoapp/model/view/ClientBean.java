@@ -163,13 +163,12 @@ public class ClientBean implements Serializable {
         }
         
 	public String update() {
-            System.out.println("******************** Going to Save ******************");
+                   
+            this.conversation.end();
                 
             Random random = new Random();
             
             adresse = client.getIdAdresse();
-                   
-            this.conversation.end();
                 
             adresse.setIdAdresse(random.nextLong());
             this.entityManager.persist(adresse);
@@ -180,9 +179,9 @@ public class ClientBean implements Serializable {
             client.setIdClient(random.nextLong());
             this.entityManager.persist(client);
                 
-            System.out.println("******************** OK ******************");
-                
-                
+            
+            String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+            return viewId + "?faces-redirect=true";
 
 		/*try {
 			if (this.id == null) {
@@ -199,8 +198,6 @@ public class ClientBean implements Serializable {
 			return null;
 		}*/
                 
-            String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
-            return viewId + "?faces-redirect=true";
 	}
 
 	public String delete() {

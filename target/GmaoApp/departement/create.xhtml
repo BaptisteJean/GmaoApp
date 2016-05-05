@@ -8,8 +8,8 @@
 	>
 
 	<f:metadata>
-		<f:viewParam name="id" value='#{rapportBean.id}'/>
-		<f:event type="preRenderView" listener='#{rapportBean.retrieve}'/>
+            <f:viewParam name="id" value='#{departementBean.id}'/>
+            <f:event type="preRenderView" listener='#{departementBean.retrieve()}'/>
 	</f:metadata>
 <ui:composition template="/resources/scaffold/pageTemplate.xhtml">
 	<ui:param name="pageTitle" value="Create Rapport"/>
@@ -73,61 +73,86 @@
         <h:panelGrid columns="3" columnClasses="cols1, cols2"  cellpadding="5" style="text-align: left;width: 70%;margin-left:170px" styleClass="connex-tech">
             
             
-            <h:outputLabel value="Libelle : *" for="libelle"></h:outputLabel>
+            <h:outputLabel value="Libelle: *" for="libelle"></h:outputLabel>
              <p:spacer width="50px"/>
-              <p:inputText  value="#{equipeBean.equipe.libelleEquipe}" required="true"/>
-            <h:outputLabel value="Description des activites : *" for="description"></h:outputLabel>
+             <p:inputText  value="#{departementBean.departement.libelleDepartemnt}" required="true"/>
+            
+             <h:outputLabel value="Description des activites : *" for="description"></h:outputLabel>
              <p:spacer width="50px"/>
-            <p:inputTextarea id="description" value="" required="true"/>
+             <p:inputTextarea id="description" value="#{departementBean.departement.descriptionActiviteDepartement}" required="true"/>
             
             
             
             
         <p:outputLabel value="Chef de departement" />
          <p:spacer width="50px"/>
- <p:inputText  value="#{equipeBean.equipe.libelleEquipe}" required="true"/>
+         <p:inputText  value="#{departementBean.departement.chefDepartement}" required="true"/>
             
         </h:panelGrid>
         <p style="text-align: center; margin-top:20px;">
              <p:commandButton   action="confirmSignIn"  value="Annuler"  style="background-color: #3e5288; color: white;"/>
              <p:spacer width="50px"/>
-              <p:commandButton    action="confirmSignIn"  value="Ajouter" style="background-color: #3e5288; color: white;"/>
+             <p:commandButton    action="#{departementBean.update()}"  value="Ajouter" style="background-color: #3e5288; color: white;"/>
              </p>
     </p:panel>
                </h:form>
-                <h:form >
+<h:form >
  
-    <p:outputPanel id="books">
-        <p:dataTable value="#{collectorView.books}" var="book" id="booksTable">
- <f:facet name="header">
+    <!--<p:outputPanel id="books">-->
+    <p:dataTable value="#{departementBean.all}" var="departement" id="departementTable"
+                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                paginator="true" rows="10" style="margin-bottom:20px">
+        
+        <f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage name="/img/excel.png" width="24"/>
+                <p:dataExporter type="xls" target="departementTable" fileName="cars" />
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="/img/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="departementTable" fileName="cars"/>
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="/img/csv.png" width="24"/>
+                <p:dataExporter type="csv" target="departementTable" fileName="cars" />
+            </h:commandLink>
+
+            <h:commandLink>
+                <p:graphicImage name="/img/xml.png" width="24"/>
+                <p:dataExporter type="xml" target="departementTable" fileName="cars" />
+            </h:commandLink>
+        </f:facet>
+        
+        <f:facet name="header">
             Liste des departements
         </f:facet>
-            <p:column headerText="Libelle">
-                <h:outputText value="#{book.title}" />
-            </p:column>
+        <p:column headerText="Libelle">
+            <h:outputText value="#{departement.libelleDepartemnt}" />
+        </p:column>
+
+        <p:column headerText="Prenom(s)">
+            <f:facet name="header">
+                <h:outputText value="Description des activites" />
+            </f:facet>
+            <h:outputText value="#{departement.descriptionActiviteDepartement}" />
+        </p:column>
+
+
+        <p:column headerText="Chef de departement ">
+            <h:outputText value="#{departement.chefDepartement}" />
+        </p:column>
+
+        <!--<p:column headerText="Action">
+            <p:commandLink value="Remove" update=":form:books" process=":form:books">
+                <p:collector value="" removeFrom="" unique="true"/>
+            </p:commandLink>
+        </p:column>-->
  
-            <p:column headerText="Prenom(s)">
-                <f:facet name="header">
-                    <h:outputText value="Description des activites" />
-                </f:facet>
-                <h:outputText value="#{book.author}" />
-            </p:column>
-            
-            
-            <p:column headerText="Chef de departement ">
-                <h:outputText value="#{book.title}" />
-            </p:column>
- 
-            <p:column headerText="Action">
-                <p:commandLink value="Remove" update=":form:books" process=":form:books">
-                    <p:collector value="" removeFrom="" unique="true"/>
-                </p:commandLink>
-            </p:column>
- 
-        </p:dataTable><br/><br/>
-        
+    </p:dataTable><br/><br/>
        
-    </p:outputPanel>
+    <!--</p:outputPanel>-->
 </h:form>
             </ui:define>
 	
