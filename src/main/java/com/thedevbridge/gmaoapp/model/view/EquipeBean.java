@@ -251,17 +251,19 @@ public class EquipeBean implements Serializable {
                 
                 if(chefEquipe != null){
                     chefEquipe.setIdEquipe(equipe);
+                    equipe.setChefEquipe(chefEquipe.getIdPersonnel().getNomPersonnel());
+                    System.out.println("************   **************   ******* chef Ecquipe " + equipe.getChefEquipe());
                 }
-                if(chefEquipe != null){
+                if(technicien1 != null){
                     technicien1.setIdEquipe(equipe);
                 }
-                if(chefEquipe != null){
+                if(technicien2 != null){
                     technicien2.setIdEquipe(equipe);
                 }
-                if(chefEquipe != null){
+                if(technicien3 != null){
                     technicien3.setIdEquipe(equipe);
                 }
-                if(chefEquipe != null){
+                if(technicien4 != null){
                     technicien4.setIdEquipe(equipe);
                 }
                 
