@@ -151,6 +151,9 @@
                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                     paginator="true" rows="10" style="margin-bottom:20px" rendered="#{technicienBean.showTable}">
             
+            <f:facet name="header">
+                Liste des Techniciens 
+            </f:facet>
             <f:facet name="{Exporters}">
                 <h:commandLink>
                     <p:graphicImage name="/img/excel.png" width="24"/>
@@ -210,6 +213,13 @@
                     <h:outputText value="Departement" />
                 </f:facet>
                 <h:outputText value="#{technicien.idDepartement.libelleDepartemnt}" />
+            </p:column>
+            
+            <p:column headerText="Equipe">
+                <f:facet name="header">
+                    <h:outputText value="Equipe" />
+                </f:facet>
+                <h:outputText value="#{technicien.idEquipe.libelleEquipe}" />
             </p:column>
  
             <!--<p:column headerText="Action">

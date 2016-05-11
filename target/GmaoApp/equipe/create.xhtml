@@ -15,153 +15,249 @@
 
 	 <ui:composition template="/resources/scaffold/pageTemplate.xhtml">
 <ui:define name="left">
-                <div id="wrapper">
-                    <div class="menuleft">
-                  <ul class="nav navbar-default navbar-side" >
-           
-              
-        
-                    <li >
-                        <a  href="../dashboard/dashboard.xhtml" >Tableau de bord</a>
-                    </li>
-                    <li>
-                        <a href="../materiel/create.xhtml" >Materiel </a>
-                         
-                    </li>
-                     <li>
-                        <a href="../client/create.xhtml"  >Clients </a>
-                        
-                    </li>
-                    <li>
-                        <a href="../intervention/create.xhtml">Interventions </a>
-                        
-                    </li>
-                     <li>
-                        <a href="../technicien/create.xhtml">Techniciens </a>
-                         
-                    </li>
-      
-                     <li>
-                        <a href="../planification/create.xhtml">Planification</a>
-                    </li>
-                    <li>
-                        <a href="../equipe/create.xhtml" class="active-menu">Equipe</a>
-                    </li>
-                    <li>
-                        <a href="../departement/create.xhtml">Archivage </a>
-                    </li>
-                     <li>
-                        <a href="../rapport/create.xhtml">Rapport</a>
-                    </li>
-                    <li>
-                        <a href="../departement/create.xhtml">Departement </a>
-                    </li>
-                        </ul>
-               
-        
-                </div>
-                </div>
-            </ui:define>
-            <ui:define name="content">
-               <h:form id="form">
-    <p:growl id="msgs" />
-    <h3 style="margin-top:0;color:#18547c;font-weight: bold;">Equipe</h3>
-    <p:panel header="Nouvelle equipe" style="margin-bottom:20px">
-        <h:panelGrid  styleClass="connex-tech" id="logPanelGrid" style="margin: 0 auto; margin-top: 25px; text-align: left" cellspacing="8" columns="3">
-                                <h:panelGroup style="text-align:left">
-					<h:outputLabel value="Libelle : *" for="txt_title"/>
-				</h:panelGroup>
-                                <p:spacer width="20px"/>
-				<h:panelGroup>
-                                    <p:inputText  value="#{equipeBean.equipe.libelleEquipe}" required="true"/>
-				</h:panelGroup>
-					
-                                <h:panelGroup>
-                                    <p:outputLabel for="departement" value="Departement" />
-                                </h:panelGroup>
-                                          <p:spacer width="50px"/>
-                                <h:panelGroup >
-                                    <p:selectOneMenu id="departement" value="#{equipeBean.equipe.idDepartemant}" style="width:203px">
-                <f:selectItem itemLabel="chosir un departement" itemValue="" />
-                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-            </p:selectOneMenu>  
-                                </h:panelGroup>
-                       
-           
-                                <h:panelGroup>
-                                    <p:outputLabel for="chef" value="chef d'equipe " />
-                                </h:panelGroup>
-                                           <p:spacer width="50px"/>
-                                 <h:panelGroup>
-            <p:selectOneMenu id="chef" value="#{selectOneMenuView.console}" style="width:203px">
-                <f:selectItem itemLabel="Choisir un chef" itemValue="" />
-                <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-            </p:selectOneMenu>
-                                 </h:panelGroup>
-                                           
-                                           <h:panelGroup style="text-align:left">
-					 <p:outputLabel value="Description*" />
-                                </h:panelGroup>
-                                <p:spacer width="50px"/>
-                                <h:panelGroup >
-                                    <p:inputTextarea  value="#{equipeBean.equipe.descriptionActiviteEquipe}" required="true"/>
-				</h:panelGroup>
+    <div id="wrapper">
+        <div class="menuleft">
+            <ul class="nav navbar-default navbar-side" >
+                <li >
+                    <a  href="../dashboard/dashboard.xhtml" >Tableau de bord</a>
+                </li>
+                <li>
+                    <a href="../materiel/create.xhtml" >Materiel </a>
 
-                                           
-           </h:panelGrid>
-                 <p style="text-align: center; margin-top:20px;">
-             <p:commandButton  value="Annuler" type="reset" style="background-color: #3e5288; color: white;"/>
-             <p:spacer width="30px"/>
-              <p:commandButton value="Enregistrer" type="submit" style="background-color: #3e5288; color: white;"/>
-              
-             </p>
-    </p:panel>
-               </h:form>
+                </li>
+                 <li>
+                    <a href="../client/create.xhtml"  >Clients </a>
+
+                </li>
+                <li>
+                    <a href="../intervention/create.xhtml">Interventions </a>
+
+                </li>
+                 <li>
+                    <a href="../technicien/create.xhtml">Techniciens </a>
+
+                </li>
+
+                 <li>
+                    <a href="../planification/create.xhtml">Planification</a>
+                </li>
+                <li>
+                    <a href="../equipe/create.xhtml" class="active-menu">Equipe</a>
+                </li>
+                <li>
+                    <a href="../departement/create.xhtml">Archivage </a>
+                </li>
+                 <li>
+                    <a href="../rapport/create.xhtml">Rapport</a>
+                </li>
+                <li>
+                    <a href="../departement/create.xhtml">Departement </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</ui:define>
+<ui:define name="content">
+    <h:form id="form">
+        <p:growl id="msgs" />
+        <h3 style="margin-top:0;color:#18547c;font-weight: bold;">Equipe</h3>
+        <p:panel header="Nouvelle equipe" style="margin-bottom:20px">
+            <h:panelGrid  styleClass="connex-tech" id="logPanelGrid" style="margin: 0 auto; margin-top: 25px; text-align: left" cellspacing="8" columns="3">
+                <h:panelGroup style="text-align:left">
+                        <h:outputLabel value="Libelle: *" for="txt_title"/>
+                </h:panelGroup>
+                <p:spacer width="20px"/>
+                <h:panelGroup>
+                <p:inputText  value="#{equipeBean.equipe.libelleEquipe}" required="true"/>
+                </h:panelGroup>
+
+                <h:panelGroup>
+                <p:outputLabel for="departement" value="Departement" />
+                </h:panelGroup>
+                <p:spacer width="50px"/>
+                <h:panelGroup >
+                    <p:selectOneMenu id="departement" value="#{equipeBean.equipe.idDepartemant}" converter="#{departementBean.converter}" style="width:203px">
+                        <!--<f:selectItem itemLabel="chosir un departement" itemValue="" />-->
+                        <f:selectItems value="#{equipeBean.allDepartement}" var="departement" itemValue="#{departement}"
+                                       itemLabel="#{departement.libelleDepartemnt} - #{departement.chefDepartement}" />
+                    </p:selectOneMenu>  
+                </h:panelGroup>
+
+
+                <h:panelGroup>
+                    <p:outputLabel for="chef" value="Chef d'equipe " />
+                </h:panelGroup>
+                <p:spacer width="50px"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="chef" value="#{equipeBean.chefEquipe}" converter="#{technicienBean.converter}" style="width:203px">
+                        <f:selectItem itemLabel="Choisissez le chef d'equipe" />
+                        <f:selectItems value="#{equipeBean.allTechnicien}" var="technicien" itemValue="#{technicien}"
+                                       itemLabel="#{technicien.idPersonnel.prenomPersonnel}  #{technicien.idPersonnel.nomPersonnel}" />
+                    </p:selectOneMenu>
+                </h:panelGroup>
                 
+                <h:panelGroup>
+                    <p:outputLabel for="technicien1" value="Technicien 1 " />
+                </h:panelGroup>
+                <p:spacer width="50px"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="technicien1" value="#{equipeBean.technicien1}" converter="#{technicienBean.converter}" style="width:203px">
+                        <f:selectItem itemLabel="Choisissez le Technicien 1" />
+                        <f:selectItems value="#{equipeBean.allTechnicien}" var="technicien" itemValue="#{technicien}"
+                                       itemLabel="#{technicien.idPersonnel.prenomPersonnel}  #{technicien.idPersonnel.nomPersonnel}" />
+                    </p:selectOneMenu>
+                </h:panelGroup>
                 
-                <br/><br/>
-                <h:form>
-                <p:outputPanel id="books">
-        <p:dataTable value="#{collectorView.books}" var="book" id="booksTable">
- <f:facet name="header">
-            Liste des equipes 
-        </f:facet>
+                <h:panelGroup>
+                    <p:outputLabel for="technicien2" value="Technicien 2 " />
+                </h:panelGroup>
+                <p:spacer width="50px"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="technicien2" value="#{equipeBean.technicien2}" converter="#{technicienBean.converter}" style="width:203px">
+                        <f:selectItem itemLabel="Choisissez le Technicien 2" />
+                        <f:selectItems value="#{equipeBean.allTechnicien}" var="technicien" itemValue="#{technicien}"
+                                       itemLabel="#{technicien.idPersonnel.prenomPersonnel}  #{technicien.idPersonnel.nomPersonnel}" />
+                    </p:selectOneMenu>
+                </h:panelGroup>
+                
+                <h:panelGroup>
+                    <p:outputLabel for="technicien3" value="Technicien 3 " />
+                </h:panelGroup>
+                <p:spacer width="50px"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="technicien3" value="#{equipeBean.technicien3}" converter="#{technicienBean.converter}" style="width:203px">
+                        <f:selectItem itemLabel="Choisissez le Technicien 3" />
+                        <f:selectItems value="#{equipeBean.allTechnicien}" var="technicien" itemValue="#{technicien}"
+                                       itemLabel="#{technicien.idPersonnel.prenomPersonnel}  #{technicien.idPersonnel.nomPersonnel}" />
+                    </p:selectOneMenu>
+                </h:panelGroup>
+                
+                <h:panelGroup>
+                    <p:outputLabel for="technicien4" value="Technicien 4 " />
+                </h:panelGroup>
+                <p:spacer width="50px"/>
+                <h:panelGroup>
+                    <p:selectOneMenu id="technicien4" value="#{equipeBean.technicien4}" converter="#{technicienBean.converter}" style="width:203px">
+                        <f:selectItem itemLabel="Choisissez le Technicien 4" />
+                        <f:selectItems value="#{equipeBean.allTechnicien}" var="technicien" itemValue="#{technicien}"
+                                       itemLabel="#{technicien.idPersonnel.prenomPersonnel}  #{technicien.idPersonnel.nomPersonnel}" />
+                    </p:selectOneMenu>
+                </h:panelGroup>
+
+                <h:panelGroup style="text-align:left">
+                    <p:outputLabel for="departement" value="Description*" />
+                </h:panelGroup>
+                <p:spacer width="50px"/>
+                <h:panelGroup >
+                    <p:inputTextarea  value="#{equipeBean.equipe.descriptionActiviteEquipe}" required="true"/>
+                </h:panelGroup>
+
+
+            </h:panelGrid>
+            <p style="text-align: center; margin-top:20px;">
+                <p:commandButton  value="Annuler" type="reset" style="background-color: #3e5288; color: white;"/>
+                <p:spacer width="30px"/>
+                <p:commandButton value="Enregistrer" action="#{equipeBean.update()}" style="background-color: #3e5288; color: white;"/>
+
+            </p>
+        </p:panel>
+    </h:form>
+
+        <br/><br/>
+
+    <h:form>
+        <p:dataTable value="#{equipeBean.all}" var="equipe" id="equipeTable" 
+                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                    paginator="true" rows="10" style="margin-bottom:20px" rendered="#{equipeBean.showTable}">
+            <f:facet name="header">
+                Liste des Equipes 
+            </f:facet>
+            <f:facet name="{Exporters}">
+                <h:commandLink>
+                    <p:graphicImage name="/img/excel.png" width="24"/>
+                    <p:dataExporter type="xls" target="equipeTable" fileName="cars" />
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage name="/img/pdf.png" width="24"/>
+                    <p:dataExporter type="pdf" target="equipeTable" fileName="cars"/>
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage name="/img/csv.png" width="24"/>
+                    <p:dataExporter type="csv" target="equipeTable" fileName="cars" />
+                </h:commandLink>
+
+                <h:commandLink>
+                    <p:graphicImage name="/img/xml.png" width="24"/>
+                    <p:dataExporter type="xml" target="equipeTable" fileName="cars" />
+                </h:commandLink>
+            </f:facet>
+            
             <p:column headerText="libelle">
-                <h:outputText value="#{book.title}" />
+                <h:outputText value="#{equipe.libelleEquipe}" />
             </p:column>
- 
+
             <p:column headerText="Description">
                 <f:facet name="header">
                     <h:outputText value="Description" />
                 </f:facet>
-                <h:outputText value="#{book.author}" />
+                <h:outputText value="#{equipe.descriptionActiviteEquipe}" />
             </p:column>
-            
-            
+
             <p:column headerText="Departement">
-                <h:outputText value="#{book.title}" />
+                <f:facet name="header">
+                    <h:outputText value="Departement" />
+                </f:facet>
+                <h:outputText value="#{equipe.idDepartemant.libelleDepartemnt}" />
             </p:column>
- 
+            
             <p:column headerText="chef d'equipe">
                 <f:facet name="header">
                     <h:outputText value="chef d'equipe" />
                 </f:facet>
+                <h:outputText value="#{equipe.technicienList.get(0)}" rendered="#{equipe.technicienList.size()>0}" />
             </p:column>
- 
-            <p:column headerText="Action">
+            
+            <p:column headerText="Technicien 1">
+                <f:facet name="header">
+                    <h:outputText value="Technicien 1" />
+                </f:facet>
+                <h:outputText value="#{equipe.technicienList.get(1)}" rendered="#{equipe.technicienList.size()>1}" />
+            </p:column>
+            
+            <p:column headerText="Technicien 2">
+                <f:facet name="header">
+                    <h:outputText value="Technicien 2" />
+                </f:facet>
+                <h:outputText value="#{equipe.technicienList.get(2)}" rendered="#{equipe.technicienList.size()>2}" />
+            </p:column>
+            
+            <p:column headerText="Technicien 3">
+                <f:facet name="header">
+                    <h:outputText value="Technicien 3" />
+                </f:facet>
+                <h:outputText value="#{equipe.technicienList.get(3)}" rendered="#{equipe.technicienList.size()>3}" />
+            </p:column>
+            
+            <p:column headerText="Technicien 4">
+                <f:facet name="header">
+                    <h:outputText value="Technicien 4" />
+                </f:facet>
+                <h:outputText value="#{equipe.technicienList.get(4)}" rendered="#{equipe.technicienList.size()>4}" />
+            </p:column>
+                
+
+            <!--<p:column headerText="Action">
                 <p:commandLink value="Remove" update=":form:books" process=":form:books">
                     <p:collector value="" removeFrom="" unique="true"/>
                 </p:commandLink>
-            </p:column>
- 
+            </p:column>-->
+
         </p:dataTable>
-                </p:outputPanel>
-                </h:form>
-            </ui:define>
+    </h:form>
+</ui:define>
 
         </ui:composition>
         </html>

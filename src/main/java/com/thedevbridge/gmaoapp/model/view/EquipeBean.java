@@ -26,6 +26,10 @@ import javax.persistence.criteria.Root;
 
 import com.thedevbridge.gmaoapp.model.Equipe;
 import com.thedevbridge.gmaoapp.model.Departement;
+import com.thedevbridge.gmaoapp.model.Technicien;
+import java.util.Random;
+import javax.annotation.PostConstruct;
+import javax.faces.event.ValueChangeEvent;
 
 /**
  * Backing bean for Equipe entities.
@@ -49,6 +53,23 @@ public class EquipeBean implements Serializable {
 	 */
 
 	private Long id;
+	private Equipe equipe;
+        private Departement departement;
+        
+        private boolean showTable = false;
+        private List<Equipe> allEquipe;
+        private List<Technicien> allTechnicien;
+        private List<Departement> allDepartement;
+        
+        private Technicien chefEquipe;
+        private Technicien technicien1;
+        private Technicien technicien2;
+        private Technicien technicien3;
+        private Technicien technicien4;
+        
+        private String alert = "Desolé, ce technicien a déjà été choisi !";
+        private boolean isChoised = true;
+        
 
 	public Long getId() {
 		return this.id;
@@ -58,8 +79,6 @@ public class EquipeBean implements Serializable {
 		this.id = id;
 	}
 
-	private Equipe equipe;
-
 	public Equipe getEquipe() {
 		return this.equipe;
 	}
@@ -67,6 +86,115 @@ public class EquipeBean implements Serializable {
 	public void setEquipe(Equipe equipe) {
 		this.equipe = equipe;
 	}
+        
+        public Departement getDepartement() {
+		return this.departement;
+	}
+
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
+	}
+        
+        public boolean getShowTable(){
+            return this.showTable;
+        }
+
+        public void setShowTable(boolean showTable){
+            this.showTable = showTable;
+        }
+        
+        public List<Technicien> getAllTechnicien(){
+            return this.allTechnicien;
+        }
+        
+        public void setAllTechnicien(List<Technicien> allTechnicien){
+            this.allTechnicien = allTechnicien;
+        }
+        
+        public List<Departement> getAllDepartement(){
+            return this.allDepartement;
+        }
+        
+        public void setAllDepartement(List<Departement> allDepartement){
+            this.allDepartement = allDepartement;
+        }
+        
+        public List<Equipe> getAllEquipe(){
+            return this.allEquipe;
+        }
+        
+        public void setAllEquipe(List<Equipe> allEquipe){
+            this.allEquipe = allEquipe;
+        }
+        
+        public Technicien getChefEquipe() {
+		return this.chefEquipe;
+	}
+
+	public void setChefEquipe(Technicien chefEquipe) {
+		this.chefEquipe = chefEquipe;
+	}
+        
+        public Technicien getTechnicien1() {
+		return this.technicien1;
+	}
+
+	public void setTechnicien1(Technicien technicien1) {
+		this.technicien1 = technicien1;
+	}
+        
+        public Technicien getTechnicien2() {
+		return this.technicien2;
+	}
+
+	public void setTechnicien2(Technicien technicien2) {
+		this.technicien2 = technicien2;
+	}
+        
+        public Technicien getTechnicien3() {
+		return this.technicien3;
+	}
+
+	public void setTechnicien3(Technicien technicien3) {
+		this.technicien3 = technicien3;
+	}
+        
+        public Technicien getTechnicien4() {
+		return this.technicien4;
+	}
+
+	public void setTechnicien4(Technicien technicien4) {
+		this.technicien4 = technicien4;
+	}
+        
+        public String getAlert() {
+		return this.alert;
+	}
+
+	public void setId(String alert) {
+		this.alert = alert;
+	}
+        
+        public boolean getIsChoised() {
+		return this.isChoised;
+	}
+
+	public void setId(boolean isChoised) {
+		this.isChoised = isChoised;
+	}
+        
+        @PostConstruct
+        public void loadTechnicien(){
+            allTechnicien = (List<Technicien>)entityManager.createNamedQuery("Technicien.findAll").getResultList();
+            allDepartement = (List<Departement>)entityManager.createNamedQuery("Departement.findAll").getResultList();
+            allEquipe = (List<Equipe>)entityManager.createNamedQuery("Equipe.findAll").getResultList();
+            
+            if(allEquipe.isEmpty()){
+                this.showTable = false;
+            }else{
+                this.showTable = true;
+            }
+        }
 
 	@Inject
 	private Conversation conversation;
@@ -110,8 +238,69 @@ public class EquipeBean implements Serializable {
 
 	public String update() {
 		this.conversation.end();
+                
+                Random random = new Random();
+                Technicien chefEquipeMerged = null;
+                Technicien technicien1Merged = null;
+                Technicien technicien2Merged = null;
+                Technicien technicien3Merged = null;
+                Technicien technicien4Merged = null;
+                
+                equipe.setIdEquipe(random.nextLong());
+                //this.entityManager.persist(equipe);
+                
+                if(chefEquipe != null){
+                    chefEquipe.setIdEquipe(equipe);
+                }
+                if(chefEquipe != null){
+                    technicien1.setIdEquipe(equipe);
+                }
+                if(chefEquipe != null){
+                    technicien2.setIdEquipe(equipe);
+                }
+                if(chefEquipe != null){
+                    technicien3.setIdEquipe(equipe);
+                }
+                if(chefEquipe != null){
+                    technicien4.setIdEquipe(equipe);
+                }
+                
+                this.entityManager.persist(equipe);
+                
+                if(chefEquipe != null){
+                    chefEquipeMerged = this.entityManager.merge(chefEquipe);
+                }
+                if(technicien1 != null){
+                    technicien1Merged = this.entityManager.merge(technicien1);
+                }
+                if(technicien2 != null){
+                    technicien2Merged = this.entityManager.merge(technicien2);
+                }
+                if(technicien3 != null){
+                    technicien3Merged = this.entityManager.merge(technicien3);
+                }
+                if(technicien4 != null){
+                    technicien4Merged = this.entityManager.merge(technicien4);
+                }
+                //Technicien chefEquipeMerged = this.entityManager.merge(chefEquipe);
+                //Technicien technicien1Merged = this.entityManager.merge(chefEquipe);
+                //Technicien technicien2Merged = this.entityManager.merge(chefEquipe);
+                //Technicien technicien3Merged = this.entityManager.merge(chefEquipe);
+                //Technicien technicien4Merged = this.entityManager.merge(chefEquipe);
+                
+                equipe.getTechnicienList().add(chefEquipeMerged);
+                equipe.getTechnicienList().add(technicien1Merged);
+                equipe.getTechnicienList().add(technicien2Merged);
+                equipe.getTechnicienList().add(technicien3Merged);
+                equipe.getTechnicienList().add(technicien4Merged);
+                Equipe equipeMerged = this.entityManager.merge(equipe);
+                
+                System.out.println("**** ***** ***** **** Chef Equipe merge with succes ");
+                
+                String viewId = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+                return viewId + "?faces-redirect=true";
 
-		try {
+		/*try {
 			if (this.id == null) {
 				this.entityManager.persist(this.equipe);
 				return "search?faces-redirect=true";
@@ -124,8 +313,14 @@ public class EquipeBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(e.getMessage()));
 			return null;
-		}
+		}*/
 	}
+        
+        public void testIfChoised(ValueChangeEvent e){
+            //if((Technicien)e.getNewValue() != null){
+                this.isChoised = false;
+            //}
+        }
 
 	public String delete() {
 		this.conversation.end();

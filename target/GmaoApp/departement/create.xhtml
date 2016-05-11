@@ -101,8 +101,11 @@
     <!--<p:outputPanel id="books">-->
     <p:dataTable value="#{departementBean.all}" var="departement" id="departementTable"
                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-                paginator="true" rows="10" style="margin-bottom:20px">
+                paginator="true" rows="10" style="margin-bottom:20px" rendered="#{departementBean.showTable}">
         
+        <f:facet name="header">
+            Liste des Départements 
+        </f:facet>
         <f:facet name="{Exporters}">
             <h:commandLink>
                 <p:graphicImage name="/img/excel.png" width="24"/>
@@ -125,9 +128,6 @@
             </h:commandLink>
         </f:facet>
         
-        <f:facet name="header">
-            Liste des departements
-        </f:facet>
         <p:column headerText="Libelle">
             <h:outputText value="#{departement.libelleDepartemnt}" />
         </p:column>

@@ -26,6 +26,7 @@ import javax.persistence.criteria.Root;
 
 import com.thedevbridge.gmaoapp.model.Departement;
 import java.util.Random;
+import javax.annotation.PostConstruct;
 
 /**
  * Backing bean for Departement entities.
@@ -49,6 +50,9 @@ public class DepartementBean implements Serializable {
 	 */
 
 	private Long id;
+        
+        private boolean showTable = false;
+        private List<Departement> allDepartement;
 
 	public Long getId() {
 		return this.id;
@@ -67,6 +71,33 @@ public class DepartementBean implements Serializable {
 	public void setDepartement(Departement departement) {
 		this.departement = departement;
 	}
+        
+        public boolean getShowTable(){
+            return this.showTable;
+        }
+
+        public void setShowTable(boolean showTable){
+            this.showTable = showTable;
+        }
+        
+        public List<Departement> getAllDepartement(){
+            return this.allDepartement;
+        }
+        
+        public void setAllDepartement(List<Departement> allDepartement){
+            this.allDepartement = allDepartement;
+        }
+        
+        @PostConstruct
+        public void loadTechnicien(){
+            allDepartement = (List<Departement>)entityManager.createNamedQuery("Departement.findAll").getResultList();
+            
+            if(allDepartement.isEmpty()){
+                this.showTable = false;
+            }else{
+                this.showTable = true;
+            }
+        }
 
 	@Inject
 	private Conversation conversation;

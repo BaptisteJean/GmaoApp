@@ -184,27 +184,18 @@ public class TechnicienBean implements Serializable {
                 
                 Random random = new Random();
                 
-                //departement = technicien.getIdDepartement();
-                equipe = technicien.getIdEquipe();
+                //equipe = technicien.getIdEquipe();
                 personnel = technicien.getIdPersonnel();
                 
-                //departement.setIdDepartement(random.nextLong());
-                equipe.setIdEquipe(random.nextLong());
-                //equipe.setIdDepartemant(departement);
+                //equipe.setIdEquipe(random.nextLong());
                 personnel.setIdPersonnel(random.nextLong());
                 
-                //this.entityManager.persist(departement);
-                //List<Departement> departementSaved = (List<Departement>)entityManager.createNamedQuery("Departement.findByIdDepartement").setParameter("idDepartement", departement.getIdDepartement()).getResultList();
-                //equipe.setIdDepartemant(departementSaved.get(departementSaved.size() - 1));
-                equipe.setIdDepartemant(this.technicien.getIdDepartement());
+                //equipe.setIdDepartemant(this.technicien.getIdDepartement());
                 
-                this.entityManager.persist(equipe);
+                //this.entityManager.persist(equipe);
                 this.entityManager.persist(personnel);
-                
-                //technicien.setIdDepartement(departementSaved.get(departementSaved.size() - 1));
-                //technicien.setIdDepartement(this.technicien.getIdDepartement());
-                List<Equipe> equipeSaved = (List<Equipe>)entityManager.createNamedQuery("Equipe.findByIdEquipe").setParameter("idEquipe", equipe.getIdEquipe()).getResultList();
-                technicien.setIdEquipe(equipeSaved.get(equipeSaved.size() - 1));
+                //List<Equipe> equipeSaved = (List<Equipe>)entityManager.createNamedQuery("Equipe.findByIdEquipe").setParameter("idEquipe", equipe.getIdEquipe()).getResultList();
+                //technicien.setIdEquipe(equipeSaved.get(equipeSaved.size() - 1));
                 List<Personnel> personnelSaved = (List<Personnel>)entityManager.createNamedQuery("Personnel.findByIdPersonnel").setParameter("idPersonnel", personnel.getIdPersonnel()).getResultList();
                 technicien.setIdPersonnel(personnelSaved.get(personnelSaved.size() - 1));
                 

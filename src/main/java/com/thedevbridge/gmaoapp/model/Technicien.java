@@ -7,6 +7,7 @@ package com.thedevbridge.gmaoapp.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,7 +44,7 @@ public class Technicien implements Serializable {
 	@ManyToOne(optional = false)
 	private Departement idDepartement;
 	@JoinColumn(name = "id_equipe", referencedColumnName = "id_equipe")
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = true)
 	private Equipe idEquipe;
 	@JoinColumn(name = "id_personnel", referencedColumnName = "id_personnel")
 	@ManyToOne(optional = false)
@@ -51,7 +52,7 @@ public class Technicien implements Serializable {
 
 	public Technicien() {
             this.idDepartement = new Departement();
-            this.idEquipe = new Equipe();
+            this.idEquipe = null;
             this.idPersonnel = new Personnel();
             
             

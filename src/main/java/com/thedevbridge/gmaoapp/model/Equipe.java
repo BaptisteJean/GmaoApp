@@ -6,6 +6,7 @@
 package com.thedevbridge.gmaoapp.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -58,6 +59,8 @@ public class Equipe implements Serializable {
 	private Departement idDepartemant;
 
 	public Equipe() {
+            this.technicienList = new ArrayList<>();
+            this.idDepartemant = new Departement();
 	}
 
 	public Equipe(Long idEquipe) {
